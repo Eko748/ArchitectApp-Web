@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class HasilDesain extends Model
 {
     use HasFactory;
+
     protected $fillable =[
         'projectOwnerId','softfile'
     ];

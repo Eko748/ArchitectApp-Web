@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChooseProject extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'projectOwnerId', 'RAB', 'desain', 'panjang', 'lebar'
     ];

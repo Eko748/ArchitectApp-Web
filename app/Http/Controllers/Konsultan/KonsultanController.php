@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Konsultan;
 use App\Http\Controllers\Controller;
 use App\Models\LelangOwner;
 use App\Models\Project;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class KonsultanController extends Controller

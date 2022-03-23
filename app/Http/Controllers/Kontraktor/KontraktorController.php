@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Kontraktor;
 
 use App\Http\Controllers\Controller;
 use App\Models\LelangOwner;
-use App\Models\Project;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class KontraktorController extends Controller

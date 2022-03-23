@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ImageOwner extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'lelangOwnerId', 'image', 'chooseProjectId'
     ];

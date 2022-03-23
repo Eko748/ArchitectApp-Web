@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\Controller;
 use App\Models\Konsultan;
 use App\Models\Kontraktor;
 use App\Models\PaymentKonsultan;
-use App\Models\ProjectOwner;
 use App\Models\TenderKonsultan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminController extends BaseController
+class AdminController extends Controller
 {
     public function getAllPro()
     {

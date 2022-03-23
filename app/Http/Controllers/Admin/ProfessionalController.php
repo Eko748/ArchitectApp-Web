@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Konsultan;
-use App\Models\Kontraktor;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Yajra\DataTables\DataTables;
+use Yajra\Datatables\Facades\Datatables;
 
 class ProfessionalController extends Controller
 {
@@ -57,6 +54,4 @@ class ProfessionalController extends Controller
         return User::find($request->id)->update(['is_active'=>1]);
 
     }
-  
-  
 }

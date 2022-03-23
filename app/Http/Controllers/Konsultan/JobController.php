@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Konsultan;
 use App\Http\Controllers\Controller;
 use App\Models\HasilDesain;
 use App\Models\Image;
-use App\Models\KontrakKerjaKonsultan;
 use App\Models\Project;
 use App\Models\ProjectOwner;
 use App\Models\Rating;

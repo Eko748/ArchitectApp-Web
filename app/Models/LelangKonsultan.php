@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LelangKonsultan extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'tenderKonsultanId', 'title', 'description','desain','status'
     ];

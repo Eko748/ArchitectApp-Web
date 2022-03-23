@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\Controller;
 use App\Models\Konsultan;
 use App\Models\KontrakKerjaKonsultan;
 use App\Models\Project;
 use App\Models\ProjectOwner;
 use App\Models\TenderKonsultan;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use PDF;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Str;
 
-class GeneratePDF extends BaseController
+class GeneratePDF extends Controller
 {
     public function generatePDF($tender)
     {

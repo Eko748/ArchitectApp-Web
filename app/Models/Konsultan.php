@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Konsultan extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'userId', 'telepon', 'website', 'instagram', 'about', 'alamat', 'slug'
     ];
