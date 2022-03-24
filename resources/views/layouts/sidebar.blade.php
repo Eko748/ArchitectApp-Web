@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('dashboard') }}">KONSULTAN</a>
+            <a href="{{ route('dashboard') }}">ADMIN</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('dashboard') }}">KS</a>
@@ -10,13 +10,16 @@
             <li class="menu-header">Dashboard</li>
             <li class="{{ Request::segment(1) == 'dashboard' ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('dashboard') }}"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
-                    <li class="menu-header">Management</li>
-                    <li class="{{ Request::segment(1) == 'tender' ? 'active' : '' }}"><a class="nav-link"
-                            href="{{ route('admin.tender') }}"><i class="fas fa-clipboard-list"></i><span>Data Tender Win</span></a></li>
-                    <li class="{{ Request::segment(1) == 'verify' ? 'active' : '' }}"><a class="nav-link"
-                            href="{{ route('admin.verify') }}"><i class="fas fa-clipboard-list"></i><span>Verifikasi Pembayaran</span></a></li>
+            <li class="menu-header">Management</li>
+            <li class="{{ Request::segment(1) == 'tender' ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin.tender') }}"><i class="fas fa-clipboard-list"></i><span>Data Tender
+                        Win</span></a></li>
+            <li class="{{ Request::segment(1) == 'verify' ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin.verify') }}"><i class="fas fa-clipboard-list"></i><span>Verifikasi
+                        Pembayaran</span></a></li>
 
-            <li class="nav-item dropdown  {{ in_array(Request::segment(1),['konsultan','owner','kontraktor']) ? 'active' : '' }}">
+            <li
+                class="nav-item dropdown  {{ in_array(Request::segment(1),['konsultan','owner','kontraktor']) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="fas fa-users"></i><span>User</span></a> </a>
                 <ul class="dropdown-menu">
@@ -30,8 +33,7 @@
             </li>
             <li class="menu-header">Setting</li>
             <li class="{{ Request::segment(1) == 'my' ? 'active' : '' }} "><a class="nav-link"
-                    href="{{ route('profile', Auth::user()->id) }}"> <i
-                        class="fas fa-user"></i><span>Profile</span></a>
+                    href="{{ route('profile', Auth::user()->id) }}"> <i class="fas fa-user"></i><span>Profile</span></a>
             </li>
             <li><a class="nav-link sidebar-brand sidebar-brand-sm mt-4 logout"><i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span></a>
