@@ -5,7 +5,7 @@
                 <a href="{{ route('public.landing') }}" class="d-flex align-items-center my-2 my-lg-0 me-lg-5 text-dark text-decoration-none">
                     Logo
                 </a>
-              
+
                 @guest
                     <div class="ms-auto">
                         <a href="{{ route('login') }}" class="btn btn-light text-dark me-2 btn-sm">Login</a>
