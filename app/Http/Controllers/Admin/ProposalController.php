@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
+
 class ProposalController extends Controller
 {
     public function putVerifyProp(TenderKonsultan $proposal)

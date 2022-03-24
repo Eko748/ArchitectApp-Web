@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Kontraktor;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LelangOwner;
-use App\Models\TenderKontraktor;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class LelangController extends Controller
 {
@@ -25,5 +23,4 @@ class LelangController extends Controller
         $data = LelangOwner::where('id',$lelang->id)->with('owner')->first();
         return $data;
     }
-   
 }

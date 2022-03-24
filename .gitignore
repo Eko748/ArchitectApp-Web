@@ -1,35 +1,14 @@
-/vendor/
-node_modules/
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
 npm-debug.log
 yarn-error.log
-
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
-
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-
-public/kontrak/*.pdf
-public/img/avatar/*
-public/img/lelang/tkp/*
-public/img/project/*
-public/img/persyaratan/konsultan/*
-public/img/persyaratan/kontraktor/*
-public/img/tender/konsultan/cv/*
-public/img/tender/kontraktor/cv/*
-public/img/*.jpeg
-
-
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
-
-storage/*.key
-.env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
-
+/.idea
+/.vscode

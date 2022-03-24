@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kontraktor extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'userId','telepon','website','instagram','about', 'alamat'
     ];

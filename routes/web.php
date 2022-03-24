@@ -1,4 +1,7 @@
 <?php
+require __DIR__ . '/auth.php';
+
+use App\Http\Controllers\PDFController;
 
 use App\Http\Controllers\Admin\Admincontroller;
 use App\Http\Controllers\Admin\DesainController;
@@ -196,4 +199,20 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-require __DIR__ . '/auth.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });

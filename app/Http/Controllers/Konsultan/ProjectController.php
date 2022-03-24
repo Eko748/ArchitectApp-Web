@@ -15,7 +15,6 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
-
     public function getAllProject(Request $req)
     {
 
