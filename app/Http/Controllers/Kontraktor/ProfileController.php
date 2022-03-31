@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+
     public function show(User $user)
     {
         return User::with('kontraktor')->where('id', $user->id)->first();

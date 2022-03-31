@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentKontraktor extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'kontrakKontraktorId', 'buktiBayar'
     ];

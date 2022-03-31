@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Owner;
 
+use App\Http\Controllers\API\GeneratePDF;
 use App\Http\Controllers\Controller;
 use App\Models\LelangOwner;
 use App\Models\Owner;
 use App\Models\TenderKonsultan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProposalController extends Controller
 {

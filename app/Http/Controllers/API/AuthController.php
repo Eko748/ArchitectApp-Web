@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 use App\Models\FileKonsultan;
 use App\Models\FileKontraktor;
 use App\Models\Konsultan;
@@ -11,11 +11,12 @@ use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public function login(Request $request)
     {

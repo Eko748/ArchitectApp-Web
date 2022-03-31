@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class LelangOwner extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'ownerId', 'title', 'description', 'desain', 'status', 'budget', 'RAB', 'kontraktor', 'budgetFrom', 'budgetTo', 'gayaDesain', 'panjang', 'lebar'
     ];

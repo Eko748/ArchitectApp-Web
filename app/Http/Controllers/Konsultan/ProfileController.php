@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
+
     public function show(User $user)
     {
    

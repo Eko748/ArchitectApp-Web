@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class InspirasiOwner extends Model
 {
     use HasFactory;
-
     protected $fillable = ['lelangOwnerId', 'inspirasi'];
 
     public function lelang()

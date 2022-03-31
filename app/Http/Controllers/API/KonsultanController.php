@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Konsultan;
-use App\Models\KontrakKerjaKonsultan;
-use App\Models\Project;
-use App\Models\ProjectOwner;
-use App\Models\TenderKonsultan;
-use Carbon\Carbon;
-use App\Models\Rating;
-use PDF;
-use App\Http\Controllers\PDFController;
+use App\Http\Controllers\API\BaseController;
 use App\Models\HasilDesain;
 use App\Models\Image;
+use App\Models\Konsultan;
 use App\Models\LelangKonsultan;
 use App\Models\LelangOwner;
+use App\Models\Project;
+use App\Models\ProjectOwner;
+use App\Models\Rating;
+use App\Models\TenderKonsultan;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\File;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class KonsultanController extends Controller
+class KonsultanController extends BaseController
 {
     public function getAllLelang()
     {

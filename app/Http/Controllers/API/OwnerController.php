@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
-use App\Http\Controllers\Controller;
 use App\Models\ChooseProject;
 use App\Models\Favorit;
 use App\Models\ImageOwner;
@@ -26,8 +25,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class OwnerController extends Controller
+class OwnerController extends BaseController
 {
+
     public function getAllProjectKons()
     {
         $project  = Project::with('images', 'konsultan.user', 'projectOwn.ratings', 'projectOwn.owner.user')->where('isLelang', "0")->get();

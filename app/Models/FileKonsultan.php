@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FileKonsultan extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'konsultanId','file'
     ];

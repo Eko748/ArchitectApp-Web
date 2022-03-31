@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
-use App\Http\Controllers\Controller;
 use App\Models\Konsultan;
 use App\Models\User;
 use App\Models\Owner;
@@ -11,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
     public function updateProfile(Request $request, User $user)
     {

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Konsultan;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\LelangOwner;
+use App\Models\TenderKonsultan;
+use Carbon\Carbon;
 
 class LelangController extends Controller
 {
@@ -23,4 +25,5 @@ class LelangController extends Controller
         $data = LelangOwner::where('id',$lelang->id)->with('owner','proposal.konsultan')->where('status',0)->first();
         return $data;
     }
+   
 }

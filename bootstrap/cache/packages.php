@@ -7,7 +7,32 @@
     ),
     'aliases' => 
     array (
-      'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
+      'PDF' => 'Barryvdh\\DomPDF\\Facade',
+    ),
+  ),
+  'facade/ignition' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Facade\\Ignition\\IgnitionServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Flare' => 'Facade\\Ignition\\Facades\\Flare',
+    ),
+  ),
+  'fideloper/proxy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    ),
+  ),
+  'fruitcake/laravel-cors' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fruitcake\\Cors\\CorsServiceProvider',
     ),
   ),
   'laravel/sail' => 
@@ -24,11 +49,45 @@
       0 => 'Laravel\\Sanctum\\SanctumServiceProvider',
     ),
   ),
+  'laravel/socialite' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Socialite' => 'Laravel\\Socialite\\Facades\\Socialite',
+    ),
+  ),
   'laravel/tinker' => 
   array (
     'providers' => 
     array (
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'laravelcollective/html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Collective\\Html\\HtmlServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
+    ),
+  ),
+  'maatwebsite/excel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
     ),
   ),
   'nesbot/carbon' => 
@@ -45,15 +104,32 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
-  'spatie/laravel-ignition' => 
+  'yajra/laravel-datatables-buttons' => 
   array (
     'providers' => 
     array (
-      0 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+      0 => 'Yajra\\DataTables\\ButtonsServiceProvider',
     ),
-    'aliases' => 
+  ),
+  'yajra/laravel-datatables-editor' => 
+  array (
+    'providers' => 
     array (
-      'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
+      0 => 'Yajra\\DataTables\\EditorServiceProvider',
+    ),
+  ),
+  'yajra/laravel-datatables-fractal' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Yajra\\DataTables\\FractalServiceProvider',
+    ),
+  ),
+  'yajra/laravel-datatables-html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Yajra\\DataTables\\HtmlServiceProvider',
     ),
   ),
   'yajra/laravel-datatables-oracle' => 

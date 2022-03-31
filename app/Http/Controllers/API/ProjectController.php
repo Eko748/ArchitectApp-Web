@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
-use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class ProjectController extends Controller
+class ProjectController extends BaseController
 {
     public function getAllProject(Request $request)
     {
