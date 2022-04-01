@@ -7,8 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Yajra\DataTables\DataTables;
+use App\Models\Konsultan;
 
 class Admincontroller extends Controller
 {
@@ -18,25 +17,34 @@ class Admincontroller extends Controller
     }
     public function userPage()
     {
-        return view('admin.userpage');
+        $data = [
+            "userpage" => User::get()
+        ];
+        return view('admin.userpage', $data);
     }
     public function proPage()
     {
-        return view('admin.propage');
+        $data = [
+            "propage" => User::where("level", "konsultan")->get()
+        ];
+        return view('admin.propage', $data);
     }
     public function adminPage()
     {
-        return view('admin.adminpage');
+        $data = [
+            "adminpage" => User::where("level", "kontraktor")->get()
+        ];
+        return view('admin.adminpage', $data);
     }
     public function desainPage()
     {
-        
+
         return view('admin.design');
     }
 
 
- 
-   
+
+
     public function show(User $user)
     {
         return response()->json($user);
