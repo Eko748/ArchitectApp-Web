@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -27,7 +28,6 @@ class RegisteredUserController extends Controller
     public function chooseAccount()
     {
         return view('auth.choose');
-        
     }
     public function registerKosultan()
     {
@@ -61,13 +61,13 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'avatar' => 'default.png',
-            'level' => 'user',
-            'is_active'=>0,
+            'level' => 'owner',
+            'is_active' => 0,
         ]);
-       Owner::create(['userId'=>$user->id]);
+        Owner::create(['userId' => $user->id]);
         event(new Registered($user));
 
-       
+
         return redirect(route('login'));
     }
     public function storeKonsultan(Request $request)
@@ -75,13 +75,13 @@ class RegisteredUserController extends Controller
         $path = 'persyaratan/konsultan/';
         $file = $request->file('file');
 
-       $request->validate([
+        $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
             'username' => 'required|min:3|unique:users,username',
             'password' => 'required|min:8',
             'file' => 'required',
-            'file.*'=> 'mimes:pdf,jpg,jpeg,png'
+            'file.*' => 'mimes:pdf,jpg,jpeg,png'
         ]);
         $input = [
             'name' => $request->name,
@@ -90,15 +90,18 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'avatar' => 'default.png',
             'level' => 'konsultan',
-            'is_active'=>0,
+            'is_active' => 0,
         ];
         $user = User::create($input);
-        $kons = new Konsultan(['userId'=>$user->id]);
+        $kons = new Konsultan([
+            'userId' => $user->id,
+            'slug' => Str::slug($request->name)
+        ]);
         $konsultan = $user->konsultan()->save($kons);
-        foreach($file as $item){
+        foreach ($file as $item) {
             $item->storeAs($path, $item->hashName(), 'files');
-           $files = new FileKonsultan(['konsultanId'=>$konsultan->id,'file'=>$item->hashName()]);
-           $konsultan->files()->save($files);
+            $files = new FileKonsultan(['konsultanId' => $konsultan->id, 'file' => $item->hashName()]);
+            $konsultan->files()->save($files);
         }
         return redirect(route('login'));
     }

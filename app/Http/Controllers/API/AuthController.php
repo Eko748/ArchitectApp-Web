@@ -130,34 +130,34 @@ class AuthController extends BaseController
 
         // Mengirim notifikasi ke admin
         $admin = User::where('level', 'admin')->first();
-          
+
         $SERVER_API_KEY = 'AAAAODXY9xI:APA91bEJBxQ3kKubZRAQTIoCk_2aYGXE-xNUI571Oka9fIKCBwi-J0p4r__syz4_cpJuVTEDzbCSUJ0YdI_hN66KVjk8MmyqgpwBllRTOnhAGe60DgL08q4D0cdyGCGsumJOacD_crt0';
         // $SERVER_API_KEY = 'AAAAe3lvlps:APA91bEg_-VVYnHn12FPjiuyLzvjAaqCiZZHilXP3XImA99x8oEYJU5MEmndXwi3wcoooBlJml3uwXnTucZ0a0w2jvwI2NCLinqjmF7CxyAd8p6cxXOG4Ebjjw_lQdA8hO1PNJQU5fiY';
-  
+
         $firebase = [
             "to" => $admin->fireBaseToken,
             // "registration_ids" => $user->fireBaseToken,
             "notification" => [
                 "title" => "Architect App",
-                "body" => "$request->name mendaftar sebagai konsultan. Mohon segera verifikasi!",  
+                "body" => "$request->name mendaftar sebagai konsultan. Mohon segera verifikasi!",
             ]
         ];
         $dataString = json_encode($firebase);
-    
+
         $headers = [
             'Authorization: key=' . $SERVER_API_KEY,
             'Content-Type: application/json',
         ];
-    
+
         $ch = curl_init();
-      
+
         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-               
+
         // curl_exec($ch);
         $response = curl_exec($ch);
         // $data = Konsultan::with('user', 'files')->find($konsultan->id);
@@ -210,7 +210,7 @@ class AuthController extends BaseController
         return $this->sendResponse($user, 'You have been logged out');
     }
 
-    public function setFirebase(Request $request) 
+    public function setFirebase(Request $request)
     {
         $data = User::firstWhere('id', Auth::user()->id)->update(['fireBaseToken' => $request->firebaseToken]);
         return $this->sendResponse($data, 'Berhasil mengirimkan firebase token');
