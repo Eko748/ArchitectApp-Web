@@ -3,7 +3,7 @@
 Web Version
 
 ## Arsitek.co
-![logoco](https://user-images.githubusercontent.com/79303700/161210855-ca46cb5b-dbe9-48aa-bb2a-c8a025f52bfe.png)
+![logoco](https://user-images.githubusercontent.com/79303700/161211147-42dbce6c-8b48-413b-adfa-cd62a42a9316.png)
 
 Untuk memenuhi tugas Mata Kuliah Proyek 3.
 
