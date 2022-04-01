@@ -43,7 +43,7 @@ class Admincontroller extends Controller
     }
 
 
-
+// eko
 
     public function show(User $user)
     {
