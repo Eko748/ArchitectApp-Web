@@ -1,6 +1,7 @@
 @extends('layouts.auth-main')
 @section('title', 'Login')
 @section('css')
+@section('js')
 <link rel="stylesheet" href="{{ asset('node_modules/bootstrap-social/bootstrap-social.css') }}">
 
 @endsection
@@ -12,9 +13,9 @@
                 <div class="div">
                     <a href="/"><i class="fa-solid fa-arrow-left"></i>Back to home.</a>
                 </div>
-                <img src="{{ asset('img/stisla-fill.svg') }}" alt="logo" width="80"
-                    class="shadow-light rounded-circle mb-5 mt-2">
-                <h4 class="text-dark font-weight-normal mt-2">Welcome to <span class="font-weight-bold">Konsultan</span>
+                
+                <h4 class="text-dark font-weight-normal mt-2">Welcome to <img src="{{ asset('img/logo_proyek.png') }}" alt="logo" width="115"
+                    class=" mb-5 mt-2">
                 </h4>
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -49,7 +50,7 @@
 
                     <div class="form-group text-right">
                         <a href="auth-forgot-password.html" class="float-left mt-3">
-                            Forgot Password?
+                            Lupa Password?
                         </a>
                         <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                             Login
@@ -57,12 +58,12 @@
                     </div>
 
                     <div class="mt-5 text-center">
-                        Don't have an account? <a href="{{ route('choose.account') }}">Create new one</a>
+                        Belum Punya Akun? <a href="{{ route('choose.account') }}">Register</a>
                     </div>
                 </form>
 
                 <div class="text-center mt-5 text-small">
-                    Copyright &copy; Your Company. Made with 💙 by Konsultan
+                    Copyright &copy; Polindra. Made with 💙 by Arsitek.co
                     <div class="mt-2">
                         <a href="#">Privacy Policy</a>
                         <div class="bullet"></div>
@@ -72,11 +73,29 @@
             </div>
         </div>
         <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
-            data-background="{{ asset('img/example-image.jpg') }}">
+            data-background="{{ asset('img/rumah.jpg') }}">
+            
             <div class="absolute-bottom-left index-2">
                 <div class="text-light p-5 pb-2">
                     <div class="mb-5 pb-3">
-                        <h1 class="mb-2 display-4 font-weight-bold">Good Morning</h1>
+                        <?php
+                        date_default_timezone_set('Asia/Jakarta');
+                        $tanggal = date("H:i:s");
+                        // dd($tanggal);
+                        $status = '';
+                        if ($tanggal >= 00 && $tanggal <= 10) {
+                            $status = "Selamat Pagi";
+                        } else if ($tanggal >= 11 && $tanggal <= 15) {
+                            $status = "Selamat Siang";
+                        } else if ($tanggal >= 16 && $tanggal <= 19) {
+                            $status = "Selamat Sore";
+                        } else if ($tanggal >= 20 && $tanggal <= 24) {
+                            $status = "Selamat Malam";
+                        }
+                        ?>
+                        <h1 class="mb-2 display-4 font-weight-bold">
+                            {{ $status }}
+                        </h1>
                         <h5 class="font-weight-normal text-muted-transparent">Indramayu, Indonesia</h5>
                     </div>
                 </div>
