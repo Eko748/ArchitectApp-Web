@@ -33,9 +33,12 @@ Admin Page
                                     <th scope="col">Email</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
+                                @php
+                                $no = 0
+                                @endphp
                                 @foreach($adminpage as $a)
                                 <tr>
-                                    <td>{{$a->id}}</td>
+                                    <td>{{++$no}}.</td>
                                     <td>{{$a->name}}</td>
                                     <td>{{$a->username}}</td>
                                     <td>{{$a->email}}</td>
