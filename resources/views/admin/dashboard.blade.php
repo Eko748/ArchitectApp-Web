@@ -19,10 +19,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Online Users</h4>
+                                <h4>Konsultan</h4>
                             </div>
                             <div class="card-body">
-                                47
+                                {{$jumlah_data_konsultan}}
                             </div>
                         </div>
                     </div>
@@ -34,10 +34,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Online Users</h4>
+                                <h4>Owner</h4>
                             </div>
                             <div class="card-body">
-                                47
+                                {{$jumlah_data_owner}}
                             </div>
                         </div>
                     </div>
@@ -49,10 +49,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Online Users</h4>
+                                <h4>Kontraktor</h4>
                             </div>
                             <div class="card-body">
-                                47
+                                {{$jumlah_data_kontraktor}}
                             </div>
                         </div>
                     </div>
@@ -64,10 +64,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Online Users</h4>
+                                <h4>Admin</h4>
                             </div>
                             <div class="card-body">
-                                47
+                                {{$jumlah_data_admin}}
                             </div>
                         </div>
                     </div>
@@ -120,6 +120,50 @@
         </section>
     </div>
 @endsection
+
+@section('content')
+<?php $sekarang = date("Y");  ?>
+<script>
+    $(function () {
+        var bar_data = {
+  data : [
+      ['January', <?php $data = DB::table('users')->whereMonth('last_login', "01")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['February',<?php $data = DB::table('users')->whereMonth('last_login', "02")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['March', <?php $data = DB::table('users')->whereMonth('last_login', "03")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['April', <?php $data = DB::table('users')->whereMonth('last_login', "04")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['May', <?php $data = DB::table('users')->whereMonth('last_login', "05")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['June', <?php $data = DB::table('users')->whereMonth('last_login', "06")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['July', <?php $data = DB::table('users')->whereMonth('last_login', "07")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['August', <?php $data = DB::table('users')->whereMonth('last_login', "08")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['September', <?php $data = DB::table('users')->whereMonth('last_login', "09")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['October', <?php $data = DB::table('users')->whereMonth('last_login', "10")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['November', <?php $data = DB::table('users')->whereMonth('last_login', "11")->whereYear('last_login', $sekarang)->count(); echo $data ?>],
+      ['Desember', <?php $data = DB::table('users')->whereMonth('last_login', "12")->whereYear('last_login', $sekarang)->count(); echo $data ?>]
+    ],
+  color: '#3c8dbc'
+}
+$.plot('#bar-chart', [bar_data], {
+  grid  : {
+    borderWidth: 1,
+    borderColor: '#f3f3f3',
+    tickColor  : '#f3f3f3'
+  },
+  series: {
+    bars: {
+      show    : true,
+      barWidth: 0.5,
+      align   : 'center'
+    }
+  },
+  xaxis : {
+    mode      : 'categories',
+    tickLength: 0
+  }
+})
+    })
+</script>
+@endsection
+
 @push('js')
     <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>

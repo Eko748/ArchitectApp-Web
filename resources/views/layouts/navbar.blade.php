@@ -3,7 +3,8 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="{{ route('public.landing') }}" class="d-flex align-items-center my-2 my-lg-0 me-lg-5 text-dark text-decoration-none">
-                    Logo
+                    <img src="{{ asset('img/logo_proyek.png') }}" alt="logo" width="80"
+                    class=" mb-0 mt-0">
                 </a>
 
                 @guest

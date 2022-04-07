@@ -1,3 +1,106 @@
+<script>
+    const hero = document.querySelector(".hero-section");
+hero.style.height = window.innerHeight + "px";
+ 
+window.addEventListener("resize", function () {
+  hero.style.height = this.innerHeight + "px";
+});
+</script>
+
+<style>
+    :root {
+  --overlay: rgba(0, 0, 0, 0.35);
+  --box-shadow: 0 5px 20px 2px rgba(0, 0, 0, 0.15);
+  --green: #528119;
+}
+ 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+ 
+a {
+  color: inherit;
+}
+ 
+a:hover {
+  color: currentColor;
+  text-decoration: none;
+}
+ 
+.cover {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+ 
+.overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay);
+}
+ 
+.btn-outline-success {
+  color: var(--green);
+}
+ 
+.btn-outline-success:hover,
+.btn-outline-success:not(:disabled):not(.disabled):active {
+  background: var(--green);
+}
+ 
+.btn-outline-success,
+.btn-outline-success:hover,
+.btn-outline-success:not(:disabled):not(.disabled):active {
+  border-color: var(--green);
+}
+
+.hero-section {
+  height: 100vh;
+}
+ 
+.hero-section video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+ }
+ 
+.hero-section svg {
+  bottom: 0;
+  left: 0;
+  height: 30vh;
+}
+
+.cover-section .cover {
+  background-attachment: fixed;
+}
+ 
+.cover-section .caption {
+  bottom: 30px;
+  left: 15px;
+  z-index: 1;
+}
+ 
+.cover-section svg {
+  bottom: 0;
+  left: 0;
+  height: 30vh;
+}
+ 
+@media screen and (min-width: 768px) { 
+  .cover-section .caption {
+    bottom: 50px;
+  }
+   
+  .cover-section svg {
+    height: 50vh;
+  }
+}
+</style>
+
 @extends('layouts.auth-main')
 @section('title', 'Login')
 @section('css')
@@ -72,8 +175,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
-            data-background="{{ asset('img/rumah.jpg') }}">
+        
+        <div class="col-lg-8 col-14 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
+            data-background="{{ asset('mp4/rumah.mp4') }}">
+            
+            
+            <section class="hero-section position-relative">
+                <video class="col-lg-25 col-13 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" src="./mp4/rumah.mp4" autoplay loop muted playsinline></video>
+              <div class="overlay position-absolute d-flex align-items-center justify-content-center font-weight-bold text-white h2 mb-0">
+              </div>
+              <svg class="position-absolute w-100">
+                <use xlink:href="#one"></use>
+              </svg>
+            </section>
             
             <div class="absolute-bottom-left index-2">
                 <div class="text-light p-5 pb-2">
@@ -101,8 +215,21 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    
 </section>
+<svg style="display:none;">
+    <symbol id="one" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill="blue" d="M0,96L1440,320L1440,320L0,320Z"></path>
+      </symbol>
+      <symbol id="two" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill="white" d="M0,32L48,37.3C96,43,192,53,288,90.7C384,128,480,192,576,197.3C672,203,768,149,864,138.7C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </symbol>
+        
+      <!-- more symbols here -->
+</svg>
+
 @endsection
 @push('js')
 
