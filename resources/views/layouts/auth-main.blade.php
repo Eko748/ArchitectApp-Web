@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tema.css') }}">
+<script src="{{ asset('js/tema.js') }}"></script>
 </head>
 
 <body>
@@ -40,6 +42,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('js/stisla.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/tema.css') }}">
+<script src="{{ asset('js/tema.js') }}"></script>
 
 
     <!-- JS Libraies -->

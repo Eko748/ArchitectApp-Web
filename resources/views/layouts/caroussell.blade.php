@@ -7,99 +7,8 @@ window.addEventListener("resize", function () {
 });
 </script>
 
-<style>
-    :root {
-  --overlay: rgba(0, 0, 0, 0.35);
-  --box-shadow: 0 5px 20px 2px rgba(0, 0, 0, 0.15);
-  --green: #528119;
-}
- 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
- 
-a {
-  color: inherit;
-}
- 
-a:hover {
-  color: currentColor;
-  text-decoration: none;
-}
- 
-.cover {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
- 
-.overlay {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--overlay);
-}
- 
-.btn-outline-success {
-  color: var(--green);
-}
- 
-.btn-outline-success:hover,
-.btn-outline-success:not(:disabled):not(.disabled):active {
-  background: var(--green);
-}
- 
-.btn-outline-success,
-.btn-outline-success:hover,
-.btn-outline-success:not(:disabled):not(.disabled):active {
-  border-color: var(--green);
-}
+<link rel="stylesheet" href="{{ asset('css/landing.css') }}">
 
-.hero-section {
-  height: 100vh;
-}
- 
-.hero-section video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
- }
- 
-.hero-section svg {
-  bottom: 0;
-  left: 0;
-  height: 30vh;
-}
-
-.cover-section .cover {
-  background-attachment: fixed;
-}
- 
-.cover-section .caption {
-  bottom: 30px;
-  left: 15px;
-  z-index: 1;
-}
- 
-.cover-section svg {
-  bottom: 0;
-  left: 0;
-  height: 30vh;
-}
- 
-@media screen and (min-width: 768px) { 
-  .cover-section .caption {
-    bottom: 50px;
-  }
-   
-  .cover-section svg {
-    height: 50vh;
-  }
-}
-</style>
 <svg style="display:none;">
     <symbol id="one" viewBox="0 0 1440 320" preserveAspectRatio="none">
         <path fill="white" d="M0,96L1440,320L1440,320L0,320Z"></path>
@@ -178,13 +87,12 @@ a:hover {
 </div>
 
 <section class="cover-section position-relative">
-    <div class="cover" style="background-image: url(./img/rumah.jpg);">
-      <img src="./img/rumah.jpg" class="img-fluid invisible" alt="" />
+    <div class="cover" style="background-image: url(./img/rumah/peakpx.jpg);">
+      <img src="{{ asset('img/rumah/peakpx.jpg') }}" class="img-fluid invisible" alt="" style="padding:5px" />
     </div>
     <div class="caption position-absolute h4 mb-0">
-      Image from <a href="" target="_blank">...</a>
     </div>
-    <svg class="position-absolute w-100">
+    <svg class="position-absolute w-10">
       <use xlink:href="#six"></use>
     </svg>
   </section>

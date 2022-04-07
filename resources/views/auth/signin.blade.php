@@ -6,100 +6,7 @@ window.addEventListener("resize", function () {
   hero.style.height = this.innerHeight + "px";
 });
 </script>
-
-<style>
-    :root {
-  --overlay: rgba(0, 0, 0, 0.35);
-  --box-shadow: 0 5px 20px 2px rgba(0, 0, 0, 0.15);
-  --green: #528119;
-}
- 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
- 
-a {
-  color: inherit;
-}
- 
-a:hover {
-  color: currentColor;
-  text-decoration: none;
-}
- 
-.cover {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
- 
-.overlay {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--overlay);
-}
- 
-.btn-outline-success {
-  color: var(--green);
-}
- 
-.btn-outline-success:hover,
-.btn-outline-success:not(:disabled):not(.disabled):active {
-  background: var(--green);
-}
- 
-.btn-outline-success,
-.btn-outline-success:hover,
-.btn-outline-success:not(:disabled):not(.disabled):active {
-  border-color: var(--green);
-}
-
-.hero-section {
-  height: 100vh;
-}
- 
-.hero-section video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
- }
- 
-.hero-section svg {
-  bottom: 0;
-  left: 0;
-  height: 30vh;
-}
-
-.cover-section .cover {
-  background-attachment: fixed;
-}
- 
-.cover-section .caption {
-  bottom: 30px;
-  left: 15px;
-  z-index: 1;
-}
- 
-.cover-section svg {
-  bottom: 0;
-  left: 0;
-  height: 30vh;
-}
- 
-@media screen and (min-width: 768px) { 
-  .cover-section .caption {
-    bottom: 50px;
-  }
-   
-  .cover-section svg {
-    height: 50vh;
-  }
-}
-</style>
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
 @extends('layouts.auth-main')
 @section('title', 'Login')
@@ -109,7 +16,7 @@ a:hover {
 
 @endsection
 @section('content')
-<section class="section">
+<section class="section" style="font-size: 15px;">
     <div class="d-flex flex-wrap align-items-stretch">
         <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
             <div class="p-4 m-3">
@@ -130,14 +37,14 @@ a:hover {
                 <form method="POST" action="{{ url('login') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" type="email" class="form-control" name="email" tabindex="1"
+                        <label for="email" style="font-size: 15px;">Email</label>
+                        <input style="font-size: 15px;" id="email" type="email" class="form-control" name="email" tabindex="1"
                             value="{{ old('email') }}" autofocus>
                     </div>
 
                     <div class="form-group">
-                        <div class="d-block">
-                            <label for="password" class="control-label">Password</label>
+                        <div class="d-block" style="font-size: 15px;">
+                            <label style="font-size: 15px;" for="password" class="control-label">Password</label>
                         </div>
                         <input id="password" type="password" class="form-control" name="password" tabindex="2">
 

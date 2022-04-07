@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-6 col-lg-3 p-2">
-                    <h6 class="text-uppercase fw-bold">browse</h6>
+                    <h6 class="text-uppercase fw-bold">Browse</h6>
                     <div class="footer-link fw-normal">
                         <a href="{{ route('public.landing') }}" class="text-decoration-none text-white">Home</a>
                         <a href="{{ route('public.project') }}" class="text-decoration-none text-white">Project</a>
