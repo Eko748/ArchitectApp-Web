@@ -21,9 +21,9 @@ window.addEventListener("resize", function () {
         <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
             <div class="p-4 m-3">
                 <div class="div">
-                    <a href="/"><i class="fa-solid fa-arrow-left"></i>Back to home.</a>
+                    <a href="/"><i style="font-size: 15px;" class="fas fa-arrow-left"> Back to home</i></a>
                 </div>
-                
+                <br>
                 <h4 class="text-dark font-weight-normal mt-2">Welcome to <img src="{{ asset('img/logo_proyek.png') }}" alt="logo" width="115"
                     class=" mb-5 mt-2">
                 </h4>
@@ -37,7 +37,7 @@ window.addEventListener("resize", function () {
                 <form method="POST" action="{{ url('login') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="email" style="font-size: 15px;">Email</label>
+                        <label for="email" style="font-size: 15px;">Email</label> <span class="text-danger">*</span>
                         <input style="font-size: 15px;" id="email" type="email" class="form-control" name="email" tabindex="1"
                             value="{{ old('email') }}" autofocus>
                     </div>
@@ -45,6 +45,7 @@ window.addEventListener("resize", function () {
                     <div class="form-group">
                         <div class="d-block" style="font-size: 15px;">
                             <label style="font-size: 15px;" for="password" class="control-label">Password</label>
+                            <span class="text-danger">*</span>
                         </div>
                         <input id="password" type="password" class="form-control" name="password" tabindex="2">
 

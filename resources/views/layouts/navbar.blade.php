@@ -9,22 +9,20 @@
 
 
 <header>
-
     <div class="px-3 py-2 text-white border-bottom">
-        
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="{{ route('public.landing') }}" class="d-flex align-items-center my-2 my-lg-0 me-lg-5 text-dark text-decoration-none">
-                    <img src="{{ asset('img/logo_proyek.png') }}" alt="logo" width="80"
+                    <img src="{{ asset('img/logo_proyek.png') }}" alt="logo" width="100"
                     class=" mb-0 mt-0">
                 </a>
                 
 
                 @guest
                     <div class="ms-auto">
-                        <a href="{{ route('login') }}" class="btn btn-light text-dark me-2 btn-sm">Login</a>
-                        <a href="{{ route('choose.account') }}" class="btn btn-warning btn-sm">Sign Up</a>
-                        <button onclick="myFunction()" class="btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">
+                        <a href="{{ route('login') }}" style="font-size: 18px;"  class="btn btn-light btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">Login</a>
+                        <a href="{{ route('choose.account') }}" style="font-size: 18px;" class="btn btn-warning btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">Sign Up</a>
+                        <button onclick="myFunction()" style="font-size: 30px;" class="btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">
                             <i class="far fa-moon"></i>
                         </button>
                     </div>
@@ -37,7 +35,7 @@
                             <img src="" alt="image" width="32" height="32" class="rounded-circle pp">
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="{{ route('owner.my.project') }}">My Project</a></li>
+                            <li><a class="dropdown-item " href="{{ route('owner.my.project') }}">My Project</a></li>
                             <li><a class="dropdown-item" href="{{ route('owner.my.lelang') }}">My Lelang</a></li>
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             <li>
@@ -51,7 +49,7 @@
         </div>
     </div>
     <div class="px-3 border-bottom bg-white">
-        <div class="container d-flex flex-wrap justify-content-center ">
+        <div class="container d-flex flex-wrap justify-content-center " style="font-size: 18px;">
             <a class="nav-link text-dark" href="{{ route('public.landing') }}">Home</a>
             <a class="nav-link text-dark" href="{{ route('public.project') }}">Project</a>
             <a class="nav-link text-dark" href="{{ route('public.konsultan') }}">Professional</a>
