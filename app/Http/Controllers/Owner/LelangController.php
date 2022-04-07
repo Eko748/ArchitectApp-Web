@@ -19,7 +19,7 @@ class LelangController extends Controller
     {
         return [
             'title' => 'required|min:3',
-            'desc' => 'required|min:100',
+            'desc' => 'required',
             'from' => 'required',
             'to' => 'required',
             'designstyle' => 'required',
@@ -36,15 +36,17 @@ class LelangController extends Controller
         $data = [
             'ownerId' => $request->ownerId,
             'title' => $request->title,
-            'description' => $request->desc,
+            'description' => $request->description,
             'budgetFrom' => Str::of($request->from)->replace('.', ''),
             'budgetTo' => Str::of($request->to)->replace('.', ''),
-            'RAB' => "0",
-            'desain' => "0",
+            'RAB' => 0,
+            'desain' => 0,
             'gayaDesain' => $request->designstyle,
-            'kontraktor' => "0",
-            'status' => 0,
-            'luas' => $request->luas
+            // 'kontraktor' => "0",
+            // 'status' => 0,
+            'panjang' => 8,
+            'lebar' => 8,
+            // 'luas' => $request->luas
         ];
         if ($request->has('rab')) {
             $data['RAB'] = $request->rab;
@@ -57,10 +59,10 @@ class LelangController extends Controller
     }
     public function postLelang(Request $request)
     {
-
-        $request->validate($this->rules());
-        $data = $this->field($request);
-        $lelang = LelangOwner::create($data);
+        // dd($request->luas);
+        // $request->validate($this->rules());
+        // $data = $this->field($request);
+        $lelang = LelangOwner::create($request->all());
         if ($request->hasFile('image')) {
             $img = $request->file('image');
             $path = 'img/lelang/tkp/';

@@ -18,14 +18,15 @@ class CreateTableLelangOwners extends Migration
             $table->integer('ownerId');
             $table->string('title');
             $table->text('description');
-            $table->integer('status');
+            // $table->integer('status');
             $table->integer('budgetFrom');
             $table->integer('budgetTo');
             $table->string('gayaDesain');
             $table->enum('RAB', [1, 0]);
             $table->enum('desain', [1, 0]);
-            $table->decimal('panjang');
-            $table->decimal('lebar');
+            $table->string('luas');
+            // $table->decimal('panjang');
+            // $table->decimal('lebar');
 
             $table->timestamps();
         });
