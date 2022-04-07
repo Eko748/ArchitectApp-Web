@@ -59,7 +59,9 @@ class OwnerController extends Controller
 
     public function myLelang()
     {
-        return view('public.mylelang');
+        $data = LelangOwner::with('image')->get();
+        // return view('public.project', compact('data'));
+        return view('public.mylelang', compact('data'));
     }
     public function showLelang(LelangOwner $lelang)
     {
