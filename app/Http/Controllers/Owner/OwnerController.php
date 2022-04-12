@@ -121,4 +121,35 @@ class OwnerController extends Controller
         $data = Project::with('images', 'konsultan.user')->where('slug', $project->slug)->first();
         return view('public.detail-project', compact('data'));
     }
+
+    public function delete($id)
+    {
+        // $data =
+        LelangOwner::where("id", $id)->delete();
+        return redirect('/owner/mylelang')->with('success', "<script>alert('Post deleted successfully')</script>");
+    }
+
+    public function view($id) {
+        $data = [
+            "data_lelang" => LelangOwner::where("id", $id)->first(),
+        ];
+
+        return view("modal.modalviewlelang", $data);
+    }
+
+    // public function edit($id)
+    // {
+    //     $data = [
+    //         "data_divisi" => Divisi::where("id", $id)->first(),
+    //     ];
+    //     return view("admin.divisi.edit_divisi", $data);
+    // }
+
+    // public function update(Request $request)
+    // {
+    //     Divisi::where("id", $request->id)->update([
+    //         "nama_divisi" => $request->nama_divisi
+    //     ]);
+    //     return redirect("/admin/divisi")->with("success", "Data Berhasil di Simpan");
+    // }
 }

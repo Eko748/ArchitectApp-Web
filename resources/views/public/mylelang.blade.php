@@ -50,9 +50,18 @@ Project
                                 <td>{{ $view->title }}</td>
                                 <td>{{ $view->gayaDesain }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-info">view</button>
+                                    <form method="POST" action="{{ url ('/owner/mylelang/'.$view->id) }}"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="return confirm('Yakin ? Ingin Menghapus Data Ini ?')"
+                                            type="submit" class=" btn-danger btn-sm">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                    <button class="btn btn-info" onclick="viewlelang({{ $view->id }})"
+                                        data-toggle="modal" data-target="#exampleModal">view</button>
                                     <button type="button" class="btn btn-warning">Edit</button>
-                                    <button type="button" class="btn btn-danger">Hapus</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -66,11 +75,39 @@ Project
 </div>
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="view-image"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @include('layouts.footer')
 
 @push('js')
 
 <script>
+    function viewlelang(id) {
+        $.ajax({
+            url : "{{ url('/owner/mylelang/viewlelang') }}/"+id,
+            type : 'GET',
+            success : function(data) {
+                console.log(id);
+                $("#view-image").html(data);
+                return true;
+            }
+        });
+    }
+
     $(document).ajaxStart(function() {
                 $('.preloader').show()
             })
