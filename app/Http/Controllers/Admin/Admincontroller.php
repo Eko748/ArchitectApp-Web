@@ -21,14 +21,14 @@ class Admincontroller extends Controller
             "jumlah_data_konsultan" => Konsultan::count(),
             "jumlah_data_owner" => Owner::count(),
             "jumlah_data_kontraktor" => Kontraktor::count(),
-            
+
         ];
         return view('admin.dashboard', $data);
     }
     public function userPage()
     {
         $data = [
-            "userpage" => User::get()
+            "userpage" => User::where("level", "owner")->get()
         ];
         return view('admin.userpage', $data);
     }

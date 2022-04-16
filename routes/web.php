@@ -185,6 +185,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/owner/showlelang/{lelang}', [OwnerLelangController::class, 'showMyLelang'])->name('owner.lelang.show');
         Route::get('/owner/lelang', [OwnerController::class, 'lelangOwner'])->name('owner.lelang');
         Route::get('/owner/mylelang', [OwnerController::class, 'myLelang'])->name('owner.my.lelang');
+        Route::get('/owner/mylelang/viewlelang/{id}', [OwnerController::class, 'view'])->name('owner.my.lelang.view');
+        Route::delete('/owner/mylelang/{id}', [OwnerController::class, 'delete'])->name('owner.my.lelang.delete');
         Route::get('/owner/mylelang/{lelang}', [OwnerController::class, 'showLelang'])->name('owner.my.lelang.show');
         Route::get('/owner/myproject', [OwnerController::class, 'myProject'])->name('owner.my.project');
         Route::get('/owner/myproject/{project}', [OwnerController::class, 'getDetilProject'])->name('owner.detil.myproject');
