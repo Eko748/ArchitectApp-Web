@@ -40,6 +40,8 @@ use Illuminate\Support\Facades\Route;
 
 
 //public
+Route::get('kirim-email','App\Http\Controllers\MailController@index');
+
 Route::get('/', [OwnerController::class, 'index'])->name('public.landing');
 Route::get('/project', [OwnerController::class, 'project'])->name('public.project');
 Route::get('/all-konsultan', [OwnerController::class, 'professional'])->name('public.konsultan');
