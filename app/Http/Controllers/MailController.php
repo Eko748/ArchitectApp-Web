@@ -13,7 +13,7 @@ class MailController extends Controller
         'body' => 'This is for testing email using smtp'
         ];
        
-        \Mail::to('saneglos005@gmail.com')->send(new \App\Mail\MyTestMail($details));
+        return Mail::to('saneglos005@gmail.com')->send(new \App\Mail\MyTestMail($details));
        
         dd("Email sudah terkirim.");
     
