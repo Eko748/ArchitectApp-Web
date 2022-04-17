@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/owner/allproject', [OwnerController::class, 'getAllProjectKons']);
         Route::get('/owner/proposal', [OwnerController::class, 'getProposal']);
         Route::get('/owner/getdataowner', [OwnerController::class, 'getDataOwner']);
-        
+
         // proposal
         Route::post('/owner/proposal/choose', [OwnerController::class, 'chooseProposal']);
         Route::post('/owner/project/rating', [OwnerController::class, 'rating']);
@@ -40,7 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/owner/simpan/project', [OwnerController::class, 'favorit']);
         Route::delete('/owner/simpan/project', [OwnerController::class, 'hapusFavorit']);
 
-        
         Route::post('/owner/choose/project', [OwnerController::class, 'chooseProject']);
         Route::get('/owner/project/{project}', [OwnerController::class, 'detailProjectKons']);
         Route::get('/owner/project', [OwnerController::class, 'getProjectByOwn']);
@@ -69,7 +68,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/konsultan/deleteproject/{project}', [KonsultanController::class, 'deleteProject']);
         Route::post('/konsultan/upload/hasil', [KonsultanController::class, 'uploadHasil']);
         Route::post('/konsultan/upload/hasil-project', [KonsultanController::class, 'createProject']);
-
     });
 
     Route::middleware('kontraapi')->group(function () {
@@ -87,16 +85,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admin/allkonsultan', [AdminController::class, 'getAllKonsultan']);
         Route::get('/admin/allkontraktor', [AdminController::class, 'getAllKontraktor']);
         Route::put('/admin/verificationpro/{user}', [AdminController::class, 'verifikasiPro']);
-        
-        //proposal 
+
+        //proposal
         Route::get('/admin/allproposal', [AdminController::class, 'getAllProposal']);
         Route::post('/admin/verifikasi/proposal', [AdminController::class, 'verifikasiLelang']);
-        
+
         Route::get('/admin/paymentKonsultan', [AdminController::class, 'getPaymentKonsultan']);
         Route::post('/admin/verifikasi/payment', [AdminController::class, 'verifPayment']);
 
-        
-    
+
+
     });
 
 

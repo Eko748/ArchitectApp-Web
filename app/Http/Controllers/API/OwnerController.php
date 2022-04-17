@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class OwnerController extends BaseController
+class  OwnerController extends BaseController
 {
 
     public function getAllProjectKons()
@@ -392,7 +392,7 @@ class OwnerController extends BaseController
                 Favorit::create(['ownerId' => $this->getOwnerId()->owner->id, 'projectId' => $request->projectId]);
             }
         }
-        // $favs = Favorit::create(['ownerId'=>$this->getOwnerId()->owner->id,'projectId'=>$request->projectId]); 
+        // $favs = Favorit::create(['ownerId'=>$this->getOwnerId()->owner->id,'projectId'=>$request->projectId]);
         return $this->sendResponse($favorits, 'Berhasil menyimpan desain favorit');
     }
 
