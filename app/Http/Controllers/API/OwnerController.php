@@ -277,7 +277,9 @@ class  OwnerController extends BaseController
 
     public function getLelangByOwn()
     {
-        $data = LelangOwner::where([['ownerId', $this->getOwnerId()->owner->id], ['status', 0]])->with('owner.user', 'image', 'inspirasi', 'proposal.konsultan.user')->withCount('proposal')->orderBy('id', 'DESC')->get();
+        $data = LelangOwner::with('image')->get();
+        // return view('public.project', compact('data'));
+        // return view('public.mylelang', compact('data'));
         return $this->sendResponse($data, 'Data loaded successfully');
     }
 

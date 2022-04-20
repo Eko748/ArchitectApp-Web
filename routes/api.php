@@ -57,6 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/konsultan/myproject', [KonsultanController::class, 'getProjectByKons']);
         Route::get('/konsultan/getdatakonsultan', [KonsultanController::class, 'getDataKonsultan']);
         Route::post('/konsultan/allmyproject', [KonsultanController::class, 'getAllProjectByKons']);
+        Route::get('/konsultan/allmyproject', [KonsultanController::class, 'getAllProjectByKons']);
         Route::post('/konsultan/allproposal', [KonsultanController::class, 'getAllProposal']);
         Route::post('/konsultan/addproposal', [KonsultanController::class, 'postProposal']);
         Route::post('/konsultan/addlelang', [KonsultanController::class, 'postLelangKons']);
@@ -107,7 +108,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/allproject', [ProjectController::class, 'getAllProject']);
     Route::get('/showproject/{project}', [ProjectController::class, 'showProject']);
     Route::post('/postproject', [ProjectController::class, 'postProject']);
-    Route::post('/putproject/{project}', [ProjectController::class, 'putProject']);
+    Route::put('/putproject/{project}', [ProjectController::class, 'putProject']);
     Route::delete('/destroyproject/{project}', [ProjectController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/setfirebase', [AuthController::class, 'setFirebase']);

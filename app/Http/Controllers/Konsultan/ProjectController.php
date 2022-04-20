@@ -107,6 +107,7 @@ class ProjectController extends Controller
         Project::destroy($project->id);
         return 1;
     }
+    
     public function show(Project $design)
     {
         return $design;
