@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //public
-Route::get('kirim-email','App\Http\Controllers\MailController@index');
+Route::get('kirim-email', 'App\Http\Controllers\MailController@index');
 
 Route::get('/', [OwnerController::class, 'index'])->name('public.landing');
 Route::get('/project', [OwnerController::class, 'project'])->name('public.project');
@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/gettimelogin', [Admincontroller::class, 'getTimeLogging']);
     Route::middleware(['admin'])->group(function () {
         Route::get('/dashboard', [Admincontroller::class, 'index'])->name('dashboard');
+        Route::delete('/konsultan/{id}', [AdminController::class, 'deletekonsul'])->name('user.konsultan.delete');
+        Route::delete('/owner/{id}', [AdminController::class, 'deleteowner'])->name('user.owner.delete');
+        Route::delete('/kontraktor/{id}', [AdminController::class, 'deletekontraktor'])->name('user.kontraktor.delete');
 
         // user routes
         Route::get('/owner', [Admincontroller::class, 'userPage'])->name('owner.page');
@@ -186,6 +189,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/owner/lelang', [OwnerController::class, 'lelangOwner'])->name('owner.lelang');
         Route::get('/owner/mylelang', [OwnerController::class, 'myLelang'])->name('owner.my.lelang');
         Route::get('/owner/mylelang/viewlelang/{id}', [OwnerController::class, 'view'])->name('owner.my.lelang.view');
+        Route::get('/owner/mylelang/editlelang/{id}', [OwnerController::class, 'edit'])->name('owner.my.lelang.edit');
+        Route::put('/owner/mylelang/updatelelang/{id}', [OwnerController::class, 'updatemylelang'])->name('owner.my.update.update');
         Route::delete('/owner/mylelang/{id}', [OwnerController::class, 'delete'])->name('owner.my.lelang.delete');
         Route::get('/owner/mylelang/{lelang}', [OwnerController::class, 'showLelang'])->name('owner.my.lelang.show');
         Route::get('/owner/myproject', [OwnerController::class, 'myProject'])->name('owner.my.project');

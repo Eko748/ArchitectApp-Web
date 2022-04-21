@@ -52,6 +52,26 @@ class Admincontroller extends Controller
         return view('admin.design');
     }
 
+    public function deletekonsul($id)
+    {
+        // $data =
+        User::where("id", $id)->delete();
+        return redirect('/konsultan')->with('success', "<script>alert('Post deleted successfully')</script>");
+    }
+
+    public function deleteowner($id)
+    {
+        // $data =
+        User::where("id", $id)->delete();
+        return redirect('/owner')->with('success', "<script>alert('Post deleted successfully')</script>");
+    }
+
+    public function deletekontraktor($id)
+    {
+        // $data =
+        User::where("id", $id)->delete();
+        return redirect('/kontraktor')->with('success', "<script>alert('Post deleted successfully')</script>");
+    }
 
 // eko
 

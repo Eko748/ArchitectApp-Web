@@ -61,7 +61,7 @@ Project
                                     </form>
                                     <button class="btn btn-info" onclick="viewlelang({{ $view->id }})"
                                         data-toggle="modal" data-target="#exampleModal">view</button>
-                                    <button type="button" class="btn btn-warning">Edit</button>
+                                    <button type="button" onclick="editlelang({{ $view->id }})" data-toggle="modal" class="btn btn-warning" data-target="#exampleModal">Edit</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -79,7 +79,7 @@ Project
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">All View My Lelang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -108,10 +108,21 @@ Project
         });
     }
 
+    function editlelang(id) {
+    $.ajax({
+    url : "{{ url('/owner/mylelang/editlelang') }}/"+id,
+    type : 'get',
+    success : function(data) {
+    console.log(id);
+    $("#view-image").html(data);
+    return true;
+    }
+    });
+    }
+
     $(document).ajaxStart(function() {
                 $('.preloader').show()
             })
-
             @auth
                 $(function() {
                 $('.list-group').on('click', '.mylelang', function() {

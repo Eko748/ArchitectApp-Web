@@ -43,6 +43,16 @@ Admin Page
                                     <td>{{$a->username}}</td>
                                     <td>{{$a->email}}</td>
                                     {{-- <td>{{$k->alamat}}</td> --}}
+                                    <td>
+                                        <form method="POST" action="{{ url ('/kontraktor/'.$a->id) }}" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button onclick="return confirm('Yakin ? Ingin Menghapus Data Ini ?')" type="submit" class=" btn-danger btn-sm">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                        <button type="button" class="btn btn-warning">Edit</button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </thead>

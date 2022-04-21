@@ -134,22 +134,28 @@ class OwnerController extends Controller
             "data_lelang" => LelangOwner::where("id", $id)->first(),
         ];
 
-        return view("modal.modalviewlelang", $data);
+        return view("modal.mylelang.modalviewlelang", $data);
     }
 
-    // public function edit($id)
-    // {
-    //     $data = [
-    //         "data_divisi" => Divisi::where("id", $id)->first(),
-    //     ];
-    //     return view("admin.divisi.edit_divisi", $data);
-    // }
+    public function edit($id)
+    {
+        $data = [
+            "data_lelang" => LelangOwner::where("id", $id)->first(),
+        ];
+        return view("modal.mylelang.editviewlelang", $data);
+    }
 
-    // public function update(Request $request)
-    // {
-    //     Divisi::where("id", $request->id)->update([
-    //         "nama_divisi" => $request->nama_divisi
-    //     ]);
-    //     return redirect("/admin/divisi")->with("success", "Data Berhasil di Simpan");
-    // }
+    public function updatemylelang(Request $request)
+    {
+        LelangOwner::where("id", $request->id)->update([
+            "title" => $request->title,
+            "description" => $request->description,
+            "budgetFrom" => $request->budgetFrom,
+            "budgetTo" => $request->budgetTo,
+            "gayaDesain" => $request->gayaDesain,
+            // "desain" => $request->desain,
+            "luas" => $request->luas
+        ]);
+        return redirect("/owner/mylelang/")->with("success", "Data Berhasil di Simpan");
+    }
 }

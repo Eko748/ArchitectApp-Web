@@ -44,6 +44,16 @@ User Page
                                     <td>{{$p->username}}</td>
                                     <td>{{$p->email}}</td>
                                     {{-- <td>{{$k->alamat}}</td> --}}
+                                    <td>
+                                        <form method="POST" action="{{ url ('/konsultan/'.$p->id) }}" class="d-inline"> 
+                                            @csrf
+                                            @method('DELETE')
+                                            <button onclick="return confirm('Yakin ? Ingin Menghapus Data Ini ?')" type="submit" class=" btn-danger btn-sm">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                        <button type="button" class="btn btn-warning">Edit</button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </thead>
