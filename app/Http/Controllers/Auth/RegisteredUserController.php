@@ -65,7 +65,7 @@ class RegisteredUserController extends Controller
             'is_active' => 0,
         ]);
         Owner::create(['userId' => $user->id]);
-        event(new Registered($user));
+        // event(new Registered($user));
 
 
         return redirect(route('login'));

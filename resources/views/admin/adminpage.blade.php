@@ -31,6 +31,7 @@ Admin Page
                                     <th scope="col">Nama</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">Accept</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                                 @php
@@ -43,6 +44,13 @@ Admin Page
                                     <td>{{$a->username}}</td>
                                     <td>{{$a->email}}</td>
                                     {{-- <td>{{$k->alamat}}</td> --}}
+                                    <td>
+                                        @if ($a->final == 1)
+                                        <div class="badge badge-success">Sudah disetujui</div>
+                                        @else
+                                        <div class="badge badge-danger">Belum disetujui</div>
+                                        @endif
+                                    </td>
                                     <td>
                                         <form method="POST" action="{{ url ('/kontraktor/'.$a->id) }}" class="d-inline">
                                             @csrf

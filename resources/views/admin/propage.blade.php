@@ -32,6 +32,7 @@ User Page
                                     <th scope="col">Nama</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">Accept</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                                 @php
@@ -45,10 +46,18 @@ User Page
                                     <td>{{$p->email}}</td>
                                     {{-- <td>{{$k->alamat}}</td> --}}
                                     <td>
-                                        <form method="POST" action="{{ url ('/konsultan/'.$p->id) }}" class="d-inline"> 
+                                        @if ($p->final == 1)
+                                        <div class="badge badge-success">Sudah disetujui</div>
+                                        @else
+                                        <div class="badge badge-danger">Belum disetujui</div>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="{{ url ('/konsultan/'.$p->id) }}" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button onclick="return confirm('Yakin ? Ingin Menghapus Data Ini ?')" type="submit" class=" btn-danger btn-sm">
+                                            <button onclick="return confirm('Yakin ? Ingin Menghapus Data Ini ?')"
+                                                type="submit" class=" btn-danger btn-sm">
                                                 Hapus
                                             </button>
                                         </form>
@@ -59,6 +68,12 @@ User Page
                             </thead>
 
                         </table>
+                        {{-- <form method="POST" action="/admin/finalpanitia/{{ $id_acara }}">
+                            @csrf
+                            <button type="submit" class=" btn-success btn-sm">
+                                Finalisasi
+                            </button>
+                        </form> --}}
                     </div>
                 </div>
             </div>
