@@ -33,7 +33,6 @@
                 <div class="d-block bg-white mt-3 pb-3">
                     <nav class="nav ms-5">
                         <a class="nav-link text-dark" href="#">Profile</a>
-                        <a class="nav-link text-muted" href="#">Project</a>
                         <div class="ms-auto d-flex">
                             <a class="nav-link text-secondary" href="#"><i class="fas fa-bookmark"></i></a>
                         </div>
