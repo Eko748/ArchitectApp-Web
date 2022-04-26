@@ -26,9 +26,9 @@
                                 id="tambahProject">
                                 Tambah Project
                             </a>
-                            <a href="#" class="btn btn-warning">
+                            {{-- <a href="#" class="btn btn-warning">
                                 View All
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -203,7 +203,7 @@
                 // });
                 let empTable = document.getElementById("table-project").getElementsByTagName("tbody")[0];
                             empTable.innerHTML = "";
-                            
+
                             $.ajax({
                                 url: "{{ route('konsultan.allproject') }}",
                                 success: function(response) {
@@ -211,29 +211,29 @@
                                     for (let key in response.data) {
                                         if (response.data.hasOwnProperty(key)) {
                                             let val = response.data[key];
-                                            let NewRow = empTable.insertRow(-1); 
-                                            let noCell = NewRow.insertCell(0); 
-                                            let titleCell = NewRow.insertCell(1); 
-                                            let imagesCell = NewRow.insertCell(2); 
-                                            let opsiCell = NewRow.insertCell(3); 
-                                            
+                                            let NewRow = empTable.insertRow(-1);
+                                            let noCell = NewRow.insertCell(0);
+                                            let titleCell = NewRow.insertCell(1);
+                                            let imagesCell = NewRow.insertCell(2);
+                                            let opsiCell = NewRow.insertCell(3);
+
                                             console.log(val['images']);
-                                            
-                                            noCell.innerHTML = no++; 
-                                            titleCell.innerHTML = val['title']; 
+
+                                            noCell.innerHTML = no++;
+                                            titleCell.innerHTML = val['title'];
                                             for (let key2 in val['images']) {
                                                 let val2 = val['images'][key2];
                                                 // console.log(val2['image']);
-                                                imagesCell.innerHTML = val2['image']; 
+                                                imagesCell.innerHTML = val2['image'];
                                             }
-                                            opsiCell.innerHTML = val['aksi']; 
+                                            opsiCell.innerHTML = val['aksi'];
                                         }
                                     }
                                 }
                             })
                         });
-            
-            
+
+
         </script>
         @include('konsultan.js.project-js')
         @include('konsultan.js.profileJs')
