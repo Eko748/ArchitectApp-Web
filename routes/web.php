@@ -104,6 +104,8 @@ Route::middleware('auth')->group(function () {
         // project
         Route::get('/konsultan/project', [KonsultanController::class, 'project'])->name('konsultan.project');
         Route::get('/konsultan/project-all', [ProjectController::class, 'getAllProject'])->name('konsultan.allproject');
+        Route::put('/konsultan/project/{id}', [ProjectController::class, 'editProject'])->name('konsultan.update.project');
+        Route::get('/konsultan/projectedit/{id}', [ProjectController::class, 'edit'])->name('konsultan.editProject');
         Route::post('/konsultan/project', [ProjectController::class, 'tambahProject']);
         Route::delete('/konsultan/project-del/{project}', [ProjectController::class, 'destroy'])->name('konsultan.hapus.project');
 

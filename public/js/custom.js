@@ -7,7 +7,8 @@
 
 "use strict";
 
-let baseUrl = "http://127.0.0.1:8000/";
+// let baseUrl = "http://127.0.0.1:8000/";
+let baseUrl = "http://192.168.100.75:8000/";
 
 $(document).ready(function () {
     $(".preloader").fadeOut();

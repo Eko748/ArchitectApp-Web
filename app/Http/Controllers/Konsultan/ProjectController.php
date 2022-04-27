@@ -33,7 +33,7 @@ class ProjectController extends Controller
 
                     return $gambar;
                 })->addColumn('aksi', function ($data) {
-                    $btn = '<button type="button" class="btn btn-primary btn-sm mr-1 btnEditProject"  data-toggle="modal" data-target="#modalEditProject" data-id="' . $data->id . '" >Edit</button><a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewDesign"
+                    $btn = '<button type="button" class="btn btn-primary btn-sm mr-1 btnEditProject"  data-toggle="modal" data-target="#modalEditProject" data-id="' . $data->id . '" onclick="editProject('.$data->id.')">Edit</button><a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewDesign"
                             data-id="' . $data->id . '" id="viewDesign">View</a><a href="#" class="btn btn-danger mr-1 btn-sm" id="hapusProject" data-name="' . $data->title . '" data-id="' . $data->id . '">Hapus</a>';
                     return $btn;
                 })->rawColumns(['aksi', 'gambar'])->make(true);
@@ -77,12 +77,13 @@ class ProjectController extends Controller
             return 1;
         }
     }
+
     public function editProject(Request $req, Project $design)
     {
         $slug = Str::of($req->title)->slug('-');
         $img = $req->file('images');
         $path = 'img/project/';
-        $filename = $img->hashName();
+        $filename = $img;
         $req->validate([
             'title' => 'required|unique:designs,title,' . $design->id,
             'desc' => 'required',
@@ -98,8 +99,9 @@ class ProjectController extends Controller
             'slug' => $slug,
             'userId' => Auth::user()->id,
         ];
-        return Project::create($input);
+        return Project::where('userId', Auth::user()->id)->update($input);
     }
+
     public function destroy(Project $project)
     {
         Storage::disk('files')->delete($project);
@@ -107,7 +109,7 @@ class ProjectController extends Controller
         Project::destroy($project->id);
         return 1;
     }
-    
+
     public function show(Project $design)
     {
         return $design;
@@ -137,4 +139,23 @@ class ProjectController extends Controller
             'gayaDesain' => 'required'
         ];
     }
+
+    public function edit($id)
+    {
+        $data = [
+            "data_project" => Project::where("id", $id)->first(),
+        ];
+        return view("modal.project_konsultan.edit_project", $data);
+    }
+
+    // public function updateproject(Request $request)
+    // {
+    //     Project::where("id", $request->id)->update([
+    //         "title" => $request->title,
+    //         "desc" => $request->description
+    //         //image
+
+    //     ]);
+    //     return redirect("/konsultan/project")->with("success", "Data Berhasil di Simpan");
+    // }
 }

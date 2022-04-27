@@ -64,32 +64,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post" id="formEditProject">
-                        @csrf
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control">
-                            <div class="invalid-feedback"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="images">Images</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" multiple name="images">
-                                <label class="custom-file-label" for="images">Choose file</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="desc">Deskripsi</label>
-                            <textarea name="desc" class="form-control w-100 h-100" rows="5"></textarea>
-                            <div class="invalid-feedback"></div>
-                        </div>
+                <div class="" id="editProject">
+
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
@@ -171,6 +148,19 @@
         <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
         <script>
+
+            function editProject(id) {
+            $.ajax({
+            url : "{{ url('/konsultan/projectedit/') }}/"+id,
+            type : 'get',
+            success : function(data) {
+            console.log(id);
+            $("#editProject").html(data);
+            return true;
+            }
+            });
+            }
+
             $(function() {
                 // let table = $('#table-project').DataTable({
                 //     processing: true,
