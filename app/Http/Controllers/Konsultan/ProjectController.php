@@ -33,8 +33,10 @@ class ProjectController extends Controller
 
                     return $gambar;
                 })->addColumn('aksi', function ($data) {
-                    $btn = '<button type="button" class="btn btn-primary btn-sm mr-1 btnEditProject"  data-toggle="modal" data-target="#modalEditProject" data-id="' . $data->id . '" onclick="editProject('.$data->id.')">Edit</button><a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewDesign"
-                            data-id="' . $data->id . '" id="viewDesign">View</a><a href="#" class="btn btn-danger mr-1 btn-sm" id="hapusProject" data-name="' . $data->title . '" data-id="' . $data->id . '">Hapus</a>';
+                    $btn = '<button type="button" class="btn btn-primary btn-sm mr-1 btnEditProject"  data-toggle="modal" data-target="#modalEditProject" data-id="' . $data->id . '" onclick="editProject('.$data->id.')">Edit</button>
+                    <a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#viewProject"
+                            data-id="' . $data->id . '" id="viewDesign" onclick="view('.$data->id.')">View</a>
+                            <a href="#" class="btn btn-danger mr-1 btn-sm" id="hapusProject" data-name="' . $data->title . '" data-id="' . $data->id . '">Hapus</a>';
                     return $btn;
                 })->rawColumns(['aksi', 'gambar'])->make(true);
         }
@@ -78,28 +80,52 @@ class ProjectController extends Controller
         }
     }
 
-    public function editProject(Request $req, Project $design)
+    public function editProject(Request $request, $id)
     {
-        $slug = Str::of($req->title)->slug('-');
-        $img = $req->file('images');
+        $slug = Str::of($request->title)->slug('-');
         $path = 'img/project/';
-        $filename = $img;
-        $req->validate([
-            'title' => 'required|unique:designs,title,' . $design->id,
+        $request->validate([
+            'title' => 'required',
             'desc' => 'required',
-            'images' => 'required||mimes:jpg,jpeg,png',
+            // 'images' => 'required'
         ]);
-        if ($req->hasFile('images')) {
-            $img->storeAs($path, $filename, 'files');
-        }
         $input = [
-            'title' => $req->title,
-            'desc' => $req->desc,
-            'images' => $filename,
-            'slug' => $slug,
-            'userId' => Auth::user()->id,
+            'title' => $request->title,
+            'description' => $request->desc
         ];
-        return Project::where('userId', Auth::user()->id)->update($input);
+        $project = Project::where('id',$id)->update($input);
+
+        if ($request->hasFile('images')) {
+            $img = $request->file('images');
+            foreach ($img as $key) {
+                print_r($key);die;
+                $filename = $key->hashName();
+                $key->storeAs($path, $filename, 'files');
+                $images = Image::where('projectId', $id)->update([ 'image' => $filename]);
+            }
+        }
+        return back();
+
+        // $slug = Str::of($req->title)->slug('-');
+        // $img = $req->file('images');
+        // $path = 'img/project/';
+        // $filename = $img;
+        // $req->validate([
+        //     'title' => 'required|unique:designs,title,' . $design->id,
+        //     'desc' => 'required',
+        //     'images' => 'required||mimes:jpg,jpeg,png',
+        // ]);
+        // if ($req->hasFile('images')) {
+        //     $img->storeAs($path, $filename, 'files');
+        // }
+        // $input = [
+        //     'title' => $req->title,
+        //     'desc' => $req->desc,
+        //     'images' => $filename,
+        //     'slug' => $slug,
+        //     'userId' => Auth::user()->id,
+        // ];
+        // return Project::where('userId', Auth::user()->id)->update($input);
     }
 
     public function destroy(Project $project)
@@ -148,14 +174,11 @@ class ProjectController extends Controller
         return view("modal.project_konsultan.edit_project", $data);
     }
 
-    // public function updateproject(Request $request)
-    // {
-    //     Project::where("id", $request->id)->update([
-    //         "title" => $request->title,
-    //         "desc" => $request->description
-    //         //image
+    public function view($id) {
+        $data = [
+            "data_project" => Project::where("id", $id)->first(),
+        ];
 
-    //     ]);
-    //     return redirect("/konsultan/project")->with("success", "Data Berhasil di Simpan");
-    // }
+        return view("modal.project_konsultan.view_project", $data);
+    }
 }

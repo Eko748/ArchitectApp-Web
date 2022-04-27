@@ -59,12 +59,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Project</h5>
+                    <h5 class="modal-title">Edit Project</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="" id="editProject">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="viewProject" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Project</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="" id="view">
 
                 </div>
             </div>
@@ -156,6 +172,18 @@
             success : function(data) {
             console.log(id);
             $("#editProject").html(data);
+            return true;
+            }
+            });
+            }
+
+            function view(id) {
+            $.ajax({
+            url : "{{ url('/konsultan/project/view/') }}/"+id,
+            type : 'get',
+            success : function(data) {
+            console.log(id);
+            $("#view").html(data);
             return true;
             }
             });

@@ -1,4 +1,4 @@
-<form action="{{ url('/konsultan/project/'.$data_project->id) }}" method="post" id="formEditProject">
+<form action="{{ url('/konsultan/project/'.$data_project->id) }}" method="post" id="formEditProject" enctype="multipart/form-data">
     <div class="modal-body">
     @method('PUT')
     @csrf
@@ -10,7 +10,7 @@
     <div class="form-group">
         <label for="images">Images</label>
         <div class="custom-file">
-            <input type="file" class="custom-file-input" multiple name="images">
+            <input type="file" class="custom-file-input" multiple name="images[]">
             <label class="custom-file-label" for="images">Choose file</label>
         </div>
     </div>
