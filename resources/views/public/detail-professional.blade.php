@@ -5,7 +5,7 @@
 @include('layouts.navbar')
 @section('content')
     <main class="bg-light pb-5">
-        <div class="img-pro-header d-flex flex-row justify-content-center"></div>
+        {{-- <div class="img-pro-header d-flex flex-row justify-content-center"></div> --}}
         <div class="box-pros d-flex bg-white py-5">
             <img src="{{ asset('img/avatar/' . $data->user->avatar) }}" class="pros-logo ms-5" alt="">
             <div class="pros-detail ms-3">
@@ -27,7 +27,7 @@
         <div class="d-flex">
             <div class="w-25"></div>
             <div class="about-pros mt-3 ms-5 ps-4">
-                <h4 class="text-muted">About Pros</h4>
+                <h4 class="text-muted">About Konsultan</h4>
                 <p>{{ $data->about }}</p>
             </div>
         </div>
@@ -59,20 +59,20 @@
 
             </div>
             <div class="right-pros container">
-
                 <div class="row">
                     <p class="text-muted"><span class="fw-bold">Featured </span>Projects</p>
-
                     @foreach ($data->projects as $item)
+                    @php
+                        $img = [];
+                    @endphp
                         @foreach ($item->images as $val)
                             @php
                                 $img[] = $val->image;
                             @endphp
                         @endforeach
-
                         <div class="col-lg-4 col-sm col-md-6 mb-2">
                             <div class="card projectCard border-0 bg-light project" data-slug="{{ $item->slug }}">
-                                <img src="{{ asset('img/project/' . $img[0]) }}" class="card-img-top" alt="...">
+                                <img src="{{ asset('img/project/' . $img[0]) }}" class="card-img-top" alt="">
                                 <div class="small-img-prof mt-1 text-center">
                                     <img src="{{ asset('img/project/' . $img[1]) }}" class="rounded" alt="">
                                     <img src="{{ asset('img/project/' . $img[2]) }}" class="rounded" alt="">
@@ -83,11 +83,8 @@
                                     {{-- <h6 class="card-subtitle mb-2 text-muted ">Ars</h6> --}}
                                 </div>
                             </div>
+                        </div>
                     @endforeach
-
-                </div>
-
-
             </div>
         </div>
         </div>
