@@ -54,6 +54,7 @@
 
             const id = $(this).data("id");
             const name = $(this).data("name");
+            console.log(id);
             let url = baseUrl + "konsultan/project-del/" + id;
             alertDelete(url, "Project anda berhasil dihapus", name, id, "table-project");
 

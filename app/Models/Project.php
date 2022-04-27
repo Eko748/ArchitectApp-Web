@@ -21,15 +21,15 @@ class Project extends Model
         return $this->hasMany(Image::class,'projectId');
     }
 
-    public function konsultan() 
+    public function konsultan()
     {
         return $this->belongsTo(Konsultan::class, 'konsultanId', 'id');
     }
 
-    public function designStyle()
-    {
-        return $this->hasMany(DesainStyle::class,'projectId','id');
-    }
+    // public function designStyle()
+    // {
+    //     return $this->hasMany(DesainStyle::class,'projectId','id');
+    // }
     public function projectOwn()
     {
         return $this->hasMany(ProjectOwner::class,'projectId','id');

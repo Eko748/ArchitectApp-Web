@@ -155,6 +155,7 @@ class OwnerController extends Controller
             "gayaDesain" => $request->gayaDesain,
             // "desain" => $request->desain,
             "luas" => $request->luas
+
         ]);
         return redirect("/owner/mylelang/")->with("success", "Data Berhasil di Simpan");
     }

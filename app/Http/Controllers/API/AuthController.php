@@ -176,12 +176,13 @@ class AuthController extends BaseController
                 'email' => 'required|email|unique:users,email',
                 'username' => 'required|min:3|unique:users,username',
                 'password' => 'required|min:8',
-                'file.required' => "File tidak boleh kosong",
+                'file' => 'required|mimes:pdf,jpg,jpeg,png'
             ],
             [
                 'email.email' => "Email tidak valid",
                 'email.unique' => "Email sudah digunakan",
                 'username.unique' => "Username sudah digunakan",
+                'file.required' => "File tidak boleh kosong"
             ]
         );
 

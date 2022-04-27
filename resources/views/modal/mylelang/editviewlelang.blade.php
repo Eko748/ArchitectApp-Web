@@ -34,13 +34,7 @@
     </div>
     <div class="form-group">
         <label>Image Design</label>
-        <div class="row">
-            @foreach ($data_lelang->image as $image)
-            <div class="col-lg-6 mb-3">
-                <img src="/img/lelang/tkp/{{ $image->image }}" width='100%' alt="...">
-            </div>
-            @endforeach
-        </div>
+        <input class="form-control form-control-sm @error('image') is-invalid @enderror" id="image" name="image[]" multiple type="file">
         <button type="submit" class="btn btn-primary">Update</button>
     </div>
 </form>
