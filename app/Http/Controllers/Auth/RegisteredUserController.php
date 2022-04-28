@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
     }
     public function registerKontraktor()
     {
-        return view('auth.register-kontaktor');
+        return view('auth.register-kontraktor');
     }
 
     /**
@@ -105,6 +105,7 @@ class RegisteredUserController extends Controller
         }
         return redirect(route('login'));
     }
+
     public function storeKontraktor(Request $request)
     {
         $path = 'persyaratan/kontraktor/';

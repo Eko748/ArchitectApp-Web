@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="">KONSULTAN</a>
+            <a href="">KONTRAKTOR</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="">KS</a>
@@ -22,7 +22,7 @@
                             href="{{ route('kontraktor.job.archived') }}">Archived Jobs</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown  {{ in_array(Request::segment(3),['active','submit','archived']) ? 'active' : '' }}">
+            {{-- <li class="nav-item dropdown  {{ in_array(Request::segment(3),['active','submit','archived']) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="fas fa-users"></i><span>My Proposal</span></a> </a>
                 <ul class="dropdown-menu">
@@ -33,7 +33,7 @@
                     <li class="{{ Request::segment(3) == 'archived' ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('kontraktor.proposal.archived') }}">Archived Proposal</a></li>
                 </ul>
-            </li>
+            </li> --}}
             <li class=" {{ Request::segment(2) == 'inbox' ? 'active' : '' }}"><a class="nav-link"  href=""><i class="far fa-images"></i><span>Message</span></a></li>
             <li class="menu-header">Setting</li>
             <li class="{{ Request::segment(2) == 'profile' ? 'active' : '' }} "><a class="nav-link"
