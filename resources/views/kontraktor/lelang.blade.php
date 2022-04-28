@@ -12,13 +12,13 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Lelang Project</h1>
+                <h1>Proposal Project</h1>
             </div>
 
             <div class="section-body">
                 <div class="card">
                     <div class="card-header">
-                        <h4>List Lelang</h4>
+                        <h4>List Proposal</h4>
                     </div>
                     <div class="card-body">
                         <div class="list-group"></div>
