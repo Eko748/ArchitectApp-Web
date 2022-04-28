@@ -99,6 +99,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['konsultan'])->group(function () {
 
+        // Route::get('/konsultan/dashboard', [Konsultancontroller::class, 'index'])->name('konsultan.dashboard');
         Route::get('/konsultan/dashboard', [KonsultanController::class, 'dashboard'])->name('konsultan.dashboard');
 
         // project
@@ -112,6 +113,7 @@ Route::middleware('auth')->group(function () {
 
         // lelang
         Route::get('/konsultan/lelang', [KonsultanController::class, 'lelangKons'])->name('konsultan.find');
+        // Route::get('/konsultan/mylelang/viewlelang/{id}', [OwnerController::class, 'view'])->name('owner.my.lelang.view');
         Route::get('/konsultan/all-lelang', [LelangController::class, 'getAllLelangOwner'])->name('konsultan.lelang');
         Route::get('/konsultan/lelang/{lelang}', [KonsultanController::class, 'detilLelang'])->name('konsultan.lelang.detil');
         Route::get('/konsultan/getlelang/{lelang}', [LelangController::class, 'showLelang'])->name('konsultan.lelang.show');
@@ -184,7 +186,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('owner')->group(function () {
-
+ 
         Route::post('/owner/profile/{user}', [OwnerController::class, 'profileOwner'])->name('owner.profile.show');
         Route::post('/owner/lelang', [OwnerLelangController::class, 'postLelang'])->name('owner.lelang.post');
         Route::get('/owner/lelang/all', [OwnerLelangController::class, 'AllMyLelang'])->name('owner.lelang.all');
