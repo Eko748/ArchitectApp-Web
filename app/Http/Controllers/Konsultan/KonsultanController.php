@@ -5,19 +5,37 @@ namespace App\Http\Controllers\Konsultan;
 use App\Http\Controllers\Controller;
 use App\Models\LelangOwner;
 use App\Models\Project;
-use App\Models\User;
+use App\Models\LelangKonsultan;
 use Illuminate\Http\Request;
 
 class KonsultanController extends Controller
 {
+    // public function index()
+    // {
+    //     $data = [
+    //         // "jumlah_data_desain" => Admin::count(),
+    //         // "jumlah_data_lelang_owner" => Konsultan::count(),
+    //         "jumlah_data_project" => Project::count(),
+    //         // "jumlah_data_proposal" => Kontraktor::count(),
+
+    //     ];
+    //     return view('konsultan.dashboard', $data);
+    // }
     public function dashboard()
     {
-        return view('konsultan.dashboard');
+        $data = [
+            "jumlah_data_desain" => Project::count(),
+            "jumlah_data_lelang_owner" => LelangOwner::count(),
+            "jumlah_data_lelang_konsultan" => LelangKonsultan::count(),
+            // "jumlah_data_proposal" => ::count(),
+
+        ];
+        return view('konsultan.dashboard', $data);
     }
     public function project()
     {
-     
-       return view('konsultan.project');
+    
+        return view('konsultan.project');
     }
     public function lelangKons()
     {
@@ -31,7 +49,9 @@ class KonsultanController extends Controller
     }
     public function lelangOwner()
     {
-        return view('konsultan.owner-lelang');
+        $data = LelangOwner::with('image')->get();
+        // return view('public.project', compact('data'));
+        return view('konsultan.lelang', compact('data'));
     }
     public function archivedJob()
     {
@@ -60,5 +80,12 @@ class KonsultanController extends Controller
     {
     
         return view('konsultan.detil-job');
+    }
+    public function detailLelangOwner($id) {
+        $data = [
+            "data_lelang" => LelangOwner::where("id", $id)->first(),
+        ];
+
+        return view("modal.lelang-owner.detail-lelang", $data);
     }
 }
