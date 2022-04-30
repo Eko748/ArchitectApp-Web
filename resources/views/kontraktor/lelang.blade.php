@@ -20,9 +20,6 @@
                     <div class="card-header">
                         <h4>List Proposal</h4>
                     </div>
-                    <div class="card-body">
-                        <div class="list-group"></div>
-                    </div>
                     <div class="card-footer">
                     </div>
                 </div>

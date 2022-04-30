@@ -16,8 +16,7 @@ class KonsultanController extends Controller
     }
     public function project()
     {
-     
-       return view('konsultan.project');
+        return view('konsultan.project');
     }
     public function lelangKons()
     {
@@ -26,7 +25,7 @@ class KonsultanController extends Controller
     }
     public function detilLelang(LelangOwner $lelang )
     {
-        
+
         return view('konsultan.detil-lelang');
     }
     public function lelangOwner()
@@ -44,21 +43,21 @@ class KonsultanController extends Controller
     public function activeProposal()
     {
         return view('konsultan.active-proposal');
-        
+
     }
     public function submitProposal()
     {
         return view('konsultan.submit-proposal');
-        
+
     }
     public function archivedProposal()
     {
         return view('konsultan.archived-proposal');
-        
+
     }
     public function detilJob(Project $project)
     {
-    
+
         return view('konsultan.detil-job');
     }
 }

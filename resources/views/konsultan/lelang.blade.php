@@ -21,7 +21,24 @@
                         <h4>List Lelang</h4>
                     </div>
                     <div class="card-body">
-                        <div class="list-group"></div>
+                        <div class="main">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Gaya Desain</th>
+                                            <th scope="col">Owner</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="list-group">
+                        </div>
                     </div>
                     <div class="card-footer">
                     </div>
