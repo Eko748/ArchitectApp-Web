@@ -37,6 +37,10 @@ class KonsultanController extends Controller
     
         return view('konsultan.project');
     }
+    public function lelangKonsultan()
+    {
+        return view('konsultan.lelang-konsultan');
+    }
     public function lelangKons()
     {
         return view('konsultan.lelang');

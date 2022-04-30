@@ -9,6 +9,18 @@ class LelangKonsultan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tenderKonsultanId', 'title', 'description','desain','status'
+        'tenderKonsultanId', 'title', 'description','budget','desain','rab','status'
     ];
+
+    public function tenderKonsultan()
+    {
+        return $this->belongsTo(TenderKonsultan::class, 'tenderKonsultanId', 'id');
+    }
+
+    public function proposal()
+    {
+        return $this->hasMany(TenderKonsultan::class, 'lelangOwnerId');
+    }
 }
+
+
