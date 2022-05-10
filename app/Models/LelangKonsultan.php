@@ -9,8 +9,26 @@ class LelangKonsultan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tenderKonsultanId', 'title', 'description','budget','desain','rab','status'
+        'konsultanId', 'title', 'description', 'slug', 'budget','status'
     ];
+    protected $attributes = [
+        'budget' => 0,
+    ];
+
+    public function images()
+    {
+        return $this->hasMany(ImageLelangKonsultan::class,'LelangKonsultanId');
+    }
+
+    public function files()
+    {
+        return $this->hasOne(FileLelangKonsultan::class,'lelangKonsultanId');
+    }
+
+    public function konsultan()
+    {
+        return $this->belongsTo(Konsultan::class, 'konsultanId', 'id');
+    }
 
     public function tenderKonsultan()
     {

@@ -10,6 +10,7 @@
 @section('content')
     @include('layouts.topbar')
     @include('layouts.sidebar-konsultan')
+    {{-- @include('layouts.assets') --}}
 
     <div class="main-content">
         <section class="section">
@@ -22,8 +23,8 @@
                     <div class="card-header">
                         <h4>Data Lelang</h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProject"
-                                id="tambahProject">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalLelang"
+                                id="tambahLelang">
                                 Tambah Lelang
                             </a>
                             {{-- <a href="#" class="btn btn-warning">
@@ -33,15 +34,13 @@
                     </div>
                     <div class="card-body">
 
-                        <table class="table table-hover" id="table-project">
+                        <table class="table table-hover" id="table-lelang">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
-                                    {{-- <th scope="col">Description</th> --}}
                                     <th scope="col">Budget</th>
-                                    <th scope="col">Desain</th>
-                                    <th scope="col">RAB</th>
+                                    <th scope="col">Images</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -89,7 +88,7 @@
             </div>
         </div>
     </div> --}}
-    <div class="modal fade" id="modalProject" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal fade" id="modalLelang" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -99,7 +98,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" id="formTambahProject">
+                    <form action="" method="post" id="formTambahLelang" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title">Title</label>
@@ -122,9 +121,17 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="images">4 Gambar Utama</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="images[]" multiple>
+                                <label class="custom-file-label" for="images">Choose file</label>
+                            </div>
+                            <small>Gambar minimal 4 desain</small>
+                        </div>
+                        <div class="form-group">
                             <label for="desain">Desain</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" multiple name="desain">
+                                <input type="file" name="desain" class="custom-file-input">
                                 <label class="custom-file-label" for="desain">Unggah File</label>
                             </div>
                             <small>Format PDF</small>
@@ -132,7 +139,7 @@
                         <div class="form-group">
                             <label for="rab">RAB</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" multiple name="rab">
+                                <input type="file" name="rab" class="custom-file-input">
                                 <label class="custom-file-label" for="rab">Unggah File</label>
                             </div>
                             <small>Format PDF</small>
@@ -208,11 +215,11 @@
                 //         },
                 //     ],
                 // });
-                let empTable = document.getElementById("table-project").getElementsByTagName("tbody")[0];
+                let empTable = document.getElementById("table-lelang").getElementsByTagName("tbody")[0];
                             empTable.innerHTML = "";
 
                             $.ajax({
-                                url: "{{ route('konsultan.all.lelang') }}",
+                                url: "{{ route('konsultan.all.Lelang.Konsultan') }}",
                                 success: function(response) {
                                     let no = 1;
                                     for (let key in response.data) {
@@ -222,25 +229,20 @@
                                             let noCell = NewRow.insertCell(0);
                                             let titleCell = NewRow.insertCell(1);
                                             let budgetCell = NewRow.insertCell(2);
-                                            let desainCell = NewRow.insertCell(3);
-                                            let rabCell = NewRow.insertCell(4);
-                                            let opsiCell = NewRow.insertCell(5);
+                                            let imagesCell = NewRow.insertCell(3);
+                                            let opsiCell = NewRow.insertCell(4);
 
-                                            console.log(val['desain']);
+                                            console.log(val['images']);
 
                                             noCell.innerHTML = no++;
                                             titleCell.innerHTML = val['title'];
-                                            budgetCell.innerHTML = val['title'];
-                                            for (let key2 in val['desain']) {
-                                                let val2 = val['desain'][key2];
+                                            budgetCell.innerHTML = val['budget'];
+                                            for (let key2 in val['images']) {
+                                                let val2 = val['images'][key2];
                                                 // console.log(val2['desain']);
-                                                desainCell.innerHTML = val2['desain'];
+                                                imagesCell.innerHTML = val2['images'];
                                             }
-                                            for (let key2 in val['rab']) {
-                                                let val2 = val['rab'][key2];
-                                                // console.log(val2['rab']);
-                                                desainCell.innerHTML = val2['rab'];
-                                            }
+                                            
                                             opsiCell.innerHTML = val['aksi'];
                                         }
                                     }

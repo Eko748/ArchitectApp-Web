@@ -34,16 +34,14 @@ class KonsultanController extends Controller
     }
     public function project()
     {
-<<<<<<< HEAD
+
         return view('konsultan.project');
-=======
     
         return view('konsultan.project');
     }
     public function lelangKonsultan()
     {
         return view('konsultan.lelang-konsultan');
->>>>>>> bfd4530373da3d6fcd0fe5727eae23e144966e6e
     }
     public function lelangKons()
     {

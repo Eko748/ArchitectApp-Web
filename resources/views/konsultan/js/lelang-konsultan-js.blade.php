@@ -1,15 +1,15 @@
 <script>
     $(function() {
 
-        // add project
-        $("body").on('click', '#tambahProject', function() {
+        // add lelang
+        $("body").on('click', '#tambahLelang', function() {
             blankInput();
             formfile('Pilih File')
             removeInvalid();
-            $("#formTambahProject").trigger("reset")
+            $("#formTambahLelang").trigger("reset")
         });
 
-        $("body").on("submit", "#formTambahProject", function(e) {
+        $("body").on("submit", "#formTambahLelang", function(e) {
             e.preventDefault();
             let url = "{{ route('konsultan.lelang-konsultan') }}"
             SetupAjax();
@@ -23,9 +23,9 @@
                 contentType: false,
                 success: function(response) {
                     $(this).trigger("reset");
-                    $("#modalProject").modal("hide");
+                    $("#modalLelang").modal("hide");
                     alertSuccess("Lelang anda berhasil ditambahkan");
-                    $("#table-project").DataTable().ajax.reload();
+                    $("#table-lelang").DataTable().ajax.reload();
                 },
                 error: function(xhr) {
                     var res = xhr.responseJSON;
@@ -42,21 +42,21 @@
             });
         });
 
-        // edit Project
+        // edit Lelang
         $('body').on('click', '#btnEditProject', function() {
 
             const id = $(this).data("id");
 
             $("#table-project").DataTable().ajax.reload();
         })
-        // Hpus project
-        $('body').on('click', '#hapusProject', function() {
+        // Hapus lelang
+        $('body').on('click', '#hapusLelang', function() {
 
             const id = $(this).data("id");
             const name = $(this).data("name");
             console.log(id);
             let url = baseUrl + "konsultan/lelang-del/" + id;
-            alertDelete(url, "Lelang anda berhasil dihapus", name, id, "table-project");
+            alertDelete(url, "Lelang anda berhasil dihapus", name, id, "table-lelang");
 
         })
     });

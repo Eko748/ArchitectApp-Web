@@ -8,6 +8,7 @@
 @section('content')
     @include('layouts.topbar')
     @include('layouts.sidebar-konsultan')
+    
 
     <div class="main-content">
         <section class="section">
@@ -29,7 +30,6 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Title</th>
                                             <th scope="col">Gaya Desain</th>
-<<<<<<< HEAD
                                             <th scope="col">Owner</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -40,7 +40,6 @@
 
                         <div class="list-group">
                         </div>
-=======
                                             <th scope="col">Opsi View Desain</th>
                                         </tr>
                                     </thead>
@@ -62,7 +61,6 @@
                                 </table>
                             </div>
                         </div>
->>>>>>> bfd4530373da3d6fcd0fe5727eae23e144966e6e
                     </div>
                     <div class="card-footer">
                     </div>

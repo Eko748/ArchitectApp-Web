@@ -111,6 +111,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/konsultan/project', [ProjectController::class, 'tambahProject']);
         Route::delete('/konsultan/project-del/{project}', [ProjectController::class, 'destroy'])->name('konsultan.hapus.project');
 
+        // Lelang Konsultan
+        Route::get('/konsultan/lelang-konsultan', [KonsultanController::class, 'lelangKonsultan'])->name('konsultan.lelang-konsultan');
+        Route::get('/konsultan/all-lelang-konsultan', [LelangController::class, 'getAllKonsLelang'])->name('konsultan.all.Lelang.Konsultan');
+        Route::post('/konsultan/lelang-konsultan', [LelangController::class, 'tambahLelang']);
+        Route::delete('/konsultan/lelang-del/{id}', [LelangController::class, 'destroy'])->name('konsultan.hapus.lelang');
+
         // lelang
         Route::get('/konsultan/lelang', [KonsultanController::class, 'lelangKons'])->name('konsultan.find');
         // Route::get('/konsultan/mylelang/viewlelang/{id}', [OwnerController::class, 'view'])->name('owner.my.lelang.view');
