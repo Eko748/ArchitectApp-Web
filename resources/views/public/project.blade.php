@@ -55,6 +55,9 @@
                 <div class="main">
                     <div class="row">
                         @foreach ($data as $item)
+                        @php
+                        $img = [];
+                        @endphp
                             @foreach ($item->images as $val)
                                 @php
                                     $img[] = $val->image;

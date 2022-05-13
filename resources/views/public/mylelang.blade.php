@@ -1,137 +1,50 @@
 @extends('layouts.public-main')
 @section('title')
-Project
+    Project
 @endsection
 @include('layouts.navbar')
 
 @section('content')
-<div class="container-fluid">
-
-    <div class="row justify-content-center">
-        <div class="col-lg-10 col-sm col-md p-4">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('public.landing') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Lelang Saya</li>
-                </ol>
-            </nav>
-            <h1><span class="counter">{{ $data->count() }}</span><span class="text">Desain Lelang</span></h1>
-            <div class="button-dropdown my-3 d-sm-none d-md-none d-lg-block">
-                <div class="btn-group">
-                    <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="">Gaya Desain</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" class="dropdown-item">Minimalist</a></li>
-                        <li><a href="#" class="dropdown-item">Professional</a></li>
-                    </ul>
-                </div>
-                <div class="d-inline">Reset</div>
-            </div>
-
-            <hr class="my-3">
-
-            <div class="main">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Gaya Desain</th>
-                                <th scope="col">Opsi View Desain</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $view)
-                            <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $view->title }}</td>
-                                <td>{{ $view->gayaDesain }}</td>
-                                <td>
-                                    <form method="POST" action="{{ url ('/owner/mylelang/'.$view->id) }}"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button onclick="return confirm('Yakin ? Ingin Menghapus Data Ini ?')"
-                                            type="submit" class=" btn-danger btn-sm">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                    <button class="btn btn-info" onclick="viewlelang({{ $view->id }})"
-                                        data-toggle="modal" data-target="#exampleModal">view</button>
-                                    <button type="button" onclick="editlelang({{ $view->id }})" data-toggle="modal" class="btn btn-warning" data-target="#exampleModal">Edit</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 col-md col-sm">
+                <div class="my-4">
+                    <div class="page mb-3">
+                        <h4>My Lelang</h4>
+                        <hr>
+                    </div>
+                    <ul class="list-group"></ul>
+                    <div class="row justify-content-center none-lelang" style="display: none">
+                        <div class="col-lg-6 col-md col-sm text-center" style="height: 200px">
+                            <p class="">Anda belum membuat lelang</p>
+                            <a href="{{ route('owner.lelang') }}" class="btn btn-warning btn-sm">Buat Lelang</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">All View My Lelang</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="view-image"></div>
-            </div>
-        </div>
     </div>
-</div>
 
-@include('layouts.footer')
 
-@push('js')
+    @include('layouts.footer')
 
-<script>
-    function viewlelang(id) {
-        $.ajax({
-            url : "{{ url('/owner/mylelang/viewlelang') }}/"+id,
-            type : 'GET',
-            success : function(data) {
-                console.log(id);
-                $("#view-image").html(data);
-                return true;
-            }
-        });
-    }
+    @push('js')
 
-    function editlelang(id) {
-    $.ajax({
-    url : "{{ url('/owner/mylelang/editlelang') }}/"+id,
-    type : 'get',
-    success : function(data) {
-    console.log(id);
-    $("#view-image").html(data);
-    return true;
-    }
-    });
-    }
-
-    $(document).ajaxStart(function() {
+        <script>
+            $(document).ajaxStart(function() {
                 $('.preloader').show()
             })
+
             @auth
                 $(function() {
                 $('.list-group').on('click', '.mylelang', function() {
                 let id = $(this).data('id');
                 window.location.href = baseUrl + 'owner/mylelang/' + id
                 });
-
-
-
+            
+            
+            
                 SetupAjax();
                 $.ajax({
                 url: "{{ route('owner.lelang.all') }}",
@@ -143,14 +56,14 @@ Project
                 }
                 console.log(response)
                 $.each(response, function(key, value) {
-
-
+            
+            
                 let selisih = selisihWaktu(value.created_at);
                 let badge = "";
-
-
-
-
+            
+            
+            
+            
                 $('.list-group').prepend(`<li class="list-group-item list-group-item-action mylelang" data-id="${value.id}">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 title">${value.title}</h5>
@@ -172,6 +85,6 @@ Project
                 });
                 });
             @endauth
-</script>
-@endpush
+        </script>
+    @endpush
 @endsection
