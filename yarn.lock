@@ -1846,6 +1846,13 @@
   "resolved" "https://registry.npmjs.org/charenc/-/charenc-0.0.2.tgz"
   "version" "0.0.2"
 
+"chocolat@^0.4.20":
+  "integrity" "sha512-oejA4ybU0Aa5l1bCXkReVchUnQ4NEr5vI0sVSGSm0L7/XM7oRK5RQXBTDc1+S9MOF5xAx05r5rCPv/znlMZwAw=="
+  "resolved" "https://registry.npmjs.org/chocolat/-/chocolat-0.4.20.tgz"
+  "version" "0.4.20"
+  dependencies:
+    "jquery" "^3.0"
+
 "chokidar@^2.1.2":
   "integrity" "sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg=="
   "resolved" "https://registry.npmjs.org/chokidar/-/chokidar-2.1.8.tgz"
@@ -2414,6 +2421,45 @@
   dependencies:
     "es5-ext" "^0.10.50"
     "type" "^1.0.1"
+
+"datatables.net-bs4@^1.11.5", "datatables.net-bs4@>=1.11.3":
+  "integrity" "sha512-tYE9MnyWIW4P8nm41yQnCqW4dUPK3M7qsuxQY5rViFFKDEU0bUUNAnE9+69P5/4Exe4uyXaY05xFkD00niPZUA=="
+  "resolved" "https://registry.npmjs.org/datatables.net-bs4/-/datatables.net-bs4-1.11.5.tgz"
+  "version" "1.11.5"
+  dependencies:
+    "datatables.net" ">=1.11.3"
+    "jquery" ">=1.7"
+
+"datatables.net-select-bs4@^1.3.4":
+  "integrity" "sha512-hXxxTwR9Mx8xwD55g8hNiLt035afguKZ9Ejsdm5/mo3wmm9ml7gs8QG5fJuMRwtrdP9EKcnjc54+zVoHymEcgw=="
+  "resolved" "https://registry.npmjs.org/datatables.net-select-bs4/-/datatables.net-select-bs4-1.3.4.tgz"
+  "version" "1.3.4"
+  dependencies:
+    "datatables.net-bs4" ">=1.11.3"
+    "datatables.net-select" ">=1.3.3"
+    "jquery" ">=1.7"
+
+"datatables.net-select@>=1.3.3":
+  "integrity" "sha512-iQ/dBHIWkhfCBxzNdtef79seCNO1ZsA5zU0Uiw3R2mlwmjcJM1xn6pFNajke6SX7VnlzndGDHGqzzEljSqz4pA=="
+  "resolved" "https://registry.npmjs.org/datatables.net-select/-/datatables.net-select-1.3.4.tgz"
+  "version" "1.3.4"
+  dependencies:
+    "datatables.net" ">=1.11.3"
+    "jquery" ">=1.7"
+
+"datatables.net@>=1.11.3":
+  "integrity" "sha512-nlFst2xfwSWaQgaOg5sXVG3cxYC0tH8E8d65289w9ROgF2TmLULOOpcdMpyxxUim/qEwVSEem42RjkTWEpr3eA=="
+  "resolved" "https://registry.npmjs.org/datatables.net/-/datatables.net-1.11.5.tgz"
+  "version" "1.11.5"
+  dependencies:
+    "jquery" ">=1.7"
+
+"datatables@^1.10.18":
+  "integrity" "sha512-ntatMgS9NN6UMpwbmO+QkYJuKlVeMA2Mi0Gu/QxyIh+dW7ZjLSDhPT2tWlzjpIWEkDYgieDzS9Nu7bdQCW0sbQ=="
+  "resolved" "https://registry.npmjs.org/datatables/-/datatables-1.10.18.tgz"
+  "version" "1.10.18"
+  dependencies:
+    "jquery" ">=1.7"
 
 "debug@^2.2.0":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
@@ -3947,6 +3993,11 @@
     "@types/node" "*"
     "merge-stream" "^2.0.0"
     "supports-color" "^7.0.0"
+
+"jquery@^3.0", "jquery@>=1.7":
+  "integrity" "sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw=="
+  "resolved" "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz"
+  "version" "3.6.0"
 
 "js-tokens@^4.0.0":
   "integrity" "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
