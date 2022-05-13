@@ -31,7 +31,7 @@ class GeneratePDFController extends Controller
         $ownName = $proposal->lelang->owner->user->name;
         $ownTelp = $proposal->lelang->owner->telepon;
         $ownAlm = $proposal->lelang->owner->alamat;
-        $path = public_path('kontrak/');
+        $path = public_path('pdf/kontrak/');
         $konsUname = $proposal->konsultan->user->username;
         $ownuName = $proposal->lelang->owner->user->username;
         $filename = 'Kontrak_Kerja_' . $konsUname . '-' . $ownuName . '_' . Carbon::now()->toDateString() . ".pdf";
