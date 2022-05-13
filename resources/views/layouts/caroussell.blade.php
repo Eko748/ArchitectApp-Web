@@ -37,7 +37,7 @@ window.addEventListener("resize", function () {
 <section class="cover-section position-relative">...</section> --}}
 
 
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+{{-- <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
             aria-label="Slide 1"></button>
@@ -84,9 +84,9 @@ window.addEventListener("resize", function () {
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
-</div>
+</div> --}}
 
-<section class="cover-section position-relative">
+{{-- <section class="cover-section position-relative">
     <div class="cover" style="background-image: url(./img/rumah/peakpx.jpg);">
       <img src="{{ asset('img/rumah/peakpx.jpg') }}" class="img-fluid invisible" alt="" style="padding:5px" />
     </div>
@@ -95,4 +95,4 @@ window.addEventListener("resize", function () {
     <svg class="position-absolute w-10">
       <use xlink:href="#six"></use>
     </svg>
-  </section>
+  </section> --}}
