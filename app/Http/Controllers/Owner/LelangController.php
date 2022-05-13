@@ -59,22 +59,49 @@ class LelangController extends Controller
     }
     public function postLelang(Request $request)
     {
-        // dd($request->luas);
+        // // dd($request->luas);
         // $request->validate($this->rules());
         // $data = $this->field($request);
         $lelang = LelangOwner::create($request->all());
         if ($request->hasFile('image')) {
             $img = $request->file('image');
-            $path = 'img/lelang/tkp/';
+            $path = 'img/lelang/ruangan/';
             $no = 1;
             foreach ($img as $key) {
                 $filename = Str::slug($request->title) . '-' . Carbon::now()->toDateString() . '-' . $no++ . '.' . $key->getClientOriginalExtension();
                 $key->storeAs($path, $filename, 'files');
                 $image = new ImageOwner(['lelangOwnerId' => $lelang->id, 'image' => $filename]);
                 $lelang->image()->save($image);
+                $data = LelangOwner::where('id', $lelang->id)->with('owner.user', 'image')->with('proposal.konsultan.user')->withCount('proposal')->first();
+                return $data;
             }
-            return redirect(route('owner.my.lelang'))->with('msg', 'Lelang sukses ditambahkan');
         }
+        //     return redirect(route('owner.my.lelang'))->with('msg', 'Lelang sukses ditambahkan');
+        // }
+        $validasi = $this->validate($request, [
+            "ownerId" => "required",
+            "title" => "required",
+            "description" => "required",
+            "budgetFrom" => "required",
+            "budgetTo" => "required",
+            "gayaDesain" => "required",
+            "panjang" => "required",
+            "lebar" => "required"
+        ]);
+
+        if (empty($request->RAB)) {
+            $validasi["RAB"] = "0";
+            $validasi["desain"] = $request->desain;
+        } else if (empty($request->desain)) {
+            $validasi["desain"] = "0";
+            $validasi["RAB"] = $request->RAB;
+        } else {
+            $validasi["RAB"] = $request->RAB;
+            $validasi["desain"] = $request->desain;
+        }
+
+        LelangOwner::create($validasi);
+
         return redirect(route('owner.my.lelang'))->with('msg', 'Lelang sukses ditambahkan');
     }
 

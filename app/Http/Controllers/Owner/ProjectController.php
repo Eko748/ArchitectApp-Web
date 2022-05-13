@@ -93,7 +93,7 @@ class ProjectController extends Controller
         $hargaDesain = $project->chooseProject->desain == "1" ? $project->project->harga_desain : 0;
         $hargaRAB = $project->chooseProject->RAB == "1" ? $project->project->harga_rab : 0;
         $harga = $this->penyebut(($hargaDesain + $hargaRAB)) . " rupiah.";
-        $path = public_path('kontrak/');
+        $path = public_path('pdf/kontrak/');
         $konsUname = $project->project->konsultan->user->username;
         $ownuName = $project->owner->user->username;
         $filename = 'Kontrak Kerja ' . $konsUname . ' - ' . $ownuName . ' ' . Carbon::now()->toDateString() . ".pdf";

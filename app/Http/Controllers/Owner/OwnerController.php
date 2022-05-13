@@ -89,7 +89,7 @@ class OwnerController extends Controller
 
         $filename = $kontrak->kontrakKerja;
 
-        return Storage::disk('files')->download("kontrak/" . $filename);
+        return Storage::disk('files')->download("pdf/kontrak/" . $filename);
     }
 
     public function updateBio(Request $request)
@@ -106,8 +106,17 @@ class OwnerController extends Controller
     }
     public function getDetilProject(ProjectOwner $project)
     {
-        $data = ProjectOwner::with('project.images', 'project.konsultan.user', 'kontrak.proposal.lelang.inspirasi', 'kontrak.payment', 'chooseProject.imageOwner', 'lelang.imageOwner')->withCount('chooseProject.imageOwner')->find($project->id);
-        dd($data);
+        
+        $data = ProjectOwner::with('project.images', 'owner', 'project.konsultan.user', 'kontrak.proposal.lelang.inspirasi', 'kontrak.payment', 'chooseProject.imageOwner')->find($project->id);
+        // dd($data);
+        // $data = ProjectOwner::where("id", $project->id)->first();
+        
+        return view('public.single-myproject', compact('data'));
+    }
+
+    public function getDetilKonsultan(ProjectOwner $konsultan)
+    {
+        $data = ProjectOwner::with('project.konsultan.user')->find($konsultan->id);
         return view('public.single-myproject', compact('data'));
     }
 
