@@ -186,71 +186,40 @@
             }
 
             $(function() {
-                // let table = $('#table-project').DataTable({
-                //     processing: true,
-                //     serverSide: true,
-                //     autoWidth: false,
-                //     ajax: "{{ route('konsultan.allproject') }}",
-                //     columns: [
+                let table = $('#table-lelang').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    autoWidth: false,
+                    ajax: "{{ route('konsultan.all.Lelang.Konsultan') }}",
+                    columns: [
 
-                //         {
-                //             data: 'DT_RowIndex',
-                //             name: 'DT_RowIndex'
-                //         },
-                //         {
-                //             data: 'title',
-                //             name: 'title'
-                //         },
-                //         {
-                //             data: 'gambar',
-                //             name: 'gambar',
-                //             orderable: false,
-                //             searchable: false
-                //         },
-                //         {
-                //             data: 'aksi',
-                //             name: 'aksi',
-                //             orderable: false,
-                //             searchable: false
-                //         },
-                //     ],
-                // });
-                let empTable = document.getElementById("table-lelang").getElementsByTagName("tbody")[0];
-                            empTable.innerHTML = "";
-
-                            $.ajax({
-                                url: "{{ route('konsultan.all.Lelang.Konsultan') }}",
-                                success: function(response) {
-                                    let no = 1;
-                                    for (let key in response.data) {
-                                        if (response.data.hasOwnProperty(key)) {
-                                            let val = response.data[key];
-                                            let NewRow = empTable.insertRow(-1);
-                                            let noCell = NewRow.insertCell(0);
-                                            let titleCell = NewRow.insertCell(1);
-                                            let budgetCell = NewRow.insertCell(2);
-                                            let imagesCell = NewRow.insertCell(3);
-                                            let opsiCell = NewRow.insertCell(4);
-
-                                            console.log(val['images']);
-
-                                            noCell.innerHTML = no++;
-                                            titleCell.innerHTML = val['title'];
-                                            budgetCell.innerHTML = val['budget'];
-                                            for (let key2 in val['images']) {
-                                                let val2 = val['images'][key2];
-                                                // console.log(val2['desain']);
-                                                imagesCell.innerHTML = val2['images'];
-                                            }
-                                            
-                                            opsiCell.innerHTML = val['aksi'];
-                                        }
-                                    }
-                                }
-                            })
-                        });
-
-
+                        {
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex'
+                        },
+                        {
+                            data: 'title',
+                            name: 'title'
+                        },
+                        {
+                            data: 'budget',
+                            name: 'budget'
+                        },
+                        {
+                            data: 'gambar',
+                            name: 'gambar',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'aksi',
+                            name: 'aksi',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
+                });
+            });
         </script>
         @include('konsultan.js.lelang-konsultan-js')
         @include('konsultan.js.profileJs')

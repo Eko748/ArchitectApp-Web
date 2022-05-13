@@ -26,9 +26,9 @@
                                 id="tambahProject">
                                 Tambah Project
                             </a>
-                            {{-- <a href="#" class="btn btn-warning">
+                            <a href="#" class="btn btn-warning">
                                 View All
-                            </a> --}}
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -38,6 +38,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
+                                    <th scope="col">Gaya Desain</th>
                                     <th scope="col">Images</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -59,30 +60,37 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Project</h5>
+                    <h5 class="modal-title">Tambah Project</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="" id="editProject">
-
+                <div class="modal-body">
+                    <form action="" method="post" id="formEditProject">
+                        @csrf
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="images">Images</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" multiple name="images">
+                                <label class="custom-file-label" for="images">Choose file</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Deskripsi</label>
+                            <textarea name="desc" class="form-control w-100 h-100" rows="5"></textarea>
+                            <div class="invalid-feedback"></div>
+                        </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="viewProject" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">View Project</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
-                <div class="" id="view">
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -164,94 +172,41 @@
         <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
         <script>
-
-            function editProject(id) {
-            $.ajax({
-            url : "{{ url('/konsultan/projectedit/') }}/"+id,
-            type : 'get',
-            success : function(data) {
-            console.log(id);
-            $("#editProject").html(data);
-            return true;
-            }
-            });
-            }
-
-            function view(id) {
-            $.ajax({
-            url : "{{ url('/konsultan/project/view/') }}/"+id,
-            type : 'get',
-            success : function(data) {
-            console.log(id);
-            $("#view").html(data);
-            return true;
-            }
-            });
-            }
-
             $(function() {
-                // let table = $('#table-project').DataTable({
-                //     processing: true,
-                //     serverSide: true,
-                //     autoWidth: false,
-                //     ajax: "{{ route('konsultan.allproject') }}",
-                //     columns: [
+                let table = $('#table-project').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    autoWidth: false,
+                    ajax: "{{ route('konsultan.allproject') }}",
+                    columns: [
 
-                //         {
-                //             data: 'DT_RowIndex',
-                //             name: 'DT_RowIndex'
-                //         },
-                //         {
-                //             data: 'title',
-                //             name: 'title'
-                //         },
-                //         {
-                //             data: 'gambar',
-                //             name: 'gambar',
-                //             orderable: false,
-                //             searchable: false
-                //         },
-                //         {
-                //             data: 'aksi',
-                //             name: 'aksi',
-                //             orderable: false,
-                //             searchable: false
-                //         },
-                //     ],
-                // });
-                let empTable = document.getElementById("table-project").getElementsByTagName("tbody")[0];
-                            empTable.innerHTML = "";
-
-                            $.ajax({
-                                url: "{{ route('konsultan.allproject') }}",
-                                success: function(response) {
-                                    let no = 1;
-                                    for (let key in response.data) {
-                                        if (response.data.hasOwnProperty(key)) {
-                                            let val = response.data[key];
-                                            let NewRow = empTable.insertRow(-1);
-                                            let noCell = NewRow.insertCell(0);
-                                            let titleCell = NewRow.insertCell(1);
-                                            let imagesCell = NewRow.insertCell(2);
-                                            let opsiCell = NewRow.insertCell(3);
-
-                                            console.log(val['images']);
-
-                                            noCell.innerHTML = no++;
-                                            titleCell.innerHTML = val['title'];
-                                            for (let key2 in val['images']) {
-                                                let val2 = val['images'][key2];
-                                                // console.log(val2['image']);
-                                                imagesCell.innerHTML = val2['image'];
-                                            }
-                                            opsiCell.innerHTML = val['aksi'];
-                                        }
-                                    }
-                                }
-                            })
-                        });
-
-
+                        {
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex'
+                        },
+                        {
+                            data: 'title',
+                            name: 'title'
+                        },
+                        {
+                            data: 'gayaDesain',
+                            name: 'gayaDesain'
+                        },
+                        {
+                            data: 'gambar',
+                            name: 'gambar',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'aksi',
+                            name: 'aksi',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
+                });
+            });
         </script>
         @include('konsultan.js.project-js')
         @include('konsultan.js.profileJs')
