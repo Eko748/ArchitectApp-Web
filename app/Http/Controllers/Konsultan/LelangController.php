@@ -164,7 +164,7 @@ class LelangController extends Controller
         if ($req->ajax()) {
 
 
-            $data = LelangKonsultan::with('images', 'files')->where('konsultanId', $this->getKonsultanId()->konsultan->id)->get();
+            $data = LelangKonsultan::with('images')->where('konsultanId', $this->getKonsultanId()->konsultan->id)->get();
             return DataTables::of($data)
                 ->addIndexColumn()->addColumn('gambar', function ($data, $index = 0) {
                     if ($data->images->count() == 0) {

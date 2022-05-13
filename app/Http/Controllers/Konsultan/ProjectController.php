@@ -24,12 +24,15 @@ class ProjectController extends Controller
 
             $data = Project::with('images')->where('konsultanId', $this->getKonsultanId()->konsultan->id)->get();
             return DataTables::of($data)
-                ->addIndexColumn()->addColumn('gambar', function ($data, $index = 0) {
+                ->addIndexColumn()->addColumn('gambar', function ($data, $index = 0, $index2 = 1, $index3 = 2, $index4 = 3) {
                     if ($data->images->count() == 0) {
                         return $gambar = "Gambar belum di upload";
                     }
 
-                    $gambar = "<img src='" . asset('img/project/' . $data->images[$index]->image) . "' height='50' width='50'>";
+                    $gambar = "<img src='" . asset('img/project/' . $data->images[$index]->image) . "' height='100' width='100'>
+                                <img src='" . asset('img/project/' . $data->images[$index2]->image) . "' height='100' width='100'>
+                                <img src='" . asset('img/project/' . $data->images[$index3]->image) . "' height='100' width='100'>
+                                <img src='" . asset('img/project/' . $data->images[$index4]->image) . "' height='100' width='100'>";
 
                     return $gambar;
                 })->addColumn('aksi', function ($data) {
