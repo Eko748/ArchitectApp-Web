@@ -9,7 +9,7 @@ class LelangOwner extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ownerId', 'title', 'description', 'desain', 'RAB', 'kontraktor', 'budgetFrom', 'budgetTo', 'gayaDesain', 'panjang', 'lebar', 'luas'
+        'ownerId', 'title', 'description', 'desain', 'RAB', 'status', 'RAB', 'budgetFrom', 'budgetTo', 'gayaDesain', 'panjang', 'lebar'
     ];
     // protected $fillable = [
     //     'ownerId', 'title', 'description', 'desain', 'budget', 'RAB', 'kontraktor', 'budgetFrom', 'budgetTo', 'gayaDesain', 'panjang', 'lebar'

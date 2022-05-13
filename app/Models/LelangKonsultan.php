@@ -9,11 +9,12 @@ class LelangKonsultan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'konsultanId', 'title', 'description', 'slug', 'budget','status'
+        // 'konsultanId', 'title', 'description', 'slug', 'budget','status'
+        'tenderKonsultanId', 'title', 'description','desain','status'
     ];
-    protected $attributes = [
-        'budget' => 0,
-    ];
+    // protected $attributes = [
+    //     'budget' => 0,
+    // ];
 
     public function images()
     {
