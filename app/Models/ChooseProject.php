@@ -17,11 +17,16 @@ class ChooseProject extends Model
     ];
 
     public function imageOwner()
-    {
-        return $this->hasMany(ImageOwner::class, 'chooseProjectId');
+    { 
+        return $this->hasMany("App\Models\ImageOwner", "id", "chooseProjectId");
     }
     public function projectOwner()
     {
         return $this->belongsTo(ProjectOwner::class, 'projectOwnerId');
+    }
+
+    public function ambil()
+    {
+        return $this->hasMany("App\Models\ImageOwner", "id" , "chooseProjectId");
     }
 }
