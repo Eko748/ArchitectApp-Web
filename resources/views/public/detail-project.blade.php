@@ -244,7 +244,7 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <h5 class="text-center p-2 fs-5">Login to ArchTech</h5>
+                    <h5 class="text-center p-2 fs-5">Login to Arsitek.co</h5>
                     <form action="" method="POST" id="formLogin">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>

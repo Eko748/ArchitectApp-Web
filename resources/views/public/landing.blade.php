@@ -26,6 +26,9 @@ Landing Page
 
         <div class="row mb-3 mx-5 {{ $project->count() == 0 ? 'd-none' : '' }}">
             @foreach ($project as $item)
+            @php
+                $img = [];
+            @endphp
             @foreach ($item->images as $val)
             @php
             $img[] = $val->image;
