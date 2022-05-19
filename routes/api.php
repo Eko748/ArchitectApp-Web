@@ -49,6 +49,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/owner/postlelang', [OwnerController::class, 'postLelangOwner']);
         Route::put('/owner/putlelang/{lelang}', [OwnerController::class, 'putLelangOwner']);
         Route::delete('/owner/deletelelang/{lelang}', [OwnerController::class, 'deleteLelangOwn']);
+
+        Route::post('/owner/payment-handler', [OwnerController::class, 'payment_handler']);
+
     });
     Route::middleware('konsapi')->group(function () {
 

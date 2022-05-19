@@ -6,6 +6,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Admin\Admincontroller;
 use App\Http\Controllers\Admin\DesainController;
 use App\Http\Controllers\Admin\PaymentController;
+// use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Admin\ProfessionalController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProposalController as AdminProposalController;
@@ -92,9 +93,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('/delete/{user}', [ProfileController::class, 'destroy']);
 
         // payment
-        Route::get('/payment/verify', [Admincontroller::class, 'verifyPayment'])->name('admin.verify');
-        Route::get('/payment', [PaymentController::class, 'getAllPayment'])->name('payment.all');
-        Route::post('/payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
+        // Route::get('/payment/verify', [Admincontroller::class, 'verifyPayment'])->name('admin.verify');
+        Route::get('/payment/verify', [Admincontroller::class, 'verifyOrder'])->name('admin.verify');
+        Route::get('/payment', [PaymentController::class, 'getAllOrder'])->name('order.all');
+        Route::post('/payment', [PaymentController::class, 'verifyOrder'])->name('order.verify');
+        // Route::get('/payment', [PaymentController::class, 'getAllPayment'])->name('payment.all');
+        // Route::post('/payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
     });
 
     Route::middleware(['konsultan'])->group(function () {
@@ -216,6 +220,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/owner/download/kontrak/{kontrak}', [OwnerController::class, 'downloadKontrak'])->name('owner.download');
         Route::put('/owner/bio/update', [OwnerController::class, 'updateBio'])->name('owner.update');
         Route::post('/owner/project/choose', [OwnerProjectController::class, 'chooseProject'])->name('owner.choose.project');
+
+        // Payment
+        Route::get('/owner/project/myproject/payment', [OwnerProjectController::class, 'payment'])->name('owner.payment');
+        Route::post('/owner/project/myproject/payment', [OwnerProjectController::class, 'paymentPost'])->name('owner.payment.post');
+        Route::get('/owner/project/viewpayment', [OwnerProjectController::class, 'viewPayment'])->name('view.payment');
     });
 });
 
