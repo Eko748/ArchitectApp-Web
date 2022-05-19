@@ -73,7 +73,7 @@ class LelangController extends Controller
                 $image = new ImageOwner(['lelangOwnerId' => $lelang->id, 'image' => $filename]);
                 $lelang->image()->save($image);
                 $data = LelangOwner::where('id', $lelang->id)->with('owner.user', 'image')->with('proposal.konsultan.user')->withCount('proposal')->first();
-                return $data;
+                return redirect(route('owner.my.lelang'))->with('msg', 'Lelang sukses ditambahkan');
             }
         }
         //     return redirect(route('owner.my.lelang'))->with('msg', 'Lelang sukses ditambahkan');
