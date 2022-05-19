@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use App\Models\ChooseProject;
 use App\Models\ImageOwner;
+use App\Models\Order;
 use App\Models\KontrakKerjaKonsultan;
 use App\Models\Owner;
 use App\Models\PaymentKonsultan;
@@ -57,6 +58,7 @@ class ProjectController extends Controller
         if ($request->has('desain')) {
             $input['desain'] = $request->desain;
         }
+
         $choose = ChooseProject::create($input);
         if ($request->hasFile('image')) {
             $img = $request->file('image');
@@ -108,5 +110,73 @@ class ProjectController extends Controller
             'projectOwnerId' => $projectOwnid,
             'kontrakKerja' => $fileKontrak
         ]);
+    }
+
+    public function payment (ProjectOwner $project, Request $request) {
+        
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+        
+        $data = ProjectOwner::with('project.images', 'owner', 'project.konsultan.user', 'kontrak.proposal.lelang.inspirasi', 'kontrak.payment', 'chooseProject.imageOwner')->find($project->id);
+
+        $data = Auth::user()->owner->projectOwn;
+
+        $ambil = 0;
+        $ambil_harga_rab = 0;
+        $ambil_harga_desain = 0;
+        foreach ($data as $s) {
+            $ambil_harga_rab += $s->project->harga_rab;
+            $ambil_harga_desain += $s->project->harga_desain;
+
+            $ambil = $ambil_harga_rab + $ambil_harga_desain;
+        }
+        
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => $ambil,
+            ),
+            'customer_details' => array(
+                'first_name' => Auth::user()->name,
+                'last_name' => '',
+                'email' => Auth::user()->email,
+                'phone' => Auth::user()->owner->telepon,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        
+        return view('payment/payment', compact('data'), ['snap_token'=>$snapToken]);
+        
+    }
+
+    public function paymentPost(Request $request)
+    {
+        
+        $json = json_decode($request->get('json'));
+        $order = new Order();
+        $order->kontrakKonsultanId = $request->kontrakKonsultanId;
+        $order->ownerId = Auth::user()->id;
+        $order->projectId = $request->projectId;
+        $order->status = 0;
+        $order->status_order = $json->transaction_status;
+        $order->transaction_id = $json->transaction_id;
+        $order->order_id = $json->order_id;
+        $order->gross_amount = $json->gross_amount;
+        $order->payment_type = $json->payment_type;
+        $order->payment_code = isset($json->payment_code) ? $json->payment_code : null;
+        $order->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
+        return $order->save() ? redirect(url('/'))->with('alert-success', 'Order berhasil dibuat') : redirect(url('/'))->with('alert-failed', 'Terjadi kesalahan');
+    }
+
+    public function viewPayment()
+    {
+        return view('payment.payment');
     }
 }
