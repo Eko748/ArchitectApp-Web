@@ -101,4 +101,8 @@ class Admincontroller extends Controller
     {
         return view('admin.verify-payment');
     }
+    public function verifyOrder()
+    {
+        return view('admin.verify-order');
+    }
 }
