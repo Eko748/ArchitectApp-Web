@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    {{-- <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"> --}}
     <!-- CSS CDN  -->
     <!-- Bootstrap 3.3.7 -->
 
@@ -67,11 +67,11 @@
     <div id="app">
         <div class="main-wrapper">
             @yield('content')
-            {{-- <footer class="main-footer">
+            <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; {{ date('Y') }}
                 </div>
-            </footer> --}}
+            </footer>
         </div>
     </div>
 
@@ -84,8 +84,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    {{-- <script src="{{ asset('js/jquery.nicescroll.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> --}}
    
        <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
        <script src="{{ asset('js/moment.min.js') }}"></script>
@@ -95,11 +96,12 @@
 
     <!-- JS Libraries -->
     <script src="{{ asset('sweetalert2/dist/sweetalert2.min.js') }}"></script>
-  <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/tema.js') }}"></script>
 
     <!-- Page Specific JS File -->
     @stack('js')

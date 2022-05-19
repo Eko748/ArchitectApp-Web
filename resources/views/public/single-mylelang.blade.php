@@ -155,16 +155,17 @@
                 </div>
                 <div class="divider"></div>
                 <div class="text-capitalized p-3">
+                    <h6><b>Description</b><h6>
                     ${response.description}
                 </div>
                 <div class="divider"></div>
                 <div class="images p-3">
-                    <h6>Image </h6>
+                    <h6><b>Image</b></h6>
                     ${image}
                 </div>
                 <div class="divider"></div>
                 <div class="  p-3">
-                    <h6>Proposal </h6>`+
+                    <h6><b>Proposal</b></h6>`+
                     (response.proposal_count == 0 ? 'Belum ada yang mengajukan proposal' : proposal)
                     +`
                 </div>`)
