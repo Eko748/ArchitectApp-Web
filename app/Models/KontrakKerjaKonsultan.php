@@ -24,4 +24,8 @@ class KontrakKerjaKonsultan extends Model
     {
         return $this->belongsTo(TenderKonsultan::class, 'tenderKonsultanId');
     }
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'kontrakKonsultanId');
+    }
 }
