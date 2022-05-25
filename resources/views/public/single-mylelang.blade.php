@@ -87,7 +87,7 @@
                 let badge ="";
                 let image ="";
                 let proposal =""
-                let path = "{{ asset('img/lelang/tkp/') }}"
+                let path = "{{ asset('img/lelang/ruangan/') }}"
                 let propUrl = baseUrl + "owner/mylelang/proposal/"
             
                 if (response.desain == 1) {
