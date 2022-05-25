@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->belongsTo(Project::class, 'projectId', 'id');
     }
+
+    public function userOwner()
+    {
+        return $this->belongsTo(User::class, 'userId', 'id');
+    }
 }
