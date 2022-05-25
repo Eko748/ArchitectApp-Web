@@ -2,12 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
-use App\Models\Design;
-use App\Models\Konsultan;
-use App\Models\Kontraktor;
-use App\Models\Owner;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,6 +20,16 @@ class DatabaseSeeder extends Seeder
             [
                 ProjectSeed::class,
                 UserSeed::class,
+                KontraktorSeed::class,
+                OwnerSeed::class,
+                AdminSeed::class,
+                ProjectOwnerSeed::class,
+                KonsultanSeed::class,
+                ChooseProjectSeed::class,
+                LelangOwnerSeed::class,
+                ImageOwnerSeed::class,
+                KontrakKerjaKonsultanSeed::class,
+                TenderKonsultanSeed::class,
             ]
 
         );

@@ -32,13 +32,13 @@ class ProjectSeed extends Seeder
                 'image' => 'arsitek.jpg'
             ], [
                 'projectId' => $project->id,
-                'image' => 'arsitek2.jpeg'
+                'image' => 'arsitek2.jpg'
             ], [
                 'projectId' => $project->id,
                 'image' => 'arsitek3.jpg'
             ], [
                 'projectId' => $project->id,
-                'image' => 'arsitek4.jpeg'
+                'image' => 'arsitek4.jpg'
             ]
         ];
         foreach ($image as $key) {

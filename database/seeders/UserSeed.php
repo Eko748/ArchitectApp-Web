@@ -28,9 +28,9 @@ class UserSeed extends Seeder
             'is_active' => 1,
             'level' => 'admin'
         ]);
-        $admin = Admin::create([
-            'userId' => $user->id
-        ]);
+        // $admin = Admin::create([
+        //     'userId' => $user->id
+        // ]);
         $konsultan = User::create([
             'name' => 'konsultan',
             'username' => 'konsultan',
@@ -40,14 +40,14 @@ class UserSeed extends Seeder
             'is_active' => 1,
             'level' => 'konsultan'
         ]);
-        $kons = Konsultan::create([
-            'userId' => $konsultan->id,
-            'slug' => $konsultan->name,
-            'telepon' => "085929017480",
-            'instagram' => "@kons",
-            'website' => "kons.co.id",
-            'alamat' => 'Indramayu'
-        ]);
+        // $kons = Konsultan::create([
+        //     'userId' => $konsultan->id,
+        //     'slug' => $konsultan->name,
+        //     'telepon' => "085929017480",
+        //     'instagram' => "@kons",
+        //     'website' => "kons.co.id",
+        //     'alamat' => 'Indramayu'
+        // ]);
         $kontraktor = User::create([
             'name' => 'kontraktor',
             'username' => 'kontraktor',
@@ -57,9 +57,9 @@ class UserSeed extends Seeder
             'is_active' => 1,
             'level' => 'kontraktor'
         ]);
-        $kon = Kontraktor::create([
-            'userId' => $kontraktor->id
-        ]);
+        // $kon = Kontraktor::create([
+        //     'userId' => $kontraktor->id
+        // ]);
 
         $owner = User::create([
             'name' => 'owner',
@@ -71,8 +71,8 @@ class UserSeed extends Seeder
             'level' => 'owner'
         ]);
 
-        $own = Owner::create([
-            'userId' => $owner->id
-        ]);
+        // $own = Owner::create([
+        //     'userId' => $owner->id
+        // ]);
     }
 }
