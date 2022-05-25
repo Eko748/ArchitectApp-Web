@@ -4,7 +4,7 @@
             <a href="{{ route('dashboard') }}">ADMIN</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('dashboard') }}">KS</a>
+            <a href="{{ route('dashboard') }}">ADM</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -15,10 +15,9 @@
                             href="{{ route('admin.tender') }}"><i class="fas fa-clipboard-list"></i><span>Data Tender Win</span></a></li>
                     <li class="{{ Request::segment(1) == 'verify' ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin.verify') }}"><i class="fas fa-clipboard-list"></i><span>Verifikasi Pembayaran</span></a></li>
-
             <li class="nav-item dropdown  {{ in_array(Request::segment(1),['konsultan','owner','kontraktor']) ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-users"></i><span>User</span></a> </a>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-users"></i><span>User</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::segment(1) == 'konsultan' ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('konsultan.page') }}">Konsultan</a></li>
