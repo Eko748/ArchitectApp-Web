@@ -40,7 +40,7 @@ class PaymentController extends Controller
     public function getAllOrder(Request $req)
     {
         if ($req->ajax()) {
-            $data = Order::with('owner.user.name','kontrak.projectOwner.project.konsultan.user')->where('status', 0)->get();
+            $data = Order::with('owner.user.name','kontrak.projectOwner.project.konsultan.user')->get();
             return DataTables::of($data)
                 ->addIndexColumn()->addColumn('Aksi', function ($data) {
                 $btn = '<a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewUser"

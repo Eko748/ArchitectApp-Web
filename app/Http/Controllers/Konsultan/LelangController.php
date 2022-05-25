@@ -18,6 +18,12 @@ use Carbon\Carbon;
 
 class LelangController extends Controller
 {
+    public function AllMyLelang()
+    {
+        $owner = Owner::where('userId', Auth::user()->id)->first();
+        $data = LelangOwner::with('owner', 'image')->withCount('proposal')->where('status',0)->get();
+        return $data;
+    }
     public function getAllLelangOwner(Request $request)
     {
         if ($request->has('filter')) {

@@ -21,6 +21,12 @@ class KonsultanController extends Controller
     //     ];
     //     return view('konsultan.dashboard', $data);
     // }
+    public function getAllLelang()
+    {
+        $data = LelangOwner::with('owner.user', 'image', 'inspirasi', 'proposal.konsultan')->where('status', 0)->get();
+        return view('konsultan.lelang', $data);
+    }
+
     public function dashboard()
     {
         $data = [

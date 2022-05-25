@@ -20,7 +20,7 @@ class JobController extends Controller
 {
     public function getAllJob()
     {
-        
+
         return ProjectOwner::with('project','kontrak.proposal.lelang')->whereHas('project',function (Builder $query)
         {
            $query->where('isLelang','1')->where('konsultanId',$this->getKonsultanId()->konsultan->id);
