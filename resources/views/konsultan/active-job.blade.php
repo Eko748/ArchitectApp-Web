@@ -1,120 +1,85 @@
 @extends('layouts.main')
 @section('title')
-    Project
+Lelang Owner
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} ">
-    <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}">
 
 @endsection
 @section('content')
-    @include('layouts.topbar')
-    @include('layouts.sidebar-konsultan')
+@include('layouts.topbar')
+@include('layouts.sidebar-konsultan')
 
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>My Active Job</h1>
-            </div>
 
-            <div class="section-body">
-
-                <div class="row myjob">
-
+<div class="main-content">
+    <section class="section">
+        <div class="section-header">
+            <h1>Lelang Owner</h1>
+        </div>
+        
+        <div class="section-body">
+            <div class="card">
+                <div class="card-header">
+                    <h4>List Lelang</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover" id="table-project">
+                        <ul class="list-group">
+                            
+                        </ul>
+                    </table>
+                    <div class="row justify-content-center none-lelang" style="display: none">
+                        <div class="col-lg-6 col-md col-sm text-center" style="height: 100px">
+                            <p class="">Owner belum ada yang membuat lelang</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-    </div>
+        </div>
     </section>
-    </div>
+</div>
 
-
-    @push('js')
-
-        <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
-        <script>
-            $(function() {
-
-                loadJob()
-
-
-            });
-
-            function loadJob() {
-                $.ajaxSetup({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').prop("content"),
-                    },
-                });
-                $.ajax({
-                    url: "{{ route('konsultan.job') }}",
-                    dataType: "JSON",
-                    type: "GET",
-                    success: function(response) {
-                        
-                        $.each(response, function(key, value) {
-                          
-                           
-
-                            $('.myjob').prepend(`
-                             <div class="col-4">
-                            <div class="card card-warning projectCard" data-id="${value.project.id}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${value.project.title}</h5>
-                                    <p class="card-text desc">${value.project.description}</p>
-                                    <p>Harga : ${rupiahFormat((value.kontrak.proposal.tawaranHargaDesain + value.kontrak.proposal.tawaranHargaRab))}</p>
-                                  
-                                </div>
-                            </div>
-                        </div>
-                            `)
-
-                        
-                        })
-
-                    },
-                });
-            }
-        </script>
-
-        <script>
-            $(function() {
-                $('body').on('click', '.card', function() {
-
-                    window.location.href = baseUrl + "konsultan/myjob/detil/" + $(this).data('id')
-
-
-                })
-            })
-        </script>
-
-        @include('konsultan.js.profileJs')
-    @endpush
 @endsection
 
-<div class="modal fade" id="modalUploadHasil" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Upload Proposal</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="" id="FormUploadHasil">
-                <div class="modal-body">
+@push('js')
 
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
+<script>
+    $(document).ajaxStart(function() {
+        $('.preloader').show()
+    })
+    
+    @auth
+    $(function() {
+        $('.list-group').on('click', '.mylelang', function() {
+            let id = $(this).data('id');
+            window.location.href = baseUrl + 'konsultan/lelang/' + id
+        });
+        
+        
+        
+        SetupAjax();
+        $.ajax({
+            url: "{{ route('konsultan.job') }}",
+            dataType: "JSON",
+            type: "GET",
+            success: function(response) {
+                console.log(response);
+                if (response.length == 0) {
+                    $('.none-lelang').show()
+                }
+                console.log(response)
+                $.each(response, function(key, value) {
+                    
+                    
+                    $('.list-group').prepend(`<li class="list-group-item list-group-item-action mylelang" data-id="${value.id}">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h3 class="mb-1 title">${value.title}</h3>
+                            <small class="date">${selisih}</small>
+                        </div>
+                    </li>`)
+                });
+            },
+        });
+    });
+    @endauth
+</script>
+@endpush

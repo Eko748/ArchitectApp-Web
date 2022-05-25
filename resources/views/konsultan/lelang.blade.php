@@ -22,96 +22,40 @@
                         <h4>List Lelang</h4>
                     </div>
                     <div class="card-body">
-                        <div class="main">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Gaya Desain</th>
-                                            <th scope="col">Owner</th>
-                                            <th scope="col">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="list-group">
-                        </div>
-                                            <th scope="col">Opsi View Desain</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($data as $view)
-                                        <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $view->title }}</td>
-                                            <td>{{ $view->gayaDesain }}</td>
-                                            <td>
-                                                
-                                                <button class="btn btn-info" onclick="viewlelang({{ $view->id }})"
-                                                    data-toggle="modal" data-target="#exampleModal">view</button>
-                                                
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                    </div>
-                </div>
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">All View My Lelang</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="view-image"></div>
+                        <table class="table table-hover" id="table-project">
+                        <ul class="list-group">
+                            
+                        </ul>
+                        </table>
+                        <div class="row justify-content-center none-lelang" style="display: none">
+                            <div class="col-lg-6 col-md col-sm text-center" style="height: 100px">
+                                <p class="">Owner belum ada yang membuat lelang</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+        </section>
     </div>
-    </section>
-    </div>
-    @push('js')
-        <script>
-        function viewlelang(id) {
-        $.ajax({
-                url : "{{ url('/konsultan/lelang/owner-detail') }}/"+id,
-                type : 'GET',
-                success : function(data) {
-                    console.log(id);
-                    $("#view-image").html(data);
-                    return true;
-                }   
-                });
-            }
+                        
+@endsection
 
+@push('js')
+
+        <script>
             $(document).ajaxStart(function() {
                 $('.preloader').show()
             })
+
             @auth
                 $(function() {
                 $('.list-group').on('click', '.mylelang', function() {
                 let id = $(this).data('id');
-                window.location.href = baseUrl + 'owner/mylelang/' + id
+                window.location.href = baseUrl + 'konsultan/lelang/' + id
                 });
-
-
-
+            
+            
+            
                 SetupAjax();
                 $.ajax({
                 url: "{{ route('konsultan.lelang.all') }}",
@@ -123,39 +67,49 @@
                 }
                 console.log(response)
                 $.each(response, function(key, value) {
-
-
+            
+            
                 let selisih = selisihWaktu(value.created_at);
                 let badge = "";
+                let image ="";
+                let path = "{{ asset('img/lelang/ruangan/') }}"
 
+                
+                $.each(response.image, function(key, value) {
+            
+                image += `<img src="${path}/${value.image}" height="150" loading="lazy" class="d-inline m-1 rounded" >`
+                })
 
-
-
+            
+            
+            
                 $('.list-group').prepend(`<li class="list-group-item list-group-item-action mylelang" data-id="${value.id}">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1 title">${value.title}</h5>
+                        <h3 class="mb-1 title">${value.title}</h3>
                         <small class="date">${selisih}</small>
                     </div>
-                    <small><span class="me-2">Est. Biaya: ${rupiahFormat(value.budgetFrom)} - ${rupiahFormat(value.budgetTo)}</span>
+                    <small><span class="me-2">Est. Biaya: ${rupiahFormat(value.budgetFrom)} - ${rupiahFormat(value.budgetTo)}</span> <br>
                         <span class="me-2 text-capitalize "> Style Desain: ${value.gayaDesain} </span><span><i
                                 class="fas fa-map-marker-alt"></i> ${value.owner.alamat}</span></small>
+                                <hr>
+                    <h6><b>Deskripsi</b></h6>
                     <p class="mb-1 my-2 desc d-inline ">${value.description}</p>
+                    <div class="images p-3">
+    
+                    ${image}
+                    </div>
                     <div class="text-decoration-none my-3">
                         ${badge}
                     </div>
+                    
                     <small><span>Proposal: ${value.proposal_count}</span> <span class="ms-2 ">Status: `+ (value.status == 0 ?
                             '<span class="text-success fw-bolder">aktif</span>' : '<span class="text-danger fw-bolder">tutup</span>')
                             +`</span></small>
-                </li>`)
+                </li><br>`)
                 });
                 },
                 });
                 });
             @endauth
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        @include('konsultan.js.lelang-js')
-        @include('konsultan.js.profileJs')
-
     @endpush
-@endsection

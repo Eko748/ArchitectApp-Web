@@ -19,8 +19,10 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 id="title"></h4>
+                        
                     </div>
                     <div class="card-body">
+                        <img src="" id="image">
                         <div id="desc"></div>
                         <p class="d-inline mr-2">Estimasi Biaya : <span class="text-muted" id="budget"></span></p>
                         <p class="d-inline">Lokasi : <span id="loc"></span></p>
@@ -137,13 +139,22 @@
                     type: "GET",
                     success: function(response) {
                         console.log("{{Auth::user()->id}}")
+                        console.log(response)
+                        let selisih = selisihWaktu(response.created_at)
+                let image ="";
+                let path = "{{ asset('img/lelang/ruangan/') }}"
+                $.each(response.image, function(key, value) {
+            
+            image += `<img src="${path}/${value.image}" height="150" loading="lazy" class="d-inline m-1 rounded" >`
+            })
                         $.each(response.proposal,function (key,value) {
                             if (value.konsultan.userId == "{{Auth::user()->id}}" && response.id == value.lelangOwnerId) {
-                                 $('#submit-prop').prop('disabled',true)
+                                $('#submit-prop').prop('disabled',true)
                             }
                             
                         })
                         $('#title').html(response.title);
+                        $('#image').html(response.image);
                         $('#desc').html(response.description);
                         $('#budget').html(`${rupiahFormat(response.budgetFrom)} - ${rupiahFormat(response.budgetTo)} `);
                         $('#loc').html(response.owner.alamat);

@@ -134,7 +134,7 @@
                     processing: true,
                     serverSide: true,
                     autoWidth: false,
-                    ajax: "{{ route('konsultan.proposal.data.active') }}",
+                    ajax: "{{ route('konsultan.proposal.data.submit') }}",
                     columns: [
 
                         {
