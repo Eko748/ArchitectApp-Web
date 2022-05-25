@@ -89,11 +89,11 @@ Verifikasi Pembayaran
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'owner.user.name',
+                            data: 'ownerId',
                             name: 'ownerId'
                         },
                         {
-                            data: 'kontrak.project_owner.project.konsultan.user.email',
+                            data: 'kontrak.project_owner.project.konsultan.user.name',
                             name: 'kontrak.project_owner.project.konsultan.user.email'
                         },
                         {
