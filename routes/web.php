@@ -122,13 +122,17 @@ Route::middleware('auth')->group(function () {
         Route::delete('/konsultan/lelang-del/{id}', [LelangController::class, 'destroy'])->name('konsultan.hapus.lelang');
 
         // lelang
+        Route::get('/konsultan/getdatakonsultan', [KonsultanController::class, 'getDataKonsultan']);
+        Route::get('/konsultan/lelang/all', [LelangController::class, 'AllMyLelang'])->name('konsultan.lelang.all');
         Route::get('/konsultan/lelang', [KonsultanController::class, 'lelangKons'])->name('konsultan.find');
+        Route::get('/konsultan/alllelang', [KonsultanController::class, 'getAllLelang']);
         // Route::get('/konsultan/mylelang/viewlelang/{id}', [OwnerController::class, 'view'])->name('owner.my.lelang.view');
         Route::get('/konsultan/all-lelang', [LelangController::class, 'getAllLelangOwner'])->name('konsultan.lelang');
         Route::get('/konsultan/lelang/{lelang}', [KonsultanController::class, 'detilLelang'])->name('konsultan.lelang.detil');
         Route::get('/konsultan/getlelang/{lelang}', [LelangController::class, 'showLelang'])->name('konsultan.lelang.show');
 
         // job
+        Route::get('/konsultan/myproject', [KonsultanController::class, 'getProjectByKons']);
         Route::get('/konsultan/myjob/archived-job', [KonsultanController::class, 'archivedJob'])->name('konsultan.job.archived');
         Route::post('/konsultan/myjob/detil/data', [JobController::class, 'getDetilJob'])->name('konsultan.job.data');
         Route::get('/konsultan/myjob/detil/{project}', [KonsultanController::class, 'detilJob'])->name('konsultan.job.detil');
@@ -196,7 +200,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('owner')->group(function () {
- 
+
         Route::post('/owner/profile/{user}', [OwnerController::class, 'profileOwner'])->name('owner.profile.show');
         Route::post('/owner/lelang', [OwnerLelangController::class, 'postLelang'])->name('owner.lelang.post');
         Route::get('/owner/lelang/all', [OwnerLelangController::class, 'AllMyLelang'])->name('owner.lelang.all');
