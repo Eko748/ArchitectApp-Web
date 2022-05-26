@@ -15,7 +15,12 @@ class KontraktorSeed extends Seeder
     public function run()
     {
         Kontraktor::create([
-            "userId" => 3
+            "userId" => 3,
+            "telepon" => "08811223344",
+            "website" => "mawar.co.id",
+            "instagram" => "@mawar",
+            "alamat" => "Indramayu",
+            "slug" => "kontraktor"
         ]);
     }
 }

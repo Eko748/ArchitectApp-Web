@@ -29,16 +29,16 @@ class ProjectSeed extends Seeder
         $image = [
             [
                 'projectId' => $project->id,
-                'image' => 'arsitek.jpg'
+                'image' => 'e1.jpg'
             ], [
                 'projectId' => $project->id,
-                'image' => 'arsitek2.jpg'
+                'image' => 'e2.jpg'
             ], [
                 'projectId' => $project->id,
-                'image' => 'arsitek3.jpg'
+                'image' => 'e3.jpg'
             ], [
                 'projectId' => $project->id,
-                'image' => 'arsitek4.jpg'
+                'image' => 'e4.jpg'
             ]
         ];
         foreach ($image as $key) {
