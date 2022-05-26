@@ -31,7 +31,7 @@ class ProposalController extends Controller
     public function getAllProposalSubmit(Request $request)
     {
         if ($request->ajax()) {
-            $data = TenderKonsultan::with('lelang.owner.user', 'konsultan.user')->where('status',1)->get();
+            $data = TenderKonsultan::with('lelang.owner.user', 'konsultan.projects')->where('status',1)->where("konsultanId")->get();
             return DataTables::of($data)
                 ->addIndexColumn()->addColumn('cv', function ($data, $index = 0) {
                     $gambar = "<img src='" . asset('img/tender/konsultan/cv/' . $data->cv) . "' height='50' width='50'>";

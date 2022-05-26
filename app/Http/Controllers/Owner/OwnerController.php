@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Konsultan;
+use App\Models\Kontraktor;
 use App\Models\KontrakKerjaKonsultan;
 use App\Models\LelangOwner;
 use App\Models\Owner;
@@ -22,15 +23,21 @@ class OwnerController extends Controller
     public function index()
     {
         $konsultan = Konsultan::with('user')->get();
+        $kontraktor = Kontraktor::with('user')->get();
         $project = Project::with('konsultan.user', 'images')->where('isLelang', '0')->get();
 
-        return view('public.landing', compact('konsultan', 'project'));
+        return view('public.landing', compact('konsultan', 'project', 'kontraktor'));
     }
 
     public function professional()
     {
         $data = User::with('konsultan')->where(['is_active' => 1, 'level' => 'konsultan'])->get();
         return view('public.professionals', compact('data'));
+    }
+    public function kontraktor()
+    {
+        $data = User::with('kontraktor')->where(['is_active' => 1, 'level' => 'kontraktor'])->get();
+        return view('public.kontraktor', compact('data'));
     }
     public function project()
     {
@@ -124,6 +131,11 @@ class OwnerController extends Controller
     {
         $data = Konsultan::with('user', 'projects.images')->find($kons->id);
         return view('public.detail-professional', compact('data'));
+    }
+    public function kontraktorDetil(Kontraktor $kontraktor)
+    {
+        $data = Kontraktor::with('user')->find($kontraktor->id);
+        return view('public.detail-kontraktor', compact('data'));
     }
     public function projectDetil(Project $project)
     {
