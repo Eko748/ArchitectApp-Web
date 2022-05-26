@@ -20,7 +20,7 @@
             <div class="section-body">
                 <div class="card">
                     <div class="card-header">
-                        <h4>My Proposal - Active</h4>
+                        <h4>My Proposal - Submit</h4>
                     </div>
                     <div class="card-body">
 
