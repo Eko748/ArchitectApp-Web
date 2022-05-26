@@ -56,7 +56,7 @@
                 <span>Jasa</span>
                 <div class="dropdown-content">
                 <a class="nav-link text-dark dropdown-item" href="{{ route('public.konsultan') }}">Konsultan</a>
-                <a class="nav-link text-dark dropdown-item" href="{{ route('public.konsultan') }}">Kontraktor</a>
+                <a class="nav-link text-dark dropdown-item" href="{{ route('public.kontraktor') }}">Kontraktor</a>
                 </div>
             </div>
             @auth

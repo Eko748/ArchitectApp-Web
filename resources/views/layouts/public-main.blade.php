@@ -89,6 +89,10 @@
             let slug = $(this).data('slug')
             window.location.href = baseUrl + `detil/konsultan/${slug}`
         })
+        $('.kontraktor').on('click', function() {
+            let slug = $(this).data('slug')
+            window.location.href = baseUrl + `detil/kontraktor/${slug}`
+        })
     </script>
     <!-- Page Specific JS File -->
     @stack('js')
