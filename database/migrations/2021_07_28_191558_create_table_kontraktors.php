@@ -21,6 +21,7 @@ class CreateTableKontraktors extends Migration
             $table->string('instagram')->nullable();
             $table->text('about')->nullable();
             $table->text('alamat')->nullable();
+            $table->string('slug');
             $table->timestamps();
         });
     }

@@ -25,6 +25,6 @@ class Konsultan extends Model
     }
     public function proposal()
     {
-        return $this->hasOne(TenderKonsultan::class, 'konsultanId', 'id');
+        return $this->hasOne(TenderKonsultan::class, 'konsultanId');
     }
 }

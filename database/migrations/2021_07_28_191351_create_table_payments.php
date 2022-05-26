@@ -18,7 +18,6 @@ class CreateTablePayments extends Migration
             $table->integer('kontrakKonsultanId');
             $table->text('buktiBayar');
             $table->integer('status');
-
             $table->timestamps();
         });
     }

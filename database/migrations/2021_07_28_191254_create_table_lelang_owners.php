@@ -16,6 +16,7 @@ class CreateTableLelangOwners extends Migration
         Schema::create('lelang_owners', function (Blueprint $table) {
             $table->id();
             $table->integer('ownerId');
+            $table->integer('konsultanId');
             $table->string('title');
             $table->text('description');
             $table->integer('status');

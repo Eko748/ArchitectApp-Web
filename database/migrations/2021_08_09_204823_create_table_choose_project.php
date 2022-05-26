@@ -15,6 +15,7 @@ class CreateTableChooseProject extends Migration
     {
         Schema::create('choose_projects', function (Blueprint $table) {
             $table->id();
+            $table->integer('projectOwnerId');
             $table->enum('RAB', [1, 0]);
             $table->enum('desain', [1, 0]);
             $table->decimal('panjang');

@@ -9,7 +9,7 @@ class Kontraktor extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'userId','telepon','website','instagram','about', 'alamat'
+        'userId','telepon','website','instagram','about', 'alamat', 'slug'
     ];
     public function user()
     {
