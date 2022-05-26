@@ -70,6 +70,24 @@ class UserSeed extends Seeder
             'is_active' => 1,
             'level' => 'owner'
         ]);
+        $konsultan = User::create([
+            'name' => 'Eko Permana S.Ars',
+            'username' => 'eko712',
+            'email' => 'permanaeko74@gmail.com',
+            'password' => Hash::make('12345678'),
+            'avatar' => 'default.png',
+            'is_active' => 1,
+            'level' => 'konsultan'
+        ]);
+        $owner = User::create([
+            'name' => 'Lely Maria Kova',
+            'username' => 'lely123',
+            'email' => 'lely@gmail.com',
+            'password' => Hash::make('12345678'),
+            'avatar' => 'default.png',
+            'is_active' => 1,
+            'level' => 'owner'
+        ]);
 
         // $own = Owner::create([
         //     'userId' => $owner->id

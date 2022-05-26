@@ -21,9 +21,9 @@ class OwnerSeed extends Seeder
         ]);
 
         Owner::create([
-            "userId" => 5,
-            "telepon" => "5555",
-            "alamat" => "Bandung"
+            "userId" => 6,
+            "telepon" => "0888888888991",
+            "alamat" => "Cirebon"
         ]);
     }
 }

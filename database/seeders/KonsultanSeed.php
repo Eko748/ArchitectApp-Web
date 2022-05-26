@@ -22,5 +22,13 @@ class KonsultanSeed extends Seeder
             "alamat" => "Bandung",
             "slug" => "konsultan"
         ]);
+        Konsultan::create([
+            "userId" => 5,
+            "telepon" => "088222155847",
+            "website" => "eko748.github.io",
+            "instagram" => "@anamrepoke_",
+            "alamat" => "Cirebon",
+            "slug" => "konsultan"
+        ]);
     }
 }

@@ -45,5 +45,35 @@ class ProjectSeed extends Seeder
 
             Image::create($key);
         }
+
+        $project = Project::create([
+            'title' => 'Mawar Alami',
+            'description' => 'Sebuah desain arsitektur traditional yang memancarkan keindahan bunga Mawar',
+            'isLelang' => '0',
+            'konsultanId' => 2,
+            'harga_desain' => 2000000,
+            'harga_rab' => 4000000,
+            'gayaDesain' => 'traditional',
+            'slug' => Str::slug('Mawar Alami'),
+        ]);
+        $image = [
+            [
+                'projectId' => $project->id,
+                'image' => 'a1.jpg'
+            ], [
+                'projectId' => $project->id,
+                'image' => 'a2.jpg'
+            ], [
+                'projectId' => $project->id,
+                'image' => 'a3.jpg'
+            ], [
+                'projectId' => $project->id,
+                'image' => 'a4.jpg'
+            ]
+        ];
+        foreach ($image as $key) {
+
+            Image::create($key);
+        }
     }
 }
