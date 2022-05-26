@@ -29,22 +29,27 @@
                         </div>
                         <tr>
                         <div class="mb-3">
+                        <div class="row g-3">
+                        <div class="col-md-6">
                             <label for="panjang" class="form-label form-label-sm">Panjang<span
                                     class="text-danger fw-bolder">*</span></label>
-                            <input type="text" class="form-control form-control-sm @error('panjang') is-invalid @enderror"
+                            <input type="number" class="form-control form-control-sm @error('panjang') is-invalid @enderror"
                                 name="panjang" id="panjang" value="{{ old('panjang') }}">
                             @error('panjang')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <td>
+                        <div class="col-md-6">
                             <label for="lebar" class="form-label form-label-sm">Lebar<span
                                     class="text-danger fw-bolder">*</span></label>
-                            <input type="text" class="form-control form-control-sm @error('lebar') is-invalid @enderror"
+                            <input type="number" class="form-control form-control-sm @error('lebar') is-invalid @enderror"
                                 name="lebar" id="lebar" value="{{ old('lebar') }}">
                             @error('lebar')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+                        </div>
                         </div>
                         </tr>
                         <div class="mb-3">
@@ -56,7 +61,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
 
-                                        <input type="text"
+                                        <input type="number"
                                             class="form-control form-control-sm @error('budgetFrom') is-invalid @enderror"
                                             id="budgetFrom" name="budgetFrom" value="{{ old('budgetFrom') }}">
 
@@ -71,7 +76,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
 
-                                        <input type="text"
+                                        <input type="number"
                                             class="form-control form-control-sm @error('budgetTo') is-invalid @enderror" name="budgetTo"
                                             value="{{ old('budgetTo') }}" id="budgetTo">
 
@@ -131,13 +136,15 @@
                             </div>
 
                         </div>
-
+                        <div class="mb-3">
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-warning btn-sm btn-block">
                                 Submit
                             </button>
                         </div>
+                        </div>
                     </form>
+                    <br>
                 </div>
             </div>
         </div>

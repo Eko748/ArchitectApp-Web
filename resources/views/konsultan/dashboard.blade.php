@@ -19,37 +19,37 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
+                                <h4>Desain</h4>
+                            </div>
+                            <div class="card-body">
+                                {{$jumlah_data_desain}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-2">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-file"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Lelang Owner</h4>
+                            </div>
+                            <div class="card-body">
+                                {{$jumlah_data_lelang_owner}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-2">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-file"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
                                 <h4>Project</h4>
-                            </div>
-                            <div class="card-body">
-                                47
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-2">
-                        <div class="card-icon bg-primary">
-                            <i class="fas fa-file"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Active Proposal</h4>
-                            </div>
-                            <div class="card-body">
-                                47
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-2">
-                        <div class="card-icon bg-primary">
-                            <i class="fas fa-file"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Active Job</h4>
                             </div>
                             <div class="card-body">
                                 47

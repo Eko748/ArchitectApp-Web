@@ -1,6 +1,6 @@
 @extends('layouts.public-main')
 @section('title')
-    Project
+    Lelang Saya
 @endsection
 @include('layouts.navbar')
 
@@ -10,7 +10,7 @@
             <div class="col-10 col-md col-sm">
                 <div class="my-4">
                     <div class="page mb-3">
-                        <h4>My Lelang</h4>
+                        <h4>Lelang Saya</h4>
                         <hr>
                     </div>
                     <ul class="list-group"></ul>
@@ -79,7 +79,7 @@
                     <small><span>Proposal: ${value.proposal_count}</span> <span class="ms-2 ">Status: `+ (value.status == 0 ?
                             '<span class="text-success fw-bolder">aktif</span>' : '<span class="text-danger fw-bolder">tutup</span>')
                             +`</span></small>
-                </li>`)
+                </li><br>`)
                 });
                 },
                 });
