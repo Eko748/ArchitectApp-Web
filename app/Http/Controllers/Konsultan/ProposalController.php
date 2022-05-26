@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class ProposalController extends Controller
 {

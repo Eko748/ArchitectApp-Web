@@ -7,6 +7,7 @@ use App\Models\LelangOwner;
 use App\Models\Project;
 use App\Models\LelangKonsultan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KonsultanController extends Controller
 {
@@ -30,8 +31,8 @@ class KonsultanController extends Controller
     public function dashboard()
     {
         $data = [
-            "jumlah_data_desain" => Project::count(),
-            "jumlah_data_lelang_owner" => LelangOwner::count(),
+            "jumlah_data_desain" => Project::where('id', Auth::user()->id)->count(),
+            "jumlah_data_lelang_owner" => LelangOwner::where('status', 0)->count(),
             "jumlah_data_lelang_konsultan" => LelangKonsultan::count(),
             // "jumlah_data_proposal" => ::count(),
 
