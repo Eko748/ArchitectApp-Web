@@ -228,8 +228,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/owner/project/choose', [OwnerProjectController::class, 'chooseProject'])->name('owner.choose.project');
 
         // Payment
-        Route::get('/owner/project/myproject/payment', [OwnerProjectController::class, 'payment'])->name('owner.payment');
-        Route::post('/owner/project/myproject/payment', [OwnerProjectController::class, 'paymentPost'])->name('owner.payment.post');
+        Route::get('/owner/project/myproject/payment/', [OwnerProjectController::class, 'payment'])->name('owner.payment');
+        Route::post('/owner/project/myproject/payment/{project}', [OwnerProjectController::class, 'paymentPost'])->name('owner.payment.post');
         Route::get('/owner/project/viewpayment', [OwnerProjectController::class, 'viewPayment'])->name('view.payment');
     });
 });
