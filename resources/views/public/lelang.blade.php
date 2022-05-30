@@ -5,9 +5,11 @@
 @include('layouts.navbar')
 
 @section('content')
-    <div class="container">
+<br>
+<div class="container mb-5 card shadow" style="border-radius: 30px;">
+    <div class="card-body">
         <div class="row justify-content-center">
-            <div class="col-5">
+            <div class="col-10">
                 <div class="my-4">
                     <div class="mt-3 mb-4 text-center">
                         <h5><span class="font-weight-bold">Form Lelang</span> </h5>
@@ -149,7 +151,7 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
 
     @include('layouts.footer')
@@ -250,7 +252,6 @@
         </div>
     </div>
 @endsection
-
 
 
 {{-- @extends('layouts.public-main')

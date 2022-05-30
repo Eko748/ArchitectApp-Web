@@ -152,11 +152,11 @@ class ProjectController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         
-        return view('payment/payment', compact('data'), ['snap_token'=>$snapToken]);
+        return view('payment.payment', compact('data'), ['snap_token'=>$snapToken]);
         
     }
 
-    public function paymentPost(Request $request)
+    public function paymentPost(Request $request, ProjectOwner $project)
     {
         
         $json = json_decode($request->get('json'));

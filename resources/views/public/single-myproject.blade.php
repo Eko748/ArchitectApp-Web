@@ -1,6 +1,6 @@
 @extends('layouts.public-main')
 @section('title')
-    Project
+    Project Saya
 @endsection
 @include('layouts.navbar')
 
@@ -10,7 +10,7 @@
             <div class="col-10 col-md col-sm">
                 <div class="my-4">
                     <div class="page mb-3">
-                        <h4>My Project</h4>
+                        <h4>Project Saya</h4>
                     </div>
                     <div class="card">
                         <h4 class="px-3 pt-3">{{ $data->project->title }}</h4>
@@ -41,11 +41,14 @@
                             
                         </div>
                         <div class="divider"></div>
-                        <div class="images p-3">
-                            <b>Foto Ruangan / Bangunan</b>
-                            @foreach ($data->chooseProject->imageOwner as $item)
-                            <img src="{{ url('/img/owner/'.$item->image) }}" alt="" width="200px" height="200">
+                        <div class="text-capitalized p-3">
+                            <b>Foto Ruangan / Bangunan Anda</b>
+                        
+                        <div class="images">
+                            @foreach ($data->ambil_image as $item)
+                            <img src="{{ url('/img/owner/'.$item->image) }}" alt="" width="254px" height="180">
                             @endforeach
+                        </div>
                         </div>
                         @if ($data->kontrak->proposal != null)
                             <div class="divider"></div>
@@ -81,6 +84,7 @@
                                 <button type="submit" class="btn btn-warning btn-sm" id="pay-button">
                                     Pay!
                                 </button>
+                                <button id="pay-button">Pay!</button>
                             </form>
                                 {{-- <button class="btn btn-warning btn-sm  upload" data-bs-toggle="modal"
                                     data-bs-target="#modalBayar" data-id="{{ $data->kontrak->id }}">Upload
@@ -127,6 +131,46 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
     @include('layouts.footer')
 
     @push('js')
+    <button id="pay-button">Pay!</button>
+    <script type="text/javascript"
+      src="https://app.sandbox.midtrans.com/snap/snap.js"
+      data-client-key="SB-Mid-client-ojEypI047x7sFX1T"></script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity=" " crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        // For example trigger on button clicked, or any time you need
+        var payButton = document.getElementById('pay-button');
+        payButton.addEventListener('click', function () {
+          // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+          window.snap.pay('$snap_token', {
+            onSuccess: function(result){
+              /* You may add your own implementation here */
+              console.log(result);
+              send_response_to_form(result);
+            },
+            onPending: function(result){
+              /* You may add your own implementation here */
+              console.log(result);
+              send_response_to_form(result);
+            },
+            onError: function(result){
+              /* You may add your own implementation here */
+              console.log(result);
+              send_response_to_form(result);
+            },
+            onClose: function(){
+              /* You may add your own implementation here */
+              alert('you closed the popup without finishing the payment');
+            }
+          })
+        });
+  
+        function send_response_to_form(result){
+          document.getElementById('json_callback').value = JSON.stringify(result);
+          $('#submit_form').submit();
+        }
+      </script>
     
 
     <script>

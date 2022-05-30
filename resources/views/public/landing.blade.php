@@ -37,7 +37,7 @@ Landing Page
             <div class="col-lg-3 col-sm col-md-4 mb-3">
                 <div class="card displayCard border-0 project" data-slug="{{ $item->slug }}">
                     <img src="{{ asset('img/project/' . $img[0]) }}" class="card-img-top" alt=""
-                        style="max-height: 200px; object-fit: cover">
+                        style="max-height: 300px; object-fit: cover">
                     <div class="small-img mt-1 mb-2 text-center">
                         <img src="{{ asset('img/project/' . $img[1]) }}" class="rounded" alt="">
                         <img src="{{ asset('img/project/' . $img[2]) }}" class="rounded" alt="">
@@ -80,7 +80,7 @@ Landing Page
             @endforeach
 
         </div> --}}
-        <div id="history" class="container mb-5">
+        <div id="history" class="container-fluid mb-5">
             <div class="row">
                 <div class="col text-center mb-2">
                     <h3><span class="fw-bold">Featured</span> <span class="fw-lighter text-muted">Professional</span></h3>
@@ -99,11 +99,7 @@ Landing Page
                                 <div class="col-lg-6 col-sm col-md-4 mb-3">
                                     <div class="card displayCard border-0 konsultan" data-slug="{{ $item->slug }}">
                                         <img src="{{ asset('img/avatar/' . $item->user->avatar) }}" class="card-img-top"
-                                            style="max-height: 350; object-fit: cover">
-                                        <div class="position-absolute logo-kons">
-                                            <img src="{{ asset('img/avatar/' . $item->user->avatar) }}" class="rounded-circle" width="75"
-                                                height="75">
-                                        </div>
+                                            style="max-height: 350px; object-fit: cover">
                                         <div class="card-body text-center mt-3">
                                             <h5 class="card-title">{{ $item->user->name }}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted ">
@@ -130,11 +126,7 @@ Landing Page
                                 <div class="col-lg-6 col-sm col-md-4 mb-3">
                                     <div class="card displayCard border-0 kontraktor" data-slug="{{ $item->slug }}">
                                         <img src="{{ asset('img/avatar/' . $item->user->avatar) }}" class="card-img-top"
-                                            style="max-height: 200; object-fit: cover">
-                                        <div class="position-absolute logo-kons">
-                                            <img src="{{ asset('img/avatar/' . $item->user->avatar) }}" class="rounded-circle" width="70"
-                                                height="70">
-                                        </div>
+                                            style="max-height: 350; object-fit: cover">
                                         <div class="card-body text-center mt-3">
                                             <h5 class="card-title">{{ $item->user->name }}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted ">

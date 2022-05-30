@@ -50,4 +50,11 @@ class KontraktorController extends Controller
         return view('kontraktor.archived-proposal');
         
     }
+    public function cabang()
+    {
+
+        // return view('konsultan.project');
+    
+        return view('kontraktor.cabang');
+    }
 }

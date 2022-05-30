@@ -44,7 +44,7 @@ class ProfessionalController extends Controller
                 })->rawColumns(['Aksi'])->make(true);
         }
     }
-   
+
     public function show(User $user)
     {
         return response()->json($user);
@@ -52,11 +52,9 @@ class ProfessionalController extends Controller
 
     public function verifyPro(Request $request)
     {
-       
+
         
         return User::find($request->id)->update(['is_active'=>1]);
 
     }
-  
-  
 }

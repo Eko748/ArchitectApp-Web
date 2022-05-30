@@ -25,5 +25,30 @@ class LelangController extends Controller
         $data = LelangOwner::where('id',$lelang->id)->with('owner')->first();
         return $data;
     }
-   
+
+    public function rules()
+    {
+        return [
+            'title' => 'required|min:3',
+            'desc' => 'required',
+            'budget' => 'required',
+            'images' => 'required|mimes:jpg,jpeg,png',
+            'desain' => 'required',
+            'rab' => 'required'
+        ];
+    }
+
+    public function fields($title, $desc, $slug, $budget)
+    {
+        return [
+            'title' => $title,
+            'description' => $desc,
+            'slug' => $slug,
+            'konsultanId' => $this->getKonsultanId()->konsultan->id,
+            'budget' => $budget,
+            'status' => "0"
+        ];
+    }
+    
+
 }

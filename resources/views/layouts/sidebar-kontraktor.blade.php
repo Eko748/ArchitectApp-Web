@@ -9,7 +9,9 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
             <li class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('kontraktor.dashboard') }}"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
+                href="{{ route('kontraktor.dashboard') }}"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
+            <li class="{{ Request::segment(2) == 'cabang' ? 'active' : '' }}"><a class="nav-link"
+                href="{{ route('kontraktor.cabang') }}"><i class="fas fa-fire"></i><span>Cabang</span></a></li>
             <li class="menu-header">Management</li>
             <li class=" {{ Request::segment(2) == 'lelang' ? 'active' : '' }}"><a class="nav-link"  href="{{ route('kontraktor.job') }}"><i class="far fa-images"></i><span>Find Work</span></a></li>
             <li class="nav-item dropdown  {{ in_array(Request::segment(3),['active-job','archived-job']) ? 'active' : '' }}">

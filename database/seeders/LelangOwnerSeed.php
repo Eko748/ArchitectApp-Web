@@ -16,7 +16,6 @@ class LelangOwnerSeed extends Seeder
     {
         LelangOwner::create([
             "ownerId" => 1,
-            "konsultanId" => 2,
             "title" => "Kamar Adem",
             "description" => "Untuk Rumah yang dekat sawah",
             "status" => 1,
@@ -30,10 +29,9 @@ class LelangOwnerSeed extends Seeder
         ]);
         LelangOwner::create([
             "ownerId" => 1,
-            "konsultanId" => 5,
             "title" => "Kamar Marvel",
             "description" => "Untuk anak laki-laki dan tambahkan juga meja belajar",
-            "status" => 1,
+            "status" => 0,
             "budgetFrom" => 6000000,
             "budgetTo" => 8000000,
             "gayaDesain" => "modern",
@@ -44,7 +42,6 @@ class LelangOwnerSeed extends Seeder
         ]);
         LelangOwner::create([
             "ownerId" => 1,
-            "konsultanId" => 5,
             "title" => "Kamar Rapunzel",
             "description" => "Untuk anak Perempuan yang dilengkapi sudut untuk keamanan",
             "status" => 0,

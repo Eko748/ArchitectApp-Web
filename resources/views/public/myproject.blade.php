@@ -10,7 +10,7 @@ Project
         <div class="col-lg col-md col-sm">
             <div class="my-4">
                 <div class="page mb-3">
-                    <h4>My Project</h4>
+                    <h4>Project Saya</h4>
                     <hr>
                 </div>
                 @if (count($data) != 0)

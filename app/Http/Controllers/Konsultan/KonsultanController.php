@@ -42,7 +42,7 @@ class KonsultanController extends Controller
     public function project()
     {
 
-        return view('konsultan.project');
+        // return view('konsultan.project');
     
         return view('konsultan.project');
     }

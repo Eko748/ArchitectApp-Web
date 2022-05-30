@@ -60,8 +60,8 @@ class LelangController extends Controller
     public function postLelang(Request $request)
     {
         // // dd($request->luas);
-        // $request->validate($this->rules());
-        // $data = $this->field($request);
+        $request->validate($this->rules());
+        $data = $this->field($request);
         $lelang = LelangOwner::create($request->all());
         if ($request->hasFile('image')) {
             $img = $request->file('image');

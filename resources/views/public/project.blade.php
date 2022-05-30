@@ -1,6 +1,6 @@
 @extends('layouts.public-main')
 @section('title')
-    Project
+    Project Saya
 @endsection
 @include('layouts.navbar')
 

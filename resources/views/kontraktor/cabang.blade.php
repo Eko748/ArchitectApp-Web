@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title')
-Project
+Kontraktor Cabang
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} ">
@@ -9,22 +9,21 @@ Project
 @endsection
 @section('content')
 @include('layouts.topbar')
-@include('layouts.sidebar-konsultan')
+@include('layouts.sidebar-kontraktor')
 
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Project</h1>
+            <h1>Kontraktor Cabang</h1>
         </div>
-        
         <div class="section-body">
             <div class="card">
                 <div class="card-header">
-                    <h4>Data Project</h4>
+                    <h4>Data Cabang</h4>
                     <div class="card-header-action">
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProject"
-                        id="tambahProject">
-                        Tambah Project
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalCabang"
+                        id="tambahCabang">
+                        Tambah Cabang
                     </a>
                     <a href="#" class="btn btn-warning">
                         View All
@@ -33,12 +32,13 @@ Project
             </div>
             <div class="card-body">
                 
-                <table class="table table-hover" id="table-project">
+                <table class="table table-hover" id="table-cabang">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Gaya Desain</th>
+                            <th scope="col">Nama Tim</th>
+                            <th scope="col">Harga Kontrak</th>
+                            <th scope="col">Deskripsi</th>
                             <th scope="col">Images</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -55,22 +55,22 @@ Project
 </div>
 </section>
 </div>
-<div class="modal fade" id="modalEditProject" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+<div class="modal fade" id="modalEditCabang" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
 aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Tambah Project</h5>
+            <h5 class="modal-title">Tambah Cabang</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form action="" method="post" id="formEditProject">
+            <form action="" method="post" id="formEditCabang">
                 @csrf
                 <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" class="form-control">
+                    <label for="nama_tim">Nama Tim</label>
+                    <input type="text" name="nama_tim" class="form-control">
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
@@ -79,6 +79,11 @@ aria-hidden="true">
                         <input type="file" class="custom-file-input" multiple name="images">
                         <label class="custom-file-label" for="images">Choose file</label>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="harga_kontrak">Harga Kontrak Anda</label>
+                    <input type="number" name="harga_kontrak" class="form-control">
+                    <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="desc">Deskripsi</label>
@@ -94,52 +99,35 @@ aria-hidden="true">
     </div>
 </div>
 </div>
-<div class="modal fade" id="modalProject" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="modalCabang" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Project</h5>
+                <h5 class="modal-title">Tambah Cabang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="" method="post" id="formTambahProject">
-                    @csrf
+            <form action="{{ url('/kontraktor/cabang') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="modal-body">
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" class="form-control">
+                        <label for="nama_tim">Nama Tim</label>
+                        <input type="text" name="nama_tim" class="form-control">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group">
-                        <label for="title">Gaya Desain</label>
-                        <div class="input-group">
-                            <select class="custom-select" id="" name="gayaDesain">
-                                <option selected disabled>Pilih gaya desain</option>
-                                <option value="minimalist">Minimalist</option>
-                                <option value="traditional">Traditional</option>
-                                <option value="modern">Modern</option>
-                                <option value="scandinavian">Scandinavian</option>
-                            </select>
-                        </div>
+                        <label for="nama_tim">Jumlah Tim</label>
+                        <input type="number" name="jumlah_tim" class="form-control">
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="form-group">
-                        <label for="title">Harga Desain</label>
+                        <label for="nama_tim">Harga Kontrak Anda</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Rp</span>
                             </div>
-                            <input type="text" class="form-control" name="harga_desain">
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Harga RAB</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Rp</span>
-                            </div>
-                            <input type="text" class="form-control" name="harga_rab">
+                            <input type="number" class="form-control" name="harga_kontrak">
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
@@ -173,11 +161,11 @@ aria-hidden="true">
 <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 <script>
     $(function() {
-        let table = $('#table-project').DataTable({
+        let table = $('#table-cabang').DataTable({
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{{ route('konsultan.allproject') }}",
+            ajax: "{{ route('kontraktor.allcabang') }}",
             columns: [
             
             {
@@ -185,12 +173,16 @@ aria-hidden="true">
                 name: 'DT_RowIndex'
             },
             {
-                data: 'title',
-                name: 'title'
+                data: 'nama_tim',
+                name: 'nama_tim'
             },
             {
-                data: 'gayaDesain',
-                name: 'gayaDesain'
+                data: 'harga_kontrak',
+                name: 'harga_kontrak'
+            },
+            {
+                data: 'description',
+                name: 'desc'
             },
             {
                 data: 'gambar',
@@ -208,7 +200,7 @@ aria-hidden="true">
         });
     });
 </script>
-@include('konsultan.js.project-js')
-@include('konsultan.js.profileJs')
+@include('kontraktor.js.cabang-js')
+@include('kontraktor.js.profileJs')
 @endpush
 @endsection

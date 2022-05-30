@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Konsultan;
 
 use App\Http\Controllers\Controller;
 use App\Models\TenderKonsultan;
+use App\Models\Konsultan;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class ProposalController extends Controller
     public function getAllProposalSubmit(Request $request)
     {
         if ($request->ajax()) {
-            $data = TenderKonsultan::with('lelang.owner.user', 'konsultan.projects')->where('status',1)->where("konsultanId")->get();
+            $data = TenderKonsultan::with('lelang.owner.user', 'konsultan.user')->where('status',1)->get();
             return DataTables::of($data)
                 ->addIndexColumn()->addColumn('cv', function ($data, $index = 0) {
                     $gambar = "<img src='" . asset('img/tender/konsultan/cv/' . $data->cv) . "' height='50' width='50'>";

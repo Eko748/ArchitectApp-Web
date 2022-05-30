@@ -19,6 +19,7 @@ use App\Http\Controllers\Konsultan\KonsultanController;
 use App\Http\Controllers\Konsultan\LelangController;
 use App\Http\Controllers\Konsultan\ProposalController;
 use App\Http\Controllers\Kontraktor\KontraktorController;
+use App\Http\Controllers\Kontraktor\CabangController;
 use App\Http\Controllers\Owner\GeneratePDFController;
 use App\Http\Controllers\Owner\LelangController as OwnerLelangController;
 use App\Http\Controllers\Owner\OwnerController;
@@ -166,6 +167,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/kontraktor/dashboard', [KontraktorController::class, 'dashboard'])->name('kontraktor.dashboard');
 
         // project
+        Route::get('/kontraktor/cabang', [KontraktorController::class, 'cabang'])->name('kontraktor.cabang');
+        Route::get('/kontraktor/cabang-all', [CabangController::class, 'getAllCabang'])->name('kontraktor.allcabang');
+        Route::post('/kontraktor/cabang', [CabangController::class, 'tambahCabang']);
+
         Route::get('/kontraktor/project', [KontraktorController::class, 'project'])->name('kontraktor.project');
         Route::get('/kontraktor/project-all', [ProjectController::class, 'getAllProject'])->name('kontraktor.allproject');
         Route::post('/kontraktor/project', [ProjectController::class, 'tambahProject']);
