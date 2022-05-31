@@ -58,7 +58,36 @@
                 </div>
 
             </div>
-            
+            <div class="right-pros container">
+                <div class="row">
+                    <p class="text-muted"><span class="fw-bold">Featured </span>Team</p>
+                    @foreach ($data->cabang as $item)
+                    @php
+                        $img = [];
+                    @endphp
+                        @foreach ($item->images as $val)
+                            @php
+                                $img[] = $val->image;
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-4 col-sm col-md-6 mb-2">
+                            <div class="card projectCard border-0 bg-light cabang" data-slug="{{ $item->slug }}">
+                                <img src="{{ asset('img/cabang/profile/' . $img[0]) }}" class="card-img-top" alt="">
+                                <div class="small-img-prof mt-1 text-center">
+                                    <img src="{{ asset('img/cabang/profile/' . $img[1]) }}" class="rounded" alt="">
+                                    <img src="{{ asset('img/cabang/profile/' . $img[2]) }}" class="rounded" alt="">
+                                    <img src="{{ asset('img/cabang/profile/' . $img[3]) }}" class=" rounded" alt="">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ $item->nama_tim }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ $item->alamat_cabang }}</h6>
+                                    {{-- <h6 class="card-subtitle mb-2 text-muted ">Ars</h6> --}}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+            </div>
+        </div>
         </div>
 
     </main>

@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Konsultan;
 use App\Models\Kontraktor;
 use App\Models\KontrakKerjaKonsultan;
+use App\Models\KontraktorCabang;
 use App\Models\LelangOwner;
 use App\Models\Owner;
 use App\Models\Project;
@@ -134,8 +135,13 @@ class OwnerController extends Controller
     }
     public function kontraktorDetil(Kontraktor $kontraktor)
     {
-        $data = Kontraktor::with('user')->find($kontraktor->id);
+        $data = Kontraktor::with('user', 'cabang.images')->find($kontraktor->id);
         return view('public.detail-kontraktor', compact('data'));
+    }
+    public function cabangDetil(KontraktorCabang $cabang)
+    {
+        $data = KontraktorCabang::with('images', 'kontraktor.user')->where('slug', $cabang->slug)->first();
+        return view('public.detail-cabang', compact('data'));
     }
     public function projectDetil(Project $project)
     {

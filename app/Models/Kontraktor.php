@@ -15,6 +15,10 @@ class Kontraktor extends Model
     {
         return $this->belongsTo(User::class, 'userId', 'id');
     }
+    public function cabang()
+    {
+        return $this->hasMany(KontraktorCabang::class, 'kontraktorId');
+    }
     public function files()
     {
         return $this->hasMany(FileKontraktor::class, 'kontraktorId');

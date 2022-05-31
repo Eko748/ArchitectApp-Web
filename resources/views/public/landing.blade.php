@@ -1,6 +1,6 @@
 @extends('layouts.public-main')
 @section('title')
-Landing Page
+Arsitek.co
 @endsection
 @include('layouts.navbar')
 @section('content')
@@ -80,23 +80,25 @@ Landing Page
             @endforeach
 
         </div> --}}
+        <br>
         <div id="history" class="container-fluid mb-5">
             <div class="row">
                 <div class="col text-center mb-2">
                     <h3><span class="fw-bold">Featured</span> <span class="fw-lighter text-muted">Professional</span></h3>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col">
-                    <div class="card shadow" style="border-radius: 30px;">
+                    <div class="card shadow" style="border-radius: 20px;">
                     <div class="card-body">
                         <div class="row">
                         <div class="col-md my-3">
                             <h5 class="text-center mb-3 fw-bold">Konsultan</h5>
-                            <div class="row mx-2">
-                                
+                            <br>
+                            <div class="row mx-4">                                
                                 @foreach ($konsultan as $item)
-                                <div class="col-lg-6 col-sm col-md-4 mb-3">
+                                <div class="col-lg-3 col-sm col-md-4 mb-3">
                                     <div class="card displayCard border-0 konsultan" data-slug="{{ $item->slug }}">
                                         <img src="{{ asset('img/avatar/' . $item->user->avatar) }}" class="card-img-top"
                                             style="max-height: 350px; object-fit: cover">
@@ -114,16 +116,19 @@ Landing Page
                     </div>
                     </div>
                 </div>
-                        {{-- <div class="vertikal"></div> --}}
+            </div>
+            <br>
+                        <div class="row">
                         <div class="col">
                             <div class="card shadow" style="border-radius: 30px;">
                             <div class="card-body">
                                 <div class="row">
                         <div class="col-md my-3">
                             <h5 class="text-center mb-3 fw-bold">Kontraktor</h5>
-                            <div class="row mx-2">
+                            <br>
+                            <div class="row mx-4">
                                 @foreach ($kontraktor as $item)
-                                <div class="col-lg-6 col-sm col-md-4 mb-3">
+                                <div class="col-lg-3 col-sm col-md-4 mb-3">
                                     <div class="card displayCard border-0 kontraktor" data-slug="{{ $item->slug }}">
                                         <img src="{{ asset('img/avatar/' . $item->user->avatar) }}" class="card-img-top"
                                             style="max-height: 350; object-fit: cover">

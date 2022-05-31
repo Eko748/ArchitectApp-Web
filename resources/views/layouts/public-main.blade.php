@@ -85,6 +85,10 @@
             let slug = $(this).data('slug')
             window.location.href = baseUrl + `detil/project/${slug}`
         })
+        $('.cabang').on('click', function() {
+            let slug = $(this).data('slug')
+            window.location.href = baseUrl + `detil/cabang-kontraktor/${slug}`
+        })
         $('.konsultan').on('click', function() {
             let slug = $(this).data('slug')
             window.location.href = baseUrl + `detil/konsultan/${slug}`

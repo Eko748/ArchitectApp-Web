@@ -9,7 +9,7 @@ class KontraktorCabang extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kontraktorId', 'nama_tim', 'description', 'slug', 'jumlah_tim', 'harga_kontrak', 'isLelang'
+        'kontraktorId', 'nama_tim', 'description', 'alamat_cabang', 'slug', 'jumlah_tim', 'harga_kontrak', 'isLelang'
     ];
     protected $attributes = [
         'harga_kontrak' => 0

@@ -37,7 +37,9 @@ Kontraktor Cabang
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nama Tim</th>
+                            <th scope="col">Jumlah Tim</th>
                             <th scope="col">Harga Kontrak</th>
+                            <th scope="col">Alamat</th>
                             <th scope="col">Deskripsi</th>
                             <th scope="col">Images</th>
                             <th scope="col">Aksi</th>
@@ -90,6 +92,11 @@ aria-hidden="true">
                     <textarea name="desc" class="form-control w-100 h-100" rows="5"></textarea>
                     <div class="invalid-feedback"></div>
                 </div>
+                <div class="form-group">
+                    <label for="alamat_cabang">Alamat Lengkap</label>
+                    <textarea name="alamat_cabang" class="form-control w-100 h-100" rows="5"></textarea>
+                    <div class="invalid-feedback"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -132,16 +139,21 @@ aria-hidden="true">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="images">Images</label>
+                        <label for="images">Gambar pertama akan menjadi Cover</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" multiple name="images[]">
                             <label class="custom-file-label" for="images">Choose file</label>
                         </div>
-                        <small>Image minimal 4 desain</small>
+                        <small>Gambar minimal 12</small>
                     </div>
                     <div class="form-group">
                         <label for="desc">Deskripsi</label>
                         <textarea name="desc" class="form-control w-100 h-100" rows="5"></textarea>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat_cabang">Alamat Lengkap</label>
+                        <textarea name="alamat_cabang" class="form-control w-100 h-100" rows="5"></textarea>
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>
@@ -177,8 +189,16 @@ aria-hidden="true">
                 name: 'nama_tim'
             },
             {
+                data: 'jumlah_tim',
+                name: 'jumlah_tim'
+            },
+            {
                 data: 'harga_kontrak',
                 name: 'harga_kontrak'
+            },
+            {
+                data: 'alamat_cabang',
+                name: 'alamat_cabang'
             },
             {
                 data: 'description',

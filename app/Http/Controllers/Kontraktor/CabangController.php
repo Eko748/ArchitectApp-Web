@@ -18,17 +18,19 @@ class CabangController extends Controller
         return [
             'nama_tim' => 'required|min:3',
             'desc' => 'required',
+            'alamat_cabang' => 'required',
             'jumlah_tim' => 'required',
             'harga_kontrak' => 'required',
             'images' => 'required|mimes:jpg,jpeg,png',
         ];
     }
 
-    public function fields($nama_tim, $desc, $slug, $jumlah_tim, $harga_kontrak)
+    public function fields($nama_tim, $desc, $alamat_cabang, $slug, $jumlah_tim, $harga_kontrak)
     {
         return [
             'nama_tim' => $nama_tim,
             'description' => $desc,
+            'alamat_cabang' => $alamat_cabang,
             'jumlah_tim' => $jumlah_tim,
             'slug' => $slug,
             'kontaktorId' => $this->getKontraktorId()->kontraktor->id,
@@ -73,6 +75,7 @@ class CabangController extends Controller
         $request->validate([
             'nama_tim' => 'required',
             'desc' => 'required',
+            'alamat_cabang' => 'required',
             'jumlah_tim' => 'required',
             'images' => 'required',
             'harga_kontrak' => 'required',
@@ -80,6 +83,7 @@ class CabangController extends Controller
         $input = [
             'nama_tim' => $request->nama_tim,
             'description' => $request->desc,
+            'alamat_cabang' => $request->alamat_cabang,
             'jumlah_tim' => $request->jumlah_tim,
             'harga_kontrak' => $request->harga_kontrak,
             'slug' => $slug,

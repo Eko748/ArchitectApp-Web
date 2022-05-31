@@ -12,7 +12,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb me-auto">
                         <li class="breadcrumb-item"><a href="{{ route('public.landing') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Professional</li>
+                        <li class="breadcrumb-item active">Konsultan</li>
                     </ol>
                 </nav>
                 <h1><span class="counter">{{ $data->count() }}</span><span class="text"> Konsultan Desain</span></h1>
@@ -58,11 +58,11 @@
                         @foreach ($data as $item)
                             <div class="col-lg-3 col-sm col-md-4 mb-3">
                                 <div class="card projectCard border-0 konsultan" data-slug="{{ $item->konsultan->slug }}">
-                                    <img src=" https://source.unsplash.com/3U9L9Chc3is" class="card-img-top"
-                                        style="max-height: 200; object-fit: cover">
+                                    <img src=" {{ asset('img/avatar/' . $item->avatar) }} " class="card-img-top"
+                                        style="max-height: 350; object-fit: cover">
                                     <div class="position-absolute logo-kons">
-                                        <img src="{{ asset('img/avatar/' . $item->avatar) }}" class="rounded-circle"
-                                            width="70" height="70">
+                                        {{-- <img src="{{ asset('img/avatar/' . $item->avatar) }}" class="rounded-circle" --}}
+                                            {{-- width="70" height="70"> --}}
                                     </div>
                                     <div class="card-body text-center mt-3">
                                         <h5 class="card-title">{{ $item->name }}</h5>
@@ -77,5 +77,5 @@
             </div>
         </div>
     </div>
-
+    @include('layouts.footer')
 @endsection

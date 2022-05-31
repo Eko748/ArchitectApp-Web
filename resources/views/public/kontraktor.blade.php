@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Kontraktor</li>
                     </ol>
                 </nav>
-                <h1><span class="counter"></span><span class="text"> Kontraktor Project</span></h1>
+                <h1><span class="counter">{{ $data->count() }}</span><span class="text"> Kontraktor Project</span></h1>
                 <div class="button-dropdown my-3 d-sm-none d-md-none d-lg-block">
                     <div class="dropdown d-inline mr-2">
                         <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -58,11 +58,11 @@
                         @foreach ($data as $item)
                             <div class="col-lg-3 col-sm col-md-4 mb-3">
                                 <div class="card projectCard border-0 kontraktor" data-slug="{{ $item->kontraktor->slug }}">
-                                    <img src=" https://source.unsplash.com/3U9L9Chc3is" class="card-img-top"
-                                        style="max-height: 200; object-fit: cover">
+                                    <img src=" {{ asset('img/avatar/' . $item->avatar) }} " class="card-img-top"
+                                        style="max-height: 350; object-fit: cover">
                                     <div class="position-absolute logo-kons">
-                                        <img src="{{ asset('img/avatar/' . $item->avatar) }}" class="rounded-circle"
-                                            width="70" height="70">
+                                        {{-- <img src="{{ asset('img/avatar/' . $item->avatar) }}" class="rounded-circle"
+                                            width="50" height="50"> --}}
                                     </div>
                                     <div class="card-body text-center mt-3">
                                         <h5 class="card-title">{{ $item->name }}</h5>

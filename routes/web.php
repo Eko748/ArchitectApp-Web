@@ -50,9 +50,9 @@ Route::get('/all-konsultan', [OwnerController::class, 'professional'])->name('pu
 Route::get('/all-kontraktor', [OwnerController::class, 'kontraktor'])->name('public.kontraktor');
 // Route::get('/detil/konsultan/{konsultan}', [OwnerController::class, 'detilProfessional'])->name('public.konsultan.detail');
 Route::get('/detil/konsultan/{kons:slug}', [OwnerController::class, 'konsDetil'])->name('public.konsultan.detail');
-Route::get('/detil/kontraktor/{kontraktor:slug}', [OwnerController::class, 'kontraktorDetil'])->name('public.kontraktor.detail');
 Route::get('/detil/project/{project:slug}', [OwnerController::class, 'projectDetil'])->name('public.project.detail');
-
+Route::get('/detil/kontraktor/{kontraktor:slug}', [OwnerController::class, 'kontraktorDetil'])->name('public.kontraktor.detail');
+Route::get('/detil/cabang-kontraktor/{cabang:slug}', [OwnerController::class, 'cabangDetil'])->name('public.cabang.detail');
 
 
 

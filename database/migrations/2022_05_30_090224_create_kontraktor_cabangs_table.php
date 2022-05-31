@@ -19,6 +19,7 @@ class CreateKontraktorCabangsTable extends Migration
             $table->string('nama_tim');
             $table->text('slug');
             $table->text('description');
+            $table->text('alamat_cabang');
             $table->integer('jumlah_tim');
             $table->integer('harga_kontrak');
             $table->enum('isLelang',[0,1]);
