@@ -8,6 +8,7 @@ use App\Models\Konsultan;
 use App\Models\Kontraktor;
 use App\Models\KonstruksiOwner;
 use App\Models\KontrakKerjaKonsultan;
+use App\Models\KontrakKerjaKontraktor;
 use App\Models\KontraktorCabang;
 use App\Models\LelangOwner;
 use App\Models\Owner;
@@ -113,6 +114,15 @@ class OwnerController extends Controller
         return Storage::disk('files')->download("pdf/kontrak/" . $filename);
     }
 
+    public function downloadKontrakKontraktor(KontrakKerjaKontraktor $kontrak)
+    {
+        // $kontrak = KontrakKerjaKonsultan::find($kontrak->id);
+
+        $filename = $kontrak->kontrakKerja;
+
+        return Storage::disk('files')->download("pdf/kontraktor/" . $filename);
+    }
+
     public function updateBio(Request $request)
     {
         $request->validate([
@@ -133,6 +143,15 @@ class OwnerController extends Controller
         // $data = ProjectOwner::where("id", $project->id)->first();
         
         return view('public.single-myproject', compact('data'));
+    }
+    public function getDetilKonstruksi(KonstruksiOwner $konstruksi)
+    {
+        
+        $data = KonstruksiOwner::with('owner', 'konstruksi.konstraktor.user', 'kontrak.payment')->find($konstruksi->id);
+        // dd($data);
+        // $data = ProjectOwner::where("id", $project->id)->first();
+        
+        return view('public.single-mykonstruksi', compact('data'));
     }
 
     public function getDetilKonsultan(ProjectOwner $konsultan)

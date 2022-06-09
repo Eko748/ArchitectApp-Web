@@ -66,7 +66,7 @@
                 <span>Project Saya</span>
                 <div class="dropdown-content">
                 <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.project') }}">Desain</a>
-                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.konstruksi') }}">Kontruksi</a>
+                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.konstruksi') }}">Konstruksi</a>
                 </div>
             </div>
             @endauth
