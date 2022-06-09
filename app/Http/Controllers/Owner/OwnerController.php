@@ -96,7 +96,7 @@ class OwnerController extends Controller
     public function myKonstruksi(Request $request)
     {
 
-        $data = KonstruksiOwner::with('owner.user', 'konstruksi.kontraktor.user', 'kontrak.proposal', 'kontrak.payment')->withCount('hasil')->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
+        $data = KonstruksiOwner::with('owner.user', 'konstruksi.kontraktor.user', 'kontrak.payment')->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
 
         if ($request->ajax()) {
             $view = view('konstruksi.data', compact('data'))->render();

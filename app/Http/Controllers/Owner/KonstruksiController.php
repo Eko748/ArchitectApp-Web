@@ -38,8 +38,8 @@ class KonstruksiController extends Controller
             'desa' => 'required',
             'jalan' => 'required',
             'mulaiKonstruksi' => 'required',
-            'desain' => 'required',
-            'rab' => 'required',
+            'desain' => 'required|mimes:pdf,word,wordx,obj,zip',
+            'rab' => 'required|mimes:pdf,xls,xlsx,word,wordx,zip',
         ]);
 
         $konstruksiOwn =  KonstruksiOwner::create([
@@ -81,7 +81,7 @@ class KonstruksiController extends Controller
     public function generateKontrak($konstruksiOwnerId)
     {
         $konstruksi = KonstruksiOwner::where('id', $konstruksiOwnerId)->with('chooseKonstruksi', 'owner.user', 'konstruksi.kontraktor.user',)->first();
-        $title = $konstruksi->konstruksi->title;
+        $title = $konstruksi->konstruksi->nama_tim;
         $hari = Carbon::now()->isoFormat('dddd');
         $tgl = Carbon::now()->isoFormat('D');
         $bln = Carbon::now()->isoFormat('MMMM');
@@ -96,11 +96,11 @@ class KonstruksiController extends Controller
         $hargaDesain = $konstruksi->chooseKonstruksi->desain == "1" ? $konstruksi->konstruksi->harga_desain : 0;
         $hargaRAB = $konstruksi->chooseKonstruksi->RAB == "1" ? $konstruksi->konstruksi->harga_rab : 0;
         $harga = $this->penyebut(($hargaDesain + $hargaRAB)) . " rupiah.";
-        $path = public_path('pdf/kontrak/');
+        $path = public_path('pdf/kontraktor/');
         $kontraktorUname = $konstruksi->konstruksi->kontraktor->user->username;
         $ownuName = $konstruksi->owner->user->username;
         $filename = 'Kontrak Kerja ' . $kontraktorUname . ' - ' . $ownuName . ' ' . Carbon::now()->toDateString() . ".pdf";
-        $pdf = PDF::loadView('public.surat-konstruksi', compact('filename', 'title', 'date', 'kontraktorName', 'kontraktorTelp', 'kontraktorAlm', 'ownName', 'ownTelp', 'ownAlm', 'harga'));
+        $pdf = PDF::loadView('public.surat-konstruksi', compact('filename', 'nama_tim', 'date', 'kontraktorName', 'kontraktorTelp', 'kontraktorAlm', 'ownName', 'ownTelp', 'ownAlm', 'harga'));
         $createKontrak = $this->createKontrak($konstruksiOwnerId, $filename);
         $pdf->save($path . $filename);
     }

@@ -20,7 +20,7 @@ class CreateChooseKonstruksisTable extends Migration
             $table->string('kecamatan');
             $table->string('desa');
             $table->string('jalan');
-            $table->string('mulaiKonstruksi');
+            $table->date('mulaiKonstruksi');
             $table->text('RAB');
             $table->text('desain');
             $table->integer('status');

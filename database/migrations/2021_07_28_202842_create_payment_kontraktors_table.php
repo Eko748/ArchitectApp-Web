@@ -17,6 +17,7 @@ class CreatePaymentKontraktorsTable extends Migration
             $table->id();
             $table->integer('kontrakKontraktorId');
             $table->text('buktiBayar');
+            $table->integer('status');
             $table->timestamps();
         });
     }

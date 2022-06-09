@@ -18,7 +18,7 @@ class KontrakKerjaKontraktor extends Model
     }
     public function payment()
     {
-        return $this->hasOne(PaymentKonsultan::class, 'kontrakKonsultanId');
+        return $this->hasOne(PaymentKontraktor::class, 'kontrakKontraktorId');
     }
     public function proposal()
     {
