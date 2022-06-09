@@ -232,6 +232,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/owner/bio/update', [OwnerController::class, 'updateBio'])->name('owner.update');
         Route::post('/owner/project/choose', [OwnerProjectController::class, 'chooseProject'])->name('owner.choose.project');
 
+        Route::get('/owner/mykonstruksi', [OwnerController::class, 'myKonstruksi'])->name('owner.my.konstruksi');
+
         // Payment
         Route::get('/owner/project/myproject/payment/', [OwnerProjectController::class, 'payment'])->name('owner.payment');
         Route::post('/owner/project/myproject/payment/{project}', [OwnerProjectController::class, 'paymentPost'])->name('owner.payment.post');

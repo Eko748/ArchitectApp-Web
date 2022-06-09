@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Konsultan;
 use App\Models\Kontraktor;
+use App\Models\KonstruksiOwner;
 use App\Models\KontrakKerjaKonsultan;
 use App\Models\KontraktorCabang;
 use App\Models\LelangOwner;
@@ -89,6 +90,18 @@ class OwnerController extends Controller
             return response()->json(['html' => $view]);
         }
         return view('public.myproject', compact('data'));
+    }
+
+    public function myKonstruksi(Request $request)
+    {
+
+        $data = KonstruksiOwner::with('owner.user', 'konstruksi.kontraktor.user', 'kontrak.proposal', 'kontrak.payment')->withCount('hasil')->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
+
+        if ($request->ajax()) {
+            $view = view('konstruksi.data', compact('data'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('public.mykonstruksi', compact('data'));
     }
 
     public function downloadKontrak(KontrakKerjaKonsultan $kontrak)

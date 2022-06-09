@@ -52,6 +52,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('/owner/payment-handler', [OwnerController::class, 'payment_handler']);
 
+        // Data Kontraktor
+        Route::get('/owner/allkontraktor', [OwnerController::class, 'getAllKontraktor']);
+        Route::get('/owner/allcabang', [OwnerController::class, 'getAllCabangKontraktor']);
+        Route::get('/owner/cabang/{cabang}', [OwnerController::class, 'detailCabangKontraktor']);
+
     });
     Route::middleware('konsapi')->group(function () {
 
@@ -77,6 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('kontraapi')->group(function () {
 
         // kontraktor
+        Route::get('/kontraktor/mycabang', [KontraktorController::class, 'getCabangByKontraktor']);
         Route::get('/kontraktor/alllelang', [KontraktorController::class, 'getAllLelangKons']);
         Route::post('/kontraktor/addproposal', [KontraktorController::class, 'postProposal']);
     });

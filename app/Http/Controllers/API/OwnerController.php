@@ -8,11 +8,13 @@ use App\Models\Favorit;
 use App\Models\ImageOwner;
 use App\Models\InspirasiOwner;
 use App\Models\Konsultan;
+use App\Models\Kontraktor;
 use App\Models\LelangImage;
 use App\Models\LelangOwner;
 use App\Models\Owner;
 use App\Models\PaymentKonsultan;
 use App\Models\Project;
+use App\Models\KontraktorCabang;
 use App\Models\ProjectOwner;
 use App\Models\Rating;
 use App\Models\TenderKonsultan;
@@ -415,5 +417,24 @@ class  OwnerController extends BaseController
         //status berhasil
         $order = PaymentKonsultan::where('order_id', $json->order_id)->first();
         return $order->update(['status'=>$json->transaction_status]);
+    }
+
+    public function getAllKontraktor()
+    {
+        $data = Kontraktor::with('user', 'files', 'cabang.images', 'cabang.kontraktor.user')->whereHas('user', function ($q) {
+            $q->where('is_active', 1);
+        })->get();
+        return $this->sendResponse($data, 'Data Loaded successfully');
+    }
+
+    public function getAllCabangKontraktor()
+    {
+        $cabang  = KontraktorCabang::with('images', 'kontraktor.user')->where('isLelang', "0")->get();
+        return $this->sendResponse($cabang, 'Data loaded successfully');
+    }
+    public function detailCabangKontraktor(KontraktorCabang $cabang)
+    {
+        $cabang  = KontraktorCabang::with('images', 'kontraktor.user')->where('id', $cabang->id)->first();
+        return $this->sendResponse($cabang, 'Data loaded successfully');
     }
 }

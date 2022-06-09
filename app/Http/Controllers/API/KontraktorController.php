@@ -52,4 +52,13 @@ class KontraktorController extends Controller
     {
         return Kontraktor::where('userId', $request->user()->id)->first();
     }
+
+    public function getCabangByKontraktor()
+    {
+        // $data = Project::with('projectOwn.owner.user', 'projectOwn.kontrak.payment', 'konsultan', 'images')->where([['konsultanId', $this->getKonsultanId()->konsultan->id], ['isLelang', "1"]])->get();
+        $data = Kontraktor::with('project.images', 'project.konsultan', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'chooseProject.imageOwner', 'hasil')->whereHas('project', function ($q) {
+            $q->where('konsultanId', $this->getKonsultanId()->konsultan->id);
+        })->where('status', "0")->orderBy('id', 'DESC')->get();
+        return $this->sendResponse($data, 'data loaded successfully');
+    }
 }

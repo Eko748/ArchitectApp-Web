@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableKontrakKerjaKontraktors extends Migration
+class CreateKonstruksiOwnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTableKontrakKerjaKontraktors extends Migration
      */
     public function up()
     {
-        Schema::create('kontrak_kerja_kontraktors', function (Blueprint $table) {
+        Schema::create('konstruksi_owners', function (Blueprint $table) {
             $table->id();
-            $table->integer('tenderKontraktorId');
-            $table->integer('konstruksiOwnerId')->nullable();
-            $table->text('kontrakKerja');
+            $table->integer('ownerId');
+            $table->integer('konstruksiId');
+            $table->enum('konfirmasi',[0,1,2]);
+            $table->enum('status',[0,1]);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateTableKontrakKerjaKontraktors extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kontrak_kerja_kontraktors');
+        Schema::dropIfExists('konstruksi_owners');
     }
 }

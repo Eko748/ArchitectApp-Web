@@ -22,9 +22,9 @@
                     <div class="ms-auto">
                         <a href="{{ route('login') }}" style="font-size: 18px;"  class="btn btn-light btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">Login</a>
                         <a href="{{ route('choose.account') }}" style="font-size: 18px;" class="btn btn-warning btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">Sign Up</a>
-                        <button onclick="myFunction()" style="font-size: 30px;" class="btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">
+                        {{-- <button onclick="myFunction()" style="font-size: 30px;" class="btnChangeTheme btn btn-outline-dark btn-sm border-0 ml-3 shadow-none">
                             <i class="far fa-moon"></i>
-                        </button>
+                        </button> --}}
                     </div>
 
                 @endguest
@@ -66,7 +66,7 @@
                 <span>Project Saya</span>
                 <div class="dropdown-content">
                 <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.project') }}">Desain</a>
-                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.project') }}">Kontruksi</a>
+                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.konstruksi') }}">Kontruksi</a>
                 </div>
             </div>
             @endauth

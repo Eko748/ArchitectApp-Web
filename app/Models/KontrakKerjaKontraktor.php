@@ -9,6 +9,23 @@ class KontrakKerjaKontraktor extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tenderKontraktorId', 'KontrakKerja'
+        'tenderKontraktorId', 'konstruksiOwnerId', 'kontrakKerja'
     ];
+
+    public function konstruksiOwner()
+    {
+        return $this->belongsTo(KonstruksiOwner::class, 'konstrksiOwnerId','id');
+    }
+    public function payment()
+    {
+        return $this->hasOne(PaymentKonsultan::class, 'kontrakKonsultanId');
+    }
+    public function proposal()
+    {
+        return $this->belongsTo(TenderKonsultan::class, 'tenderKonsultanId');
+    }
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'kontrakKonsultanId');
+    }
 }
