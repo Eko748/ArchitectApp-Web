@@ -34,24 +34,24 @@ class KonstruksiOwner extends Model
         return $this->hasOne(Rating::class, 'projectOwnerId', 'id');
     }
 
-    public function chooseProject()
+    public function chooseKonstruksi()
     {
-        return $this->hasOne(ChooseProject::class, 'projectOwnerId', 'id');
+        return $this->hasOne(ChooseKonstruksi::class, 'konstruksiOwnerId', 'id');
     }
     
-    public function lelang()
-    {
-        return $this->hasOne(ImageOwner::class, 'projectOwnerId', 'id');
-    }
+    // public function lelang()
+    // {
+    //     return $this->hasOne(ImageOwner::class, 'projectOwnerId', 'id');
+    // }
 
-    public function ambil_image()
-    {
-        return $this->hasMany(ImageOwner::class, "chooseProjectId", "id");
-    }
+    // public function ambil_image()
+    // {
+    //     return $this->hasMany(ImageOwner::class, "chooseProjectId", "id");
+    // }
 
-    public function coba()
-    {
-        return $this->belongsTo("App\Models\ChooseProject", "id", "projectOwnerId");
-    }
+    // public function coba()
+    // {
+    //     return $this->belongsTo("App\Models\ChooseProject", "id", "projectOwnerId");
+    // }
 
 }

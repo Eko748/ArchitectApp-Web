@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
+    <link rel="shortcut icon" href="{{asset('img/logo_proyek.png')}}" type="image/x-icon">
 
     <!-- General CSS Files -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"

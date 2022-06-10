@@ -49,11 +49,11 @@ class KontraktorCabangSeed extends Seeder
         $cabang = KontraktorCabang::create([
             'nama_tim' => 'Cahaya Konstruksi',
             'description' => 'Konstruksi dibidang eksterior segala bentuk desain',
+            'alamat_cabang' => 'Jalan Tuparev, Cirebon',
+            'jumlah_tim' => 30,
+            'harga_kontrak' => 4000000,
             'isLelang' => '0',
             'kontraktorId' => 1,
-            'harga_kontrak' => 4000000,
-            'jumlah_tim' => 30,
-            'alamat_cabang' => 'Jalan Tuparev, Cirebon',
             'slug' => Str::slug('Cahaya Konstruksi'),
         ]);
         $image = [

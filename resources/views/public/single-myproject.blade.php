@@ -81,10 +81,10 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="projectId" value="{{ $data->id }}">
                                 <input type="hidden" name="kontrakKonsultanId" value="{{ $data->kontrak->id }}">
-                                <button type="submit" class="btn btn-warning btn-sm" id="pay-button">
-                                    Pay!
+                                <button class="btn btn-warning btn-sm" id="pay-button">
+                                    Transaksi
                                 </button>
-                                <button id="pay-button">Pay!</button>
+                                {{-- <button id="pay-button">Pay!</button> --}}
                             </form>
                                 {{-- <button class="btn btn-warning btn-sm  upload" data-bs-toggle="modal"
                                     data-bs-target="#modalBayar" data-id="{{ $data->kontrak->id }}">Upload
@@ -131,8 +131,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
     @include('layouts.footer')
 
     @push('js')
-    <button id="pay-button">Pay!</button>
-    <script type="text/javascript"
+    {{-- <button id="pay-button">Pay!</button> --}}
+    {{-- <script type="text/javascript"
       src="https://app.sandbox.midtrans.com/snap/snap.js"
       data-client-key="SB-Mid-client-ojEypI047x7sFX1T"></script>
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
@@ -161,7 +161,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
             },
             onClose: function(){
               /* You may add your own implementation here */
-              alert('you closed the popup without finishing the payment');
+              alert('Anda Menutup Halaman tanpa menyelesaikan Transaksi');
             }
           })
         });
@@ -170,7 +170,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
           document.getElementById('json_callback').value = JSON.stringify(result);
           $('#submit_form').submit();
         }
-      </script>
+      </script> --}}
     
 
     <script>

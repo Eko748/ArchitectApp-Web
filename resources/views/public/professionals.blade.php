@@ -17,7 +17,7 @@
                 </nav>
                 <h1><span class="counter">{{ $data->count() }}</span><span class="text"> Konsultan Desain</span></h1>
                 <div class="button-dropdown my-3 d-sm-none d-md-none d-lg-block">
-                    <div class="dropdown d-inline mr-2">
+                    {{-- <div class="dropdown d-inline mr-2">
                         <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <span class="pe-5 ps-3">Sort By</span>
@@ -50,7 +50,7 @@
                             <li>3</li>
                         </ul>
                     </div>
-                    <div class="d-inline">Reset</div>
+                    <div class="d-inline">Reset</div> --}}
                 </div>
 
                 <div class="main">

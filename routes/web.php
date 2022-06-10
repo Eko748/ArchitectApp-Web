@@ -43,6 +43,9 @@ use Illuminate\Support\Facades\Route;
 
 
 //public
+
+Route::post("/cobaya", [KonstruksiController::class, "chooseKonstruksi"]);
+
 Route::get('kirim-email', 'App\Http\Controllers\MailController@index');
 
 Route::get('/', [OwnerController::class, 'index'])->name('public.landing');

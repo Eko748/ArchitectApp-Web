@@ -96,10 +96,9 @@ class OwnerController extends Controller
     public function myKonstruksi(Request $request)
     {
 
-        $data = KonstruksiOwner::with('owner.user', 'konstruksi.kontraktor.user', 'kontrak.payment')->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
-
+        $data = KonstruksiOwner::with('hasil', 'owner.user', 'konstruksi.kontraktor.user',)->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
         if ($request->ajax()) {
-            $view = view('konstruksi.data', compact('data'))->render();
+            $view = view('ajax.konstruksi', compact('data'))->render();
             return response()->json(['html' => $view]);
         }
         return view('public.mykonstruksi', compact('data'));
@@ -158,6 +157,12 @@ class OwnerController extends Controller
     {
         $data = ProjectOwner::with('project.konsultan.user')->find($konsultan->id);
         return view('public.single-myproject', compact('data'));
+    }
+
+    public function getDetilKontraktor(KonstruksiOwner $kontraktor)
+    {
+        $data = KonstruksiOwner::with('konstruksi.kontraktor.user')->find($kontraktor->id);
+        return view('public.single-mykonstruksi', compact('data'));
     }
 
     public function konsDetil(Konsultan $kons)

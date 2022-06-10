@@ -24,4 +24,9 @@ class KontraktorCabang extends Model
     {
         return $this->belongsTo(Kontraktor::class, 'kontraktorId', 'id');
     }
+
+    public function konstruksiOwn()
+    {
+        return $this->hasMany(KonstruksiOwner::class,'konstruksiId','id');
+    }
 }

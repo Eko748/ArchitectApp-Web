@@ -1,6 +1,6 @@
 @extends('layouts.public-main')
 @section('title')
-    Project Saya
+    Project Desain
 @endsection
 @include('layouts.navbar')
 
@@ -17,7 +17,7 @@
                 </nav>
                 <h1><span class="counter">{{ $data->count() }}</span><span class="text"> Inspirasi Desain</span></h1>
                 <div class="button-dropdown my-3 d-sm-none d-md-none d-lg-block">
-                    <div class="btn-group">
+                    {{-- <div class="btn-group">
                         <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Sort By
@@ -47,7 +47,7 @@
                             <li><a href="#" class="dropdown-item">Professional</a></li>
                         </ul>
                     </div>
-                    <div class="d-inline">Reset</div>
+                    <div class="d-inline">Reset</div> --}}
                 </div>
 
                 <hr class="my-3">
@@ -79,7 +79,6 @@
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </div>

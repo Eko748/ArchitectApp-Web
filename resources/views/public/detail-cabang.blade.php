@@ -42,7 +42,7 @@
         </div>
         <div class="banner"></div>
         <div class="d-flex">
-
+ 
             <div class="detil-project px-5 py-5">
                 <h4>{{ $data->nama_tim }}</h4>
                 <p class="desc" style="font-size:14px;">{{ $data->description }}
@@ -293,8 +293,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST" enctype="multipart/form-data" id="formChoose">
-                        <input type="hidden" name="projectId" id="proId">
+                    <form action="" id="formChoose" method="POST" enctype="multipart/form-data">
+                        {{-- {{ url('/cobaya') }} --}}
+                        {{ csrf_field() }}
+
+                        <input type="hidden" name="konstruksiId" value="{{ $data->id }}">
                         
                         <label for="desc" class="form-label">Alamat Lengkap<span class="text-danger fw-bolder">*</span></label>
                         <div class="row mb-3">
