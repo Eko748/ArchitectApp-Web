@@ -345,7 +345,6 @@
                                 </div>
                         </div>
                         
-                            
                         <div class="mb-3">
                             <label for="desain" class="form-label">File Blueprint / Desain Project Anda<span
                                 class="text-danger fw-bolder">*</span></label>
@@ -353,9 +352,9 @@
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="rab" class="form-label">RAB Project Anda<span
+                            <label for="RAB" class="form-label">RAB Project Anda<span
                                 class="text-danger fw-bolder">*</span></label>
-                            <input class="form-control form-control-sm " id="rab" name="rab" multiple type="file">
+                            <input class="form-control form-control-sm " id="RAB" name="RAB" multiple type="file">
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">

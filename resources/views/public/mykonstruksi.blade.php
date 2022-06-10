@@ -17,22 +17,22 @@ Konstruksi
                 <div class="row" id="konstruksiData">
                     @include('ajax.konstruksi')
                 </div>
-                @else
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 col-md col-sm text-center" style="height: 200px">
-                        <p class="">Anda belum memiliki project</p>
-                        <a href="{{ route('public.kontraktor') }}" class="btn btn-warning btn-sm">Buat Kontrak</a>
+                        @else
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-md col-sm text-center" style="height: 200px">
+                                <p class="">Anda belum memiliki project</p>
+                                <a href="{{ route('public.kontraktor') }}" class="btn btn-warning btn-sm">Buat Kontrak</a>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
-                @endif
+                <div class="ajax-load text-center" style="display: none">
+                    <img src="{{ asset('img/loader.gif') }}" width="300">
+                </div>
             </div>
         </div>
-        <div class="ajax-load text-center" style="display: none">
-            <img src="{{ asset('img/loader.gif') }}" width="300">
-        </div>
     </div>
-</div>
-</div>
 </div>
 
 <div class="mt-auto">

@@ -13,6 +13,11 @@ class ProjectOwner extends Model
         'ownerId', 'projectId', 'hasil_rab', 'status'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(Owner::class, 'ownerId', 'id');
+    }
+
     public function owner()
     {
         return $this->belongsTo(Owner::class, 'ownerId', 'id');

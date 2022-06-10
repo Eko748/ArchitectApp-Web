@@ -13,9 +13,14 @@ class KonstruksiOwner extends Model
         'ownerId', 'konstruksiId', 'konfirmasi', 'status'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'ownerId');
+    }
+
     public function owner()
     {
-        return $this->belongsTo(Owner::class, 'ownerId', 'id');
+        return $this->belongsTo(Owner::class, 'ownerId');
     }
     public function konstruksi()
     {

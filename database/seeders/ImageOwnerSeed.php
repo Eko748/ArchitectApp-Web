@@ -29,5 +29,10 @@ class ImageOwnerSeed extends Seeder
             "chooseProjectId" => null,
             "image" => "marvel-2022-05-23-1.jpeg"
         ]);
+        ImageOwner::create([
+            "lelangOwnerId" => 4,
+            "chooseProjectId" => null,
+            "image" => "haha-2022-05-23-1.jpeg"
+        ]);
     }
 }

@@ -19,10 +19,10 @@ class LelangController extends Controller
     {
         return [
             'title' => 'required|min:3',
-            'desc' => 'required',
+            'description' => 'required',
             'from' => 'required',
             'to' => 'required',
-            'designstyle' => 'required',
+            'gayaDesain' => 'required',
             'rab' => 'boolean',
             'desain' => 'boolean',
             'panjang' => 'required|numeric',
@@ -34,14 +34,14 @@ class LelangController extends Controller
     {
 
         $data = [
-            'ownerId' => $request->ownerId,
+            'ownerId' => Auth::user()->id,
             'title' => $request->title,
             'description' => $request->description,
             'budgetFrom' => Str::of($request->from)->replace('.', ''),
             'budgetTo' => Str::of($request->to)->replace('.', ''),
             'RAB' => 0,
             'desain' => 0,
-            'gayaDesain' => $request->designstyle,
+            'gayaDesain' => $request->gayaDesain,
             // 'kontraktor' => "0",
             // 'status' => 0,
             'panjang' => 8,
@@ -60,8 +60,8 @@ class LelangController extends Controller
     public function postLelang(Request $request)
     {
         // // dd($request->luas);
-        $request->validate($this->rules());
-        $data = $this->field($request);
+        // $request->validate($this->rules());
+        // $data = $this->field($request);
         $lelang = LelangOwner::create($request->all());
         if ($request->hasFile('image')) {
             $img = $request->file('image');
@@ -108,12 +108,13 @@ class LelangController extends Controller
     public function showMyLelang(LelangOwner $lelang)
     {
         $data = LelangOwner::where('id', $lelang->id)->with('owner.user', 'image')->with('proposal.konsultan.user')->withCount('proposal')->first();
+        // dd($data);
         return $data;
     }
     public function AllMyLelang()
     {
         $owner = Owner::where('userId', Auth::user()->id)->first();
-        $data = LelangOwner::with('owner.user', 'image')->withCount('proposal')->where('ownerId', $owner->id)->where('status', 0)->get();
+        $data = LelangOwner::with('owner.user', 'image')->withCount('proposal')->where('ownerId', Auth::user()->owner->id)->where('status', 0)->get();
         return $data;
     }
 }

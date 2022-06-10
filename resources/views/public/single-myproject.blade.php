@@ -16,10 +16,6 @@
                         <h4 class="px-3 pt-3">{{ $data->project->title }}</h4>
                         <div class="d-flex justify-content-between px-4 py-3">
                             <div>
-                                <span class="d-block me-2"><i class="fas fa-map-marker-alt me-1"></i>{{ $data->owner->alamat }}</span>
-                                <small class="text-muted ms-3 disp">Lokasi</small>
-                            </div>
-                            <div>
                                 <span class="d-block"><i class="fas fa-wallet me-1"></i>Rp {{ $data->project->harga_desain + $data->project->harga_rab }}</span>
                                 <small class="text-muted ms-3 disp">Total Harga</small>
                             </div>
@@ -30,6 +26,10 @@
                             <div><span class="d-block">
                                     <i class="fas fa-user-tie me-1"></i>{{ $data->project->konsultan->user->name }}</span>
                                 <small class="text-muted ms-3 disp">Architect / Designer</small>
+                            </div>
+                            <div>
+                                <span class="d-block me-2"><i class="fas fa-map-marker-alt me-1"></i>{{ $data->project->konsultan->user->alamat }}</span>
+                                <small class="text-muted ms-3 disp">Alamat</small>
                             </div>
                         </div>
                         <div class="divider"></div>

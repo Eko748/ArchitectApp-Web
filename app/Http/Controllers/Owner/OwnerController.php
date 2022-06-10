@@ -57,9 +57,12 @@ class OwnerController extends Controller
         return Project::with('images', 'konsultan.user')->find($project);
     }
 
-    public function lelangOwner()
+    public function lelangOwner(LelangOwner $owner)
     {
-        return view('public.lelang');
+        // $owner = LelangOwner::with('owner')->first();
+        // dd($owner);
+        return view('public.lelang', compact('owner'));
+
     }
 
     public function profileOwner(User $user)
@@ -67,14 +70,16 @@ class OwnerController extends Controller
         return User::with('owner')->where('id', $user->id)->first();
     }
 
-    public function myLelang()
+    public function myLelang(LelangOwner $lelang)
     {
-        $data = LelangOwner::with('image')->get();
+        $data = LelangOwner::with('image', 'owner.user')->where('ownerId', Auth::user()->id)->where('status', 0)->get();
+        // dd($data);
         // return view('public.project', compact('data'));
         return view('public.mylelang', compact('data'));
     }
     public function showLelang(LelangOwner $lelang)
     {
+        $data = LelangOwner::with('image', 'owner.user')->where('ownerId', Auth::user()->id)->where('status', 0)->get();
         return view('public.single-mylelang');
     }
     public function proposal()
@@ -84,7 +89,7 @@ class OwnerController extends Controller
     public function myProject(Request $request)
     {
 
-        $data = ProjectOwner::with('hasil', 'owner.user', 'project.konsultan.user', 'kontrak.proposal', 'kontrak.payment')->withCount('hasil')->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
+        $data = ProjectOwner::with('hasil', 'owner.user', 'project.konsultan.user', 'kontrak.proposal', 'kontrak.payment')->withCount('hasil')->where('ownerId', Auth::user()->id)->paginate(8);
 
         if ($request->ajax()) {
             $view = view('ajax.data', compact('data'))->render();
@@ -95,8 +100,9 @@ class OwnerController extends Controller
 
     public function myKonstruksi(Request $request)
     {
-
-        $data = KonstruksiOwner::with('hasil', 'owner.user', 'konstruksi.kontraktor.user',)->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
+        // dd($this->getOwnerId()->owner->id);
+        $data = KonstruksiOwner::with('owner.user', 'konstruksi.kontraktor.user')->where('ownerId', Auth::user()->id)->paginate(8);
+        // dd($data);
         if ($request->ajax()) {
             $view = view('ajax.konstruksi', compact('data'))->render();
             return response()->json(['html' => $view]);
@@ -137,7 +143,7 @@ class OwnerController extends Controller
     public function getDetilProject(ProjectOwner $project)
     {
         
-        $data = ProjectOwner::with('project.images', 'owner', 'project.konsultan.user', 'kontrak.proposal.lelang.inspirasi', 'kontrak.payment', 'chooseProject.imageOwner')->find($project->id);
+        $data = ProjectOwner::with('project.images', 'owner', 'project.konsultan.user', 'kontrak.proposal.lelang.inspirasi', 'kontrak.order', 'chooseProject.imageOwner')->find($project->id);
         // dd($data);
         // $data = ProjectOwner::where("id", $project->id)->first();
         
@@ -146,7 +152,7 @@ class OwnerController extends Controller
     public function getDetilKonstruksi(KonstruksiOwner $konstruksi)
     {
         
-        $data = KonstruksiOwner::with('owner', 'konstruksi.konstraktor.user', 'kontrak.payment')->find($konstruksi->id);
+        $data = KonstruksiOwner::with('owner.user', 'konstruksi.kontraktor.user', 'chooseKonstruksi.order')->find($konstruksi->id);
         // dd($data);
         // $data = ProjectOwner::where("id", $project->id)->first();
         

@@ -24,6 +24,10 @@ class ChooseProject extends Model
     {
         return $this->belongsTo(ProjectOwner::class, 'projectOwnerId');
     }
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'projectOwnerId', 'id');
+    }
 
     public function ambil()
     {

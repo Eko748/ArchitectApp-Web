@@ -44,7 +44,7 @@ class ProjectController extends Controller
 
         $projectOwn =  ProjectOwner::create([
             'projectId' => $request->projectId,
-            'ownerId' => $this->getOwnerId()->owner->id,
+            'ownerId' => Auth::user()->id,
             'status' => "0",
         ]);
         $input = [
@@ -89,15 +89,15 @@ class ProjectController extends Controller
         $konsName = $project->project->konsultan->user->name;
         $konsTelp = $project->project->konsultan->telepon;
         $konsAlm = $project->project->konsultan->alamat;
-        $ownName = $project->owner->user->name;
-        $ownTelp = $project->owner->telepon;
-        $ownAlm = $project->owner->alamat;
+        $ownName = Auth::user()->name;
+        $ownTelp = Auth::user()->owner->telepon;
+        $ownAlm = Auth::user()->owner->alamat;
         $hargaDesain = $project->chooseProject->desain == "1" ? $project->project->harga_desain : 0;
         $hargaRAB = $project->chooseProject->RAB == "1" ? $project->project->harga_rab : 0;
         $harga = $this->penyebut(($hargaDesain + $hargaRAB)) . " rupiah.";
         $path = public_path('pdf/kontrak/');
         $konsUname = $project->project->konsultan->user->username;
-        $ownuName = $project->owner->user->username;
+        $ownuName = Auth::user()->username;
         $filename = 'Kontrak Kerja ' . $konsUname . ' - ' . $ownuName . ' ' . Carbon::now()->toDateString() . ".pdf";
         $pdf = PDF::loadView('public.mypdf', compact('filename', 'title', 'date', 'konsName', 'konsTelp', 'konsAlm', 'ownName', 'ownTelp', 'ownAlm', 'harga'));
         $createKontrak = $this->createKontrak($projectOwnerId, $filename);
@@ -112,7 +112,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function payment (ProjectOwner $project, Request $request) {
+    public function payment (ChooseProject $project, Request $request) {
         
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
@@ -123,30 +123,46 @@ class ProjectController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
         
-        $data = ProjectOwner::with('project.images', 'owner', 'project.konsultan.user', 'kontrak.proposal.lelang.inspirasi', 'kontrak.payment', 'chooseProject.imageOwner')->find($project->id);
+        $data = ChooseProject::with('projectOwner.user', 'projectOwner.owner', 'project')->first();
+        // dd($data);
 
-        $data = Auth::user()->owner->projectOwn;
+        $nama = $data->projectOwner->user->name;
+        $email = $data->projectOwner->user->email;
+        $telepon = $data->projectOwner->user->owner->telepon;
+        // dd($nama);
+        $hargaRab = $data->project->harga_rab;
+        $hargaDesain = $data->project->harga_desain;
+        $hargaTotal = $hargaRab + $hargaDesain;
+        // $hargaTotal = $data->project->harga_rab;
+        // $hargaTotal = $data->project->harga_desain;
+        // foreach ($data as $key) {
+        //     $hargaRab = $key->project->harga_rab;
+        //     $hargaDesain = $key->project->harga_desain;
 
-        $ambil = 0;
-        $ambil_harga_rab = 0;
-        $ambil_harga_desain = 0;
-        foreach ($data as $s) {
-            $ambil_harga_rab += $s->project->harga_rab;
-            $ambil_harga_desain += $s->project->harga_desain;
+        //     $hargaTotal = $hargaRab + $hargaDesain;
+        // }
+        
 
-            $ambil = $ambil_harga_rab + $ambil_harga_desain;
-        }
+        // $ambil = 0;
+        // $ambil_harga_rab = 0;
+        // $ambil_harga_desain = 0;
+        // foreach ($data as $s) {
+        //     $ambil_harga_rab += $s->project->harga_rab;
+        //     $ambil_harga_desain += $s->project->harga_desain;
+
+        //     $ambil = $ambil_harga_rab + $ambil_harga_desain;
+        // }
         
         $params = array(
             'transaction_details' => array(
                 'order_id' => rand(),
-                'gross_amount' => $ambil,
+                'gross_amount' => $hargaTotal,
             ),
             'customer_details' => array(
-                'first_name' => Auth::user()->name,
+                'first_name' => $nama,
                 'last_name' => '',
-                'email' => Auth::user()->email,
-                'phone' => Auth::user()->owner->telepon,
+                'email' => $email,
+                'phone' => $telepon,
             ),
         );
 
@@ -172,7 +188,7 @@ class ProjectController extends Controller
         $order->payment_type = $json->payment_type;
         $order->payment_code = isset($json->payment_code) ? $json->payment_code : null;
         $order->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
-        return $order->save() ? redirect('owner.detil.myproject')->with('alert-success', 'Order berhasil dibuat') : redirect('owner.detil.myproject')->with('alert-failed', 'Terjadi kesalahan');
+        return $order->save() ? redirect('/')->with('alert-success', 'Order berhasil dibuat') : redirect('/')->with('alert-failed', 'Terjadi kesalahan');
     }
 
     public function viewPayment()

@@ -26,6 +26,6 @@ class KontrakKerjaKontraktor extends Model
     }
     public function order()
     {
-        return $this->hasOne(Order::class, 'kontrakKonsultanId');
+        return $this->hasOne(OrderKontraktor::class, 'kontrakKontraktorId');
     }
 }

@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
                 KontrakKerjaKonsultanSeed::class,
                 TenderKonsultanSeed::class,
                 KontraktorCabangSeed::class,
+                ChooseKonstruksiSeed::class,
+                KonstruksiOwnerSeed::class,
             ]
 
         );

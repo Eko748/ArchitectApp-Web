@@ -21,6 +21,14 @@ class ChooseKonstruksi extends Model
     {
         return $this->belongsTo(KonstruksiOwner::class, 'konstruksiOwnerId');
     }
+    public function order()
+    {
+        return $this->hasOne(OrderKontraktor::class, 'konstruksiOwnerId');
+    }
+    public function cabang()
+    {
+        return $this->belongsTo(KontraktorCabang::class, 'konstruksiOwnerId', 'id');
+    }
 
     public function ambil()
     {

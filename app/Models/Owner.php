@@ -24,6 +24,10 @@ class Owner extends Model
     {
         return $this->hasMany(ProjectOwner::class,'ownerId','id');
     }
+    public function konstruksiOwn()
+    {
+        return $this->hasMany(KonstruksiOwner::class,'ownerId','id');
+    }
     public function favorit()
     {
         return $this->hasMany(Favorit::class,'ownerId','id');

@@ -16,29 +16,34 @@
                         <h4 class="px-3 pt-3">{{ $data->konstruksi->nama_tim }}</h4>
                         <div class="d-flex justify-content-between px-4 py-3">
                             <div>
-                                <span class="d-block me-2"><i class="fas fa-map-marker-alt me-1"></i>{{ $data->owner->alamat }}</span>
-                                <small class="text-muted ms-3 disp">Lokasi</small>
+                                <span class="d-block me-2"><i class="fas fa-users me-1"></i>{{ $data->konstruksi->jumlah_tim }}</span>
+                                <small class="text-muted ms-3 disp">Anggota Kontraktor</small>
                             </div>
                             <div>
                                 <span class="d-block"><i class="fas fa-wallet me-1"></i>Rp {{ $data->konstruksi->harga_kontrak }}</span>
                                 <small class="text-muted ms-3 disp">Total Harga</small>
                             </div>
                             <div><span class="d-block">
-                                    <i class="fas fa-folder-open me-1"></i>{{ $data->konstruksi->alamat_cabang }}</span>
+                                    <i class="fas fa-map-marker-alt me-1"></i>{{ $data->konstruksi->alamat_cabang }}</span>
                                 <small class="text-muted ms-3 disp">Alamat Kontraktor</small>
                             </div>
                             <div><span class="d-block">
                                     <i class="fas fa-user-tie me-1"></i>{{ $data->konstruksi->kontraktor->user->name }}</span>
                                 <small class="text-muted ms-3 disp">Kontraktor</small>
                             </div>
+                        
                         </div>
                         <div class="divider"></div>
+                        <h5 class="px-3 pt-3">Data Anda</h5>
                         <div class="text-capitalized p-3">
-                            <b>Deskripsi</b>
-                            <div class="text-capitalized h-6">
-                                {{ $data->konstruksi->description }}
-                            </div>
+                            <i class="fas fa-user me-1"></i><span>{{ Auth::user()->name }}</span>
+                            <br>
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            <span>
+                                {{ $data->chooseKonstruksi->jalan }}, Desa.{{ $data->chooseKonstruksi->desa }}, Kec.{{ $data->chooseKonstruksi->kecamatan }}, {{ $data->chooseKonstruksi->kota }}
+                            </span>
                             
+                                
                         </div>
                         <div class="divider"></div>
                         {{-- <div class="text-capitalized p-3">
@@ -58,17 +63,18 @@
                         @endif
                         <div class="divider"></div> --}}
                         <div class="  p-3">
-                            <b>File Hasil </b>
+                            <b>Status</b>
+                            
                         </div>
                         <div class="divider"></div>
                         <div class="p-3 d-inline">
-                            <a href="{{ route('owner.download', $data->kontrak->id) }}"
-                                class="btn btn-primary btn-sm">Lihat Kontrak</a>
+                            {{-- <a href="{{ route('owner.download', $data->kontrak->id) }}"
+                                class="btn btn-primary btn-sm">Lihat Kontrak</a> --}}
                             <a href="#" class="btn btn-success btn-sm">Chat Konsultan</a>
                             
                             
 
-                            @if ($data->kontrak->payment != null)
+                            @if ($data->chooseKonstruksi->order != null)
                                 @if ($data->rating != null)
                                     <button class="btn btn-warning btn-sm " disabled>Rating</button>
 
@@ -76,14 +82,13 @@
                                 <button class="btn btn-warning btn-sm ">Rating</button>
                                 <span class="badge bg-success rounded-pill ms-auto">Sudah bayar</span>
                             @else
-                            <form action="{{ route('owner.payment') }}" style="display: inline;">
+                            <form action="{{ route('owner.transaksi') }}" style="display: inline;">
                                 {{ csrf_field() }}
-                                <input type="hidden" name="projectId" value="{{ $data->id }}">
-                                <input type="hidden" name="kontrakKonsultanId" value="{{ $data->kontrak->id }}">
-                                <button type="submit" class="btn btn-warning btn-sm" id="pay-button">
-                                    Pay!
+                                {{-- <input type="hidden" name="konstruksiId" value="{{ $data->id }}"> --}}
+                                {{-- <input type="hidden" name="kontrakKontraktorId" value="{{ $data->kontrak->id }}"> --}}
+                                <button class="btn btn-warning btn-sm" id="pay-button">
+                                    Transaksi
                                 </button>
-                                <button id="pay-button">Pay!</button>
                             </form>
                                 {{-- <button class="btn btn-warning btn-sm  upload" data-bs-toggle="modal"
                                     data-bs-target="#modalBayar" data-id="{{ $data->kontrak->id }}">Upload
@@ -131,7 +136,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     @push('js')
     <button id="pay-button">Pay!</button>
-    <script type="text/javascript"
+    {{-- <script type="text/javascript"
       src="https://app.sandbox.midtrans.com/snap/snap.js"
       data-client-key="SB-Mid-client-ojEypI047x7sFX1T"></script>
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
@@ -169,7 +174,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
           document.getElementById('json_callback').value = JSON.stringify(result);
           $('#submit_form').submit();
         }
-      </script>
+      </script> --}}
     
 
     <script>

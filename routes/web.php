@@ -242,12 +242,16 @@ Route::middleware('auth')->group(function () {
 
         // My Konstruksi
         Route::get('/owner/mykonstruksi', [OwnerController::class, 'myKonstruksi'])->name('owner.my.konstruksi');
-        Route::get('/owner/mykonstruksi/{project}', [OwnerController::class, 'getDetilKonstruksi'])->name('owner.detil.mykonstruksi');
+        Route::get('/owner/mykonstruksi/{konstruksi}', [OwnerController::class, 'getDetilKonstruksi'])->name('owner.detil.mykonstruksi');
 
         // Payment
         Route::get('/owner/project/myproject/payment/', [OwnerProjectController::class, 'payment'])->name('owner.payment');
-        Route::post('/owner/project/myproject/payment/{project}', [OwnerProjectController::class, 'paymentPost'])->name('owner.payment.post');
+        Route::post('/owner/project/myproject/payment', [OwnerProjectController::class, 'paymentPost'])->name('owner.payment.post');
         Route::get('/owner/project/viewpayment', [OwnerProjectController::class, 'viewPayment'])->name('view.payment');
+
+        Route::get('/owner/konstruksi/mykonstruksi/payment/', [KonstruksiController::class, 'transaksi'])->name('owner.transaksi');
+        Route::post('/owner/konstruksi/mykonstruksi/payment', [KonstruksiController::class, 'transaksiPost'])->name('owner.transaksi.post');
+        Route::get('/owner/konstruksi/viewtransaksi', [KonstruksiController::class, 'viewTransaksi'])->name('view.transaksi');
     });
 });
 

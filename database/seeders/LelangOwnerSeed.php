@@ -53,5 +53,18 @@ class LelangOwnerSeed extends Seeder
             "panjang" => "3.00",
             "lebar" => "5.00"
         ]);
+        LelangOwner::create([
+            "ownerId" => 2,
+            "title" => "Kamar Disney",
+            "description" => "Untuk anak Perempuan yang dilengkapi Warna warni",
+            "status" => 0,
+            "budgetFrom" => 2000000,
+            "budgetTo" => 1000000,
+            "gayaDesain" => "modern",
+            "RAB" => 1,
+            "desain" => 1,
+            "panjang" => "3.00",
+            "lebar" => "5.00"
+        ]);
     }
 }
