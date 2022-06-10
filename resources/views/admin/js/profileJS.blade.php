@@ -14,21 +14,21 @@
                 },
                 type: "POST",
                 success: function(response) {
-                   
+
                     $("#name").val(response.name)
                     $("#email").val(response.email)
                     $("#username").val(response.username)
-                    
+
                 },
             });
             removeInvalid();
             $("#formProfile").trigger("reset");
-           
+
         });
 
-         $("body").on("submit","#formProfile",function(e) {
+        $("body").on("submit","#formProfile",function(e) {
                 e.preventDefault();
-                 let url = "{{ route('profile', Auth::user()->id) }}";
+                let url = "{{ route('profile', Auth::user()->id) }}";
                 $(this).prepend('<input type="hidden" name="_method" value="PUT">');
                 ajaxValidate(
                     url,
@@ -118,17 +118,14 @@
         });
 
         // modal hapus akun
-
         $("#hpsAkun").click(function() {
             var url = "{{ route('konsultan.profile.del', Auth::user()->id) }}"
             alertDelete(url, "Akun anda berhasil dihapus", "akun ini", {{ Auth::user()->id }});
         })
-
-        
     })
 
     function loadUser() {
-         let url = 'http://127.0.0.1:8000/my/' + {{ Auth::user()->id }} + '/profile'
+        let url = 'http://127.0.0.1:8000/my/' + {{ Auth::user()->id }} + '/profile'
             let path = "http://127.0.0.1:8000/img/avatar/";
             $.ajaxSetup({
                 headers: {
@@ -146,8 +143,7 @@
                     $("#email-readonly").val(response.email);
                     $("#uname-readonly").val(response.username);
                     $(".pp").attr("src", path + response.avatar);
-
                 },
-            });  
+            });
     }
 </script>
