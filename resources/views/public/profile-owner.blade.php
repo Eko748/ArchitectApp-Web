@@ -1,75 +1,71 @@
-@extends('layouts.main')
+@extends('layouts.public-main')
 @section('title')
-    Profile
+    Project
 @endsection
+@include('layouts.navbar')
+
 @section('content')
-    @include('layouts.topbar')
-    @include('layouts.sidebar')
+    <br>
+    <div class="container">
+        <div class="section-body">
+            <h2 class="section-title">My Profile</h2>
+            <p class="section-lead">
+                Hi, {{ Auth::user()->name }}
+            </p>
+            <div class="row">
+                <div class="col-4">
 
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Profile</h1>
-            </div>
-
-            <div class="section-body">
-                <h2 class="section-title">My Profile</h2>
-                <p class="section-lead">
-                    Hi, {{ Auth::user()->name }}
-                </p>
-                <div class="row">
-                    <div class="col-4">
-
-                        <div class="card card-primary">
-                            <div class="card-body text-center">
-                                <img src="" class="rounded-circle pp" width="80" height="80">
-                                <h6 class="my-2" id="inisial"></h6>
-                                <button class="btn btn-block btn-primary btn-icon icon-left" id="editProfile"
-                                    data-toggle="modal" data-target="#modalProfile" data-id="{{ Auth::user()->id }}">
-                                    <i class="fas fa-user-edit "></i>
-                                    <span class="d-none d-lg-inline">Edit Profile</span>
-                                </button>
-                                <button class="btn btn-block btn-warning btn-icon icon-left" id="editAva"
-                                    data-toggle="modal" data-target="#modalAva" data-id="{{ Auth::user()->id }}">
-                                    <i class="fas fa-edit "></i>
-                                    <span class="d-none d-lg-inline">Edit Avatar</span>
-                                </button>
-                                <button class="btn btn-block btn-success btn-icon icon-left" id="editPass"
-                                    data-toggle="modal" data-target="#modalPass" data-id="{{ Auth::user()->id }}">
-                                    <i class="fas fa-user-shield    "></i>
-                                    <span class="d-none d-lg-inline">Edit Password</span>
-                                </button>
-                                <button class="btn btn-block btn-danger btn-icon icon-left  " id="hpsAkun"
-                                    data-id="{{ Auth::user()->id }}">
-                                    <i class="fas fa-user-times    "></i>
-                                    <span class="d-none d-lg-inline">Hapus Akun</span>
-                                </button>
-                            </div>
-
+                    <div class="card card-primary">
+                        <div class="card-body text-center">
+                            <img src="" class="rounded-circle pp" width="80" height="80">
+                            <h6 class="my-2" id="inisial"></h6>
+                            <button class="btn btn-block btn-primary btn-icon icon-left" id="editProfile"
+                                data-toggle="modal" data-target="#modalProfile" data-id="{{ Auth::user()->id }}">
+                                <i class="fas fa-user-edit "></i>
+                                <span class="d-none d-lg-inline">Edit Profile</span>
+                            </button>
+                            <button class="btn btn-block btn-warning btn-icon icon-left" id="editAva" data-toggle="modal"
+                                data-target="#modalAva" data-id="{{ Auth::user()->id }}">
+                                <i class="fas fa-edit "></i>
+                                <span class="d-none d-lg-inline">Edit Avatar</span>
+                            </button>
+                            <button class="btn btn-block btn-success btn-icon icon-left" id="editPass" data-toggle="modal"
+                                data-target="#modalPass" data-id="{{ Auth::user()->id }}">
+                                <i class="fas fa-user-shield    "></i>
+                                <span class="d-none d-lg-inline">Edit Password</span>
+                            </button>
+                            <button class="btn btn-block btn-danger btn-icon icon-left  " id="hpsAkun"
+                                data-id="{{ Auth::user()->id }}">
+                                <i class="fas fa-user-times    "></i>
+                                <span class="d-none d-lg-inline">Hapus Akun</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card card-primary">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="name-readonly" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama">Username</label>
-                                    <input type="text" class="form-control" id="uname-readonly" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama">Email</label>
-                                    <input type="text" class="form-control" id="email-readonly" readonly>
-                                </div>
+                </div>
 
+                <div class="col">
+                    <div class="card card-primary">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" id="name-readonly" value="{{ $user->name }}"
+                                    readonly>
                             </div>
-
+                            <div class="form-group">
+                                <label for="nama">Username</label>
+                                <input type="text" class="form-control" id="uname-readonly"
+                                    value="{{ $user->username }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama">Email</label>
+                                <input type="text" class="form-control" id="email-readonly" value="{{ $user->email }}"
+                                    readonly>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </section>
     </div>
 
@@ -166,7 +162,7 @@
                 <div class="modal-body">
                     <form action="" method="post" id="formAva" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
+                        {{-- @method('PUT') --}}
                         <div class="form-group">
                             <label for="avatar">Avatar</label>
                             <div class="custom-file">
@@ -183,7 +179,11 @@
             </div>
         </div>
     </div>
+    </div>
     @push('js')
-        @include('admin.js.profileJs')
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+        @include('public.js.profile-ownerJS')
     @endpush
 @endsection

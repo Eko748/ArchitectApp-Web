@@ -105,7 +105,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware(['konsultan'])->group(function () {
-
         // Route::get('/konsultan/dashboard', [Konsultancontroller::class, 'index'])->name('konsultan.dashboard');
         Route::get('/konsultan/dashboard', [KonsultanController::class, 'dashboard'])->name('konsultan.dashboard');
 
@@ -145,7 +144,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/konsultan/upload/job', [JobController::class, 'uploadHasil'])->name('konsultan.upload.job');
 
         // proposal
-
         Route::get('/konsultan/myproposal/active', [KonsultanController::class, 'activeProposal'])->name('konsultan.proposal.active');
         Route::get('/konsultan/myproposal/submit', [KonsultanController::class, 'submitProposal'])->name('konsultan.proposal.submit');
         Route::get('/konsultan/myproposal/archived', [KonsultanController::class, 'archivedProposal'])->name('konsultan.proposal.archived');
@@ -163,14 +161,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/konsultan/confirmpass/{user}', [KonsultanProfile::class, 'updatePass'])->name('konsultan.profile.pass');
         Route::delete('/konsultan/delete/{user}', [KonsultanProfile::class, 'destroy'])->name('konsultan.profile.del');
     });
+
     Route::middleware(['kontraktor'])->group(function () {
         Route::get('/kontraktor/dashboard', [KontraktorController::class, 'dashboard'])->name('kontraktor.dashboard');
-
         // project
         Route::get('/kontraktor/cabang', [KontraktorController::class, 'cabang'])->name('kontraktor.cabang');
         Route::get('/kontraktor/cabang-all', [CabangController::class, 'getAllCabang'])->name('kontraktor.allcabang');
         Route::post('/kontraktor/cabang', [CabangController::class, 'tambahCabang']);
-
         Route::get('/kontraktor/project', [KontraktorController::class, 'project'])->name('kontraktor.project');
         Route::get('/kontraktor/project-all', [ProjectController::class, 'getAllProject'])->name('kontraktor.allproject');
         Route::post('/kontraktor/project', [ProjectController::class, 'tambahProject']);
@@ -187,7 +184,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/kontraktor/myjob/archived-job', [KontraktorController::class, 'archivedJob'])->name('kontraktor.job.archived');
 
         // proposal
-
         Route::get('/kontraktor/myproposal/active', [KontraktorController::class, 'activeProposal'])->name('kontraktor.proposal.active');
         Route::get('/kontraktor/myproposal/submit', [KontraktorController::class, 'submitProposal'])->name('kontraktor.proposal.submit');
         Route::get('/kontraktor/myproposal/archived', [KontraktorController::class, 'archivedProposal'])->name('kontraktor.proposal.archived');
@@ -207,7 +203,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('owner')->group(function () {
-
         Route::post('/owner/profile/{user}', [OwnerController::class, 'profileOwner'])->name('owner.profile.show');
         Route::post('/owner/lelang', [OwnerLelangController::class, 'postLelang'])->name('owner.lelang.post');
         Route::get('/owner/lelang/all', [OwnerLelangController::class, 'AllMyLelang'])->name('owner.lelang.all');
@@ -233,6 +228,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/owner/project/choose', [OwnerProjectController::class, 'chooseProject'])->name('owner.choose.project');
 
         Route::get('/owner/mykonstruksi', [OwnerController::class, 'myKonstruksi'])->name('owner.my.konstruksi');
+
+        //Profile routes
+        Route::get('/owner/profile/', [OwnerController::class, 'profileEdit'])->name('owner.profile');
+        Route::post('/owner/{user}/profile', [OwnerController::class, 'show'])->name('profileOwner');
+        // Route::get('/owner/my/{user}/profile', [OwnerController::class, 'editProfile'])
+        Route::put('/owner/{user}/profile', [OwnerController::class, 'update']);
+        Route::post('/owner/gantiava/{user}', [OwnerController::class, 'gantiAva'])->name('gantiavaOwner');
+        Route::post('/owner/confirmpass/{user}', [OwnerController::class, 'confirmPass']);
+        Route::put('/owner/confirmpass/{user}', [OwnerController::class, 'updatePass']);
+        Route::delete('/owner/delete/{user}', [OwnerController::class, 'destroy'])->name('owner.profile.del');
 
         // Payment
         Route::get('/owner/project/myproject/payment/', [OwnerProjectController::class, 'payment'])->name('owner.payment');

@@ -66,6 +66,75 @@ class OwnerController extends Controller
         return User::with('owner')->where('id', $user->id)->first();
     }
 
+    public function profileEdit()
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        return view('public.profile-owner', compact('user'));
+    }
+
+    public function show(User $user)
+    {
+        return $user;
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'username' => 'required|unique:users,username,' . Auth::user()->id,
+            'email' => 'required|string|email',
+        ]);
+        $fields = [
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+        ];
+        return User::firstWhere('id', $user->id)->update($fields);
+    }
+
+    public function gantiAva(Request $request, User $user)
+    {
+        $img = $request->file('avatar');
+        $filename = $img->hashName();
+        $path = 'img/avatar/';
+        $request->validate([
+            'avatar' => 'required|mimes:jpg,jpeg,png'
+        ]);
+        if ($img) {
+            $img->storeAs($path, $filename, 'files');
+            if ($user->avatar != "default.png") {
+                Storage::disk('files')->delete($path . '/' . $user->avatar);
+            }
+        }
+        return User::firstWhere('id', $user->id)->update(['avatar' => $filename]);
+    }
+
+    public function updatePass(Request $request, User $user)
+    {
+        $pass = Hash::make($request->newpass_confirmation);
+        $request->validate([
+            'newpass' => 'required|min:8|confirmed',
+            'newpass_confirmation' => 'required|min:8'
+        ]);
+        return User::firstWhere('id', $user->id)->update(['password' => $pass]);
+    }
+
+    public function confirmPass(Request $request, User $user)
+    {
+        if (password_verify($request->oldpass, $user->password)) {
+            return response()->json(['status' => true]);
+        }
+        return response()->json(['status' => false]);
+    }
+
+    public function destroy(Request $request, User $user)
+    {
+        User::destroy($user->id);
+        $request->session()->flush();
+        Auth::logout();
+        return redirect()->intended(route('login'));
+    }
+
     public function myLelang()
     {
         $data = LelangOwner::with('image')->get();
@@ -127,11 +196,11 @@ class OwnerController extends Controller
     }
     public function getDetilProject(ProjectOwner $project)
     {
-        
+
         $data = ProjectOwner::with('project.images', 'owner', 'project.konsultan.user', 'kontrak.proposal.lelang.inspirasi', 'kontrak.payment', 'chooseProject.imageOwner')->find($project->id);
         // dd($data);
         // $data = ProjectOwner::where("id", $project->id)->first();
-        
+
         return view('public.single-myproject', compact('data'));
     }
 
