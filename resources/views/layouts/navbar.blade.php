@@ -38,8 +38,8 @@
                             <img src="" alt="image" width="32" height="32" class="rounded-circle pp">
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item " href="{{ route('owner.my.project') }}">My Project</a></li>
-                            <li><a class="dropdown-item" href="{{ route('owner.my.lelang') }}">My Lelang</a></li>
+                            <li><a class="dropdown-item " href="{{ route('owner.my.project') }}">Project Saya</a></li>
+                            <li><a class="dropdown-item" href="{{ route('owner.my.lelang') }}">Lelang Saya</a></li>
                             <li><a class="dropdown-item" href="{{ route('owner.profile') }}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -64,7 +64,6 @@
                 </div>
             </div>
             @auth
-<<<<<<< HEAD
                 <a class="nav-link text-dark" href="{{ route('owner.lelang') }}">Lelang</a>
                 <a class="nav-link text-dark" href="{{ route('owner.my.lelang') }}">Lelang Saya</a>
                 <div class="dropdown tema">
@@ -74,17 +73,16 @@
                         <a class="nav-link text-dark dropdown-item"
                             href="{{ route('owner.my.konstruksi') }}">Kontruksi</a>
                     </div>
-=======
-            <a class="nav-link text-dark" href="{{ route('owner.lelang') }}">Lelang</a>
-            <a class="nav-link text-dark" href="{{ route('owner.my.lelang') }}">Lelang Saya</a>
-            <div class="dropdown tema">
+                </div>
+                {{-- <div class="dropdown tema">
                 <span>Project Saya</span>
                 <div class="dropdown-content">
                 <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.project') }}">Desain</a>
                 <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.konstruksi') }}">Konstruksi</a>
->>>>>>> 49a0e1ff3c941678a8bd01ee93da9cbd42bda2aa
+                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.lelang') }}">Lelang</a>
+                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.lelang') }}">Lelang Saya</a>
                 </div>
-                <a class="nav-link text-dark" href="{{ route('owner.profile') }}">Profile</a>
+                <a class="nav-link text-dark" href="{{ route('owner.profile') }}">Profile</a> --}}
             @endauth
         </div>
         <br>
