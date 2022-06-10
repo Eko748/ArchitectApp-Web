@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
                 ImageOwnerSeed::class,
                 KontrakKerjaKonsultanSeed::class,
                 TenderKonsultanSeed::class,
+                KontraktorCabangSeed::class,
             ]
 
         );

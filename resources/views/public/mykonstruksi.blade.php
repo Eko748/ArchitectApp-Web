@@ -14,14 +14,14 @@ Konstruksi
                     <hr>
                 </div>
                 @if (count($data) != 0)
-                <div class="row" id="projectData">
-                    @include('ajax.data')
+                <div class="row" id="konstruksiData">
+                    @include('ajax.konstruksi')
                 </div>
                 @else
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md col-sm text-center" style="height: 200px">
                         <p class="">Anda belum memiliki project</p>
-                        <a href="{{ route('owner.lelang') }}" class="btn btn-warning btn-sm">Buat Lelang</a>
+                        <a href="{{ route('public.kontraktor') }}" class="btn btn-warning btn-sm">Buat Kontrak</a>
                     </div>
                 </div>
                 @endif
@@ -64,7 +64,7 @@ Konstruksi
                 return;
             }
             $('.ajax-load').hide();
-            $("#projectData").append(data.html);
+            $("#konstruksiData").append(data.html);
         })
         // Call back function
         .fail(function(jqXHR, ajaxOptions, thrownError) {
@@ -107,7 +107,7 @@ Konstruksi
                 contentType: false,
                 success: function(response) {
                     alertSuccess("Mohon tunggu verifikasi admin");
-                    $('#projectData').html('')
+                    $('#konstruksiData').html('')
                     loadMoreData(1);
                     $('#kontrakId').val('')
                 },

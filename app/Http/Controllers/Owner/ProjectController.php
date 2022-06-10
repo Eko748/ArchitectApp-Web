@@ -172,7 +172,7 @@ class ProjectController extends Controller
         $order->payment_type = $json->payment_type;
         $order->payment_code = isset($json->payment_code) ? $json->payment_code : null;
         $order->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
-        return $order->save() ? redirect(url('/'))->with('alert-success', 'Order berhasil dibuat') : redirect(url('/'))->with('alert-failed', 'Terjadi kesalahan');
+        return $order->save() ? redirect('owner.detil.myproject')->with('alert-success', 'Order berhasil dibuat') : redirect('owner.detil.myproject')->with('alert-failed', 'Terjadi kesalahan');
     }
 
     public function viewPayment()

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentKontraktorsTable extends Migration
+class CreateFileOwnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePaymentKontraktorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_kontraktors', function (Blueprint $table) {
+        Schema::create('file_owners', function (Blueprint $table) {
             $table->id();
-            $table->integer('kontrakKontraktorId');
-            $table->text('buktiBayar');
-            $table->integer('status');
+            $table->integer('chooseProjectId')->nullable();
+            $table->text('image')->nullable();
+            // $table->text('desain')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreatePaymentKontraktorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_kontraktors');
+        Schema::dropIfExists('file_owners');
     }
 }

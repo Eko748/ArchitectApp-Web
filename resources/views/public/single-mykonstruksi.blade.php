@@ -1,6 +1,6 @@
 @extends('layouts.public-main')
 @section('title')
-    Project Saya
+    Konstruksi Saya
 @endsection
 @include('layouts.navbar')
 
@@ -10,40 +10,40 @@
             <div class="col-10 col-md col-sm">
                 <div class="my-4">
                     <div class="page mb-3">
-                        <h4>Project Saya</h4>
+                        <h4>Konstruksi Saya</h4>
                     </div>
                     <div class="card">
-                        <h4 class="px-3 pt-3">{{ $data->project->title }}</h4>
+                        <h4 class="px-3 pt-3">{{ $data->konstruksi->nama_tim }}</h4>
                         <div class="d-flex justify-content-between px-4 py-3">
                             <div>
                                 <span class="d-block me-2"><i class="fas fa-map-marker-alt me-1"></i>{{ $data->owner->alamat }}</span>
                                 <small class="text-muted ms-3 disp">Lokasi</small>
                             </div>
                             <div>
-                                <span class="d-block"><i class="fas fa-wallet me-1"></i>Rp {{ $data->project->harga_desain + $data->project->harga_rab }}</span>
+                                <span class="d-block"><i class="fas fa-wallet me-1"></i>Rp {{ $data->konstruksi->harga_kontrak }}</span>
                                 <small class="text-muted ms-3 disp">Total Harga</small>
                             </div>
                             <div><span class="d-block">
-                                    <i class="fas fa-folder-open me-1"></i>{{ $data->project->gayaDesain }}</span>
-                                <small class="text-muted ms-3 disp">Desain Style</small>
+                                    <i class="fas fa-folder-open me-1"></i>{{ $data->konstruksi->alamat_cabang }}</span>
+                                <small class="text-muted ms-3 disp">Alamat Kontraktor</small>
                             </div>
                             <div><span class="d-block">
-                                    <i class="fas fa-user-tie me-1"></i>{{ $data->project->konsultan->user->name }}</span>
-                                <small class="text-muted ms-3 disp">Architect / Designer</small>
+                                    <i class="fas fa-user-tie me-1"></i>{{ $data->konstruksi->kontraktor->user->name }}</span>
+                                <small class="text-muted ms-3 disp">Kontraktor</small>
                             </div>
                         </div>
                         <div class="divider"></div>
                         <div class="text-capitalized p-3">
                             <b>Deskripsi</b>
                             <div class="text-capitalized h-6">
-                                {{ $data->project->description }}
+                                {{ $data->konstruksi->description }}
                             </div>
                             
                         </div>
                         <div class="divider"></div>
-                        <div class="text-capitalized p-3">
+                        {{-- <div class="text-capitalized p-3">
                             <b>Foto Ruangan / Bangunan Anda</b>
-                        
+
                         <div class="images">
                             @foreach ($data->ambil_image as $item)
                             <img src="{{ url('/img/owner/'.$item->image) }}" alt="" width="254px" height="180">
@@ -56,10 +56,9 @@
                                 <b>Gambar Inspirasi</b>
                             </div>
                         @endif
-                        <div class="divider"></div>
+                        <div class="divider"></div> --}}
                         <div class="  p-3">
                             <b>File Hasil </b>
-
                         </div>
                         <div class="divider"></div>
                         <div class="p-3 d-inline">
@@ -81,10 +80,10 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="projectId" value="{{ $data->id }}">
                                 <input type="hidden" name="kontrakKonsultanId" value="{{ $data->kontrak->id }}">
-                                <button class="btn btn-warning btn-sm" id="pay-button">
-                                    Transaksi
+                                <button type="submit" class="btn btn-warning btn-sm" id="pay-button">
+                                    Pay!
                                 </button>
-                                {{-- <button id="pay-button">Pay!</button> --}}
+                                <button id="pay-button">Pay!</button>
                             </form>
                                 {{-- <button class="btn btn-warning btn-sm  upload" data-bs-toggle="modal"
                                     data-bs-target="#modalBayar" data-id="{{ $data->kontrak->id }}">Upload
@@ -131,8 +130,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
     @include('layouts.footer')
 
     @push('js')
-    {{-- <button id="pay-button">Pay!</button> --}}
-    {{-- <script type="text/javascript"
+    <button id="pay-button">Pay!</button>
+    <script type="text/javascript"
       src="https://app.sandbox.midtrans.com/snap/snap.js"
       data-client-key="SB-Mid-client-ojEypI047x7sFX1T"></script>
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
@@ -161,7 +160,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
             },
             onClose: function(){
               /* You may add your own implementation here */
-              alert('Anda Menutup Halaman tanpa menyelesaikan Transaksi');
+              alert('you closed the popup without finishing the payment');
             }
           })
         });
@@ -170,7 +169,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
           document.getElementById('json_callback').value = JSON.stringify(result);
           $('#submit_form').submit();
         }
-      </script> --}}
+      </script>
     
 
     <script>

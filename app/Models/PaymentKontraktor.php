@@ -9,6 +9,11 @@ class PaymentKontraktor extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kontrakKontraktorId', 'buktiBayar'
+        'kontrakKontraktorId', 'buktiBayar', 'status'
     ];
+
+    public function kontrak()
+    {
+        return $this->belongsTo(KontrakKerjaKontraktor::class, 'kontrakKontraktorId','id');
+    }
 }

@@ -21,6 +21,7 @@ use App\Http\Controllers\Konsultan\ProposalController;
 use App\Http\Controllers\Kontraktor\KontraktorController;
 use App\Http\Controllers\Kontraktor\CabangController;
 use App\Http\Controllers\Owner\GeneratePDFController;
+use App\Http\Controllers\Owner\KonstruksiController;
 use App\Http\Controllers\Owner\LelangController as OwnerLelangController;
 use App\Http\Controllers\Owner\OwnerController;
 use App\Http\Controllers\Owner\ProjectController as OwnerProjectController;
@@ -42,6 +43,9 @@ use Illuminate\Support\Facades\Route;
 
 
 //public
+
+Route::post("/cobaya", [KonstruksiController::class, "chooseKonstruksi"]);
+
 Route::get('kirim-email', 'App\Http\Controllers\MailController@index');
 
 Route::get('/', [OwnerController::class, 'index'])->name('public.landing');
@@ -227,7 +231,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/owner/bio/update', [OwnerController::class, 'updateBio'])->name('owner.update');
         Route::post('/owner/project/choose', [OwnerProjectController::class, 'chooseProject'])->name('owner.choose.project');
 
+        // Choose Kontraktor
+        Route::post('/owner/konstruksi/choose', [KonstruksiController::class, 'chooseKonstruksi'])->name('owner.choose.konstruksi');
+        Route::get('/owner/download/kontrakKontraktor/{kontrak}', [OwnerController::class, 'downloadKontrakKontraktor'])->name('owner.download');
+
+        // My Konstruksi
         Route::get('/owner/mykonstruksi', [OwnerController::class, 'myKonstruksi'])->name('owner.my.konstruksi');
+        Route::get('/owner/mykonstruksi/{project}', [OwnerController::class, 'getDetilKonstruksi'])->name('owner.detil.mykonstruksi');
 
         //Profile routes
         Route::get('/owner/profile/', [OwnerController::class, 'profileEdit'])->name('owner.profile');

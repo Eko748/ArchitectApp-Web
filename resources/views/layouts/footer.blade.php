@@ -6,13 +6,13 @@
             class=" mb-0 mt-0">
         </a>
         <p class="footer-links">
-            <a href="#">Home</a>
+            <a href="{{ route('public.landing') }}">Home</a>
             |
-            <a href="#">Project</a>
+            <a href="{{ route('public.project') }}">Project</a>
             |
-            <a href="#">Konsultan</a>
+            <a href="{{ route('public.konsultan') }}">Konsultan</a>
             |
-            <a href="#">Kontraktor</a>
+            <a href="{{ route('public.kontraktor') }}">Kontraktor</a>
         </p>
 
         <p class="footer-company-name">© 2022 Arsitek.co</p>
@@ -26,7 +26,7 @@
 
         <div>
             <i class="fa fa-phone"></i>
-            <p>+62 88222155847</p>
+            <p>+62 87712372564</p>
         </div>
         <div>
             <i class="fa fa-envelope"></i>

@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{-- <link rel="stylesheet" href="{{ asset('css/tema.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-
+    <link rel="shortcut icon" href="{{ asset('img/logo_proyek.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
@@ -64,6 +64,7 @@
                 </div>
             </div>
             @auth
+<<<<<<< HEAD
                 <a class="nav-link text-dark" href="{{ route('owner.lelang') }}">Lelang</a>
                 <a class="nav-link text-dark" href="{{ route('owner.my.lelang') }}">Lelang Saya</a>
                 <div class="dropdown tema">
@@ -73,6 +74,15 @@
                         <a class="nav-link text-dark dropdown-item"
                             href="{{ route('owner.my.konstruksi') }}">Kontruksi</a>
                     </div>
+=======
+            <a class="nav-link text-dark" href="{{ route('owner.lelang') }}">Lelang</a>
+            <a class="nav-link text-dark" href="{{ route('owner.my.lelang') }}">Lelang Saya</a>
+            <div class="dropdown tema">
+                <span>Project Saya</span>
+                <div class="dropdown-content">
+                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.project') }}">Desain</a>
+                <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.konstruksi') }}">Konstruksi</a>
+>>>>>>> 49a0e1ff3c941678a8bd01ee93da9cbd42bda2aa
                 </div>
                 <a class="nav-link text-dark" href="{{ route('owner.profile') }}">Profile</a>
             @endauth

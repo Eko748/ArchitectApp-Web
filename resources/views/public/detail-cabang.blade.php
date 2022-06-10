@@ -42,7 +42,7 @@
         </div>
         <div class="banner"></div>
         <div class="d-flex">
-
+ 
             <div class="detil-project px-5 py-5">
                 <h4>{{ $data->nama_tim }}</h4>
                 <p class="desc" style="font-size:14px;">{{ $data->description }}
@@ -199,44 +199,23 @@
                 });
             })
 
-            function countLuas() {
-                let p = $('#panjang').val();
-                let l = $('#lebar').val();
-                let luas = p * l;
-                $('#luas').val(luas);
-            }
-
             $(function() {
                 startLoad(chooseModal)
                 $('#proId').val('');
                 removeInvalid()
-                let Crab = $('#rab')
-                let Cdesain = $('#desain')
-                let Hrab = Crab.data('rab');
-                let Hdesain = Cdesain.data('desain')
+                let Ckontrak = $('#status')
+                let Hkontrak = Ckontrak.data('status');
                 let total = 0;
-                Crab.on('change', function() {
+                Ckontrak.on('change', function() {
                     if (this.checked) {
-                        total += Hrab
+                        total += Hkontrak
                         $('#total').val(rupiahFormat(total))
                     } else {
-                        total -= Hrab
+                        total -= Hkontrak
                         $('#total').val(rupiahFormat(total))
-
                     }
-
                 })
-                Cdesain.on('change', function() {
-                    if (this.checked) {
-                        total += Hdesain
-                        $('#total').val(rupiahFormat(total))
-                    } else {
-                        total -= Hdesain
-                        $('#total').val(rupiahFormat(total))
 
-                    }
-
-                })
 
                 $('body').on('submit', '#formChoose', function(e) {
                     e.preventDefault()
@@ -244,7 +223,7 @@
                     $('#proId').val(id);
                     SetupAjax()
                     $.ajax({
-                        url: "{{ route('owner.choose.project') }}",
+                        url: "{{ route('owner.choose.konstruksi') }}",
                         dataType: "JSON",
                         type: "POST",
                         data: new FormData(this),
@@ -253,7 +232,7 @@
                         contentType: false,
                         success: function(response) {
                             $(this).trigger("reset");
-                            window.location.assign("{{ route('owner.my.project') }}")
+                            window.location.assign("{{ route('owner.my.konstruksi') }}")
                         },
                         error: function(xhr) {
                             var res = xhr.responseJSON;
@@ -314,57 +293,54 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST" enctype="multipart/form-data" id="formChoose">
-                        <input type="hidden" name="projectId" id="proId">
+                    <form action="" id="formChoose" method="POST" enctype="multipart/form-data">
+                        {{-- {{ url('/cobaya') }} --}}
+                        {{ csrf_field() }}
+
+                        <input type="hidden" name="konstruksiId" value="{{ $data->id }}">
                         
                         <label for="desc" class="form-label">Alamat Lengkap<span class="text-danger fw-bolder">*</span></label>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="lebar" class="form-label form-label-sm">Kota/Kabupaten<span
+                                <label for="kota" class="form-label form-label-sm">Kota/Kabupaten<span
                                         class="text-danger fw-bolder">*</span></label>
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" name="lebar" id="lebar"
-                                        onkeyup="countLuas()">
-                                    
+                                    <input type="text" class="form-control form-control-sm" name="kota" id="kota">
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col">
-                                <label for="panjang" class="form-label form-label-sm">Kecamatan<span
+                                <label for="kecamatan" class="form-label form-label-sm">Kecamatan<span
                                         class="text-danger fw-bolder">*</span></label>
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" name="panjang" id="panjang"
-                                        onkeyup="countLuas()">                                    
+                                    <input type="text" class="form-control form-control-sm" name="kecamatan" id="kecamatan">                                    
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="lebar" class="form-label form-label-sm">Desa/Kelurahan<span
+                                <label for="desa" class="form-label form-label-sm">Desa/Kelurahan<span
                                         class="text-danger fw-bolder">*</span></label>
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" name="lebar" id="lebar"
-                                        onkeyup="countLuas()">                                    
+                                    <input type="text" class="form-control form-control-sm" name="desa" id="desa">                                    
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col">
-                                <label for="panjang" class="form-label form-label-sm">Jalan<span
+                                <label for="jalan" class="form-label form-label-sm">Jalan<span
                                         class="text-danger fw-bolder">*</span></label>
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control form-control-sm" name="panjang" id="panjang"
-                                        onkeyup="countLuas()">                                    
+                                    <input type="text" class="form-control form-control-sm" name="jalan" id="jalan">                                    
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                                <label for="panjang" class="form-label form-label-sm">Mulai Konstruksi<span
+                                <label for="mulaiKonstruksi" class="form-label form-label-sm">Mulai Konstruksi<span
                                         class="text-danger fw-bolder">*</span></label>
                                 <div class="input-group input-group-sm">
-                                    <input type="date" class="form-control form-control-sm" name="panjang" id="panjang"
-                                        onkeyup="countLuas()" value="0">
+                                    <input type="date" class="form-control form-control-sm" name="mulaiKonstruksi" id="mulaiKonstruksi">
                                     <div class="invalid-feedback"></div>
                                 </div>
                         </div>
@@ -373,20 +349,20 @@
                         <div class="mb-3">
                             <label for="desain" class="form-label">File Blueprint / Desain Project Anda<span
                                 class="text-danger fw-bolder">*</span></label>
-                            <input class="form-control form-control-sm " id="desain" name="desain[]" multiple type="file">
+                            <input class="form-control form-control-sm " id="desain" name="desain" multiple type="file">
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="desain" class="form-label">RAB Project Anda<span
+                            <label for="rab" class="form-label">RAB Project Anda<span
                                 class="text-danger fw-bolder">*</span></label>
-                            <input class="form-control form-control-sm " id="desain" name="desain[]" multiple type="file">
+                            <input class="form-control form-control-sm " id="rab" name="rab" multiple type="file">
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="rab" name="rab"
-                                    data-rab="{{ $data->harga_rab }}">
-                                <label class="form-check-label" for="rab">
+                                <input class="form-check-input" type="checkbox" value="1" id="status" name="status"
+                                    data-status="{{ $data->harga_kontrak }}">
+                                <label class="form-check-label" for="status">
                                     Menyetujui Persyaratan dan Ketentuan
                                     <span class="text-danger fw-bolder">*</span></label>
                                 </label>
@@ -396,8 +372,7 @@
                         <div class="mb-3">
                             <label for="total" class="form-label form-label-sm">Harga Perjanjian Awal</label>
                             <div class="input-group input-group-sm">
-                                <input type="text" class="form-control form-control-sm " name="total" id="total" value="0"
-                                    readonly>
+                                <input type="text" class="form-control form-control-sm " name="total" id="total" value="0" readonly>
                             </div>
                         </div>
                         </div>

@@ -105,7 +105,7 @@ window.addEventListener("resize", function () {
               <div class="carousel-caption">
                   <h1>Profile Kontraktor</h1>
                   <p>Sebuah Project Kontruksi perlu dikerjakan oleh Kontraktor yang mempunyai Experience Teamwork</p>
-                  <p><a class="btn btn-lg btn-primary" href="{{ route('public.konsultan') }}">Kontraktor</a></p>
+                  <p><a class="btn btn-lg btn-primary" href="{{ route('public.kontraktor') }}">Kontraktor</a></p>
               </div>
           </div>
       </div>

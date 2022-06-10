@@ -32,35 +32,55 @@ class KonstruksiController extends Controller
 
     public function chooseKonstruksi(Request $request)
     {
-        $request->validate([
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'desa' => 'required',
-            'jalan' => 'required',
-            'mulaiKonstruksi' => 'required',
-            'desain' => 'required',
-            'rab' => 'required',
+        // $konstruksi_owner = new KonstruksiOwner([
+        //     "ownerId" => Auth::user()->id,
+        //     "konstruksiId" => $request->konstruksiId,
+        //     "konfirmasi" => 0,
+        //     "status" => 0
+        // ]);
+        // $request->validate([
+        //     'konstruksiOwnerId' => 'required',
+        //     'kota' => 'required',
+        //     'kecamatan' => 'required',
+        //     'desa' => 'required',
+        //     'jalan' => 'required',
+        //     'mulaiKonstruksi' => 'required',
+        //     'desain' => 'required',
+        //     'RAB' => 'required'
+        // ]);
+        // $choose_konstruksi = new ChooseKonstruksi([
+        //     "konstruksiOwnerId" => $konstruksi_owner->id,
+        //     "kota" => $request->kota,
+        //     "kecamatan" => $request->kecamatan,
+        //     "desa" => $request->desa,
+        //     "jalan" => $request->jalan,
+        //     "mulaiKonstruksi" => $request->mulaiKonstruksi,
+        //     "desain" => $request->desain,
+        //     "RAB" => $request->rab,
+        //     "status" => $request->status
+        // ]);      
+ 
+        $konstruksi_owner = new KonstruksiOwner([
+            "ownerId" => Auth::user()->id,
+            "konstruksiId" => $request->konstruksiId,
+            "konfirmasi" => "0",
+            "status" => "0"
         ]);
 
-        $konstruksiOwn =  KonstruksiOwner::create([
-            'konstruksiId' => $request->projectId,
-            'ownerId' => $this->getOwnerId()->owner->id,
-            'status' => "0",
-        ]);
-        $input = [
-            'panjang' => $request->panjang,
-            'lebar' => $request->lebar,
-            'konstruksiOwnerId' => $konstruksiOwn->id,
-        ];
-        $this->generateKontrak($konstruksiOwn->id);
-        // if ($request->has('rab')) {
-        //     $input['RAB'] = $request->rab;
-        // }
-        // if ($request->has('desain')) {
-        //     $input['desain'] = $request->desain;
-        // }
+        $konstruksi_owner->save();
 
-        // $choose = ChooseKonstruksi::create($input);
+        $choose = ChooseKonstruksi::create([
+            "konstruksiOwnerId" => $konstruksi_owner->id,
+            "kota" => $request->kota,
+            "kecamatan" => $request->kecamatan,
+            "desa" => $request->desa,
+            "jalan" => $request->jalan,
+            "mulaiKonstruksi" => $request->mulaiKonstruksi,
+            "desain" => $request->desain,
+            "RAB" => $request->rab,
+            "status" => $request->status
+        ]);
+        
         // if ($request->hasFile('image')) {
         //     $img = $request->file('image');
         //     foreach ($img as $key) {
@@ -73,7 +93,7 @@ class KonstruksiController extends Controller
         //         ]);
         //     }
 
-        //     $this->generateKontrak($projectOwn->id);
+            // $this->generateKontrak($konstruksi_owner->id);
         // }
         return 1;
     }
@@ -81,7 +101,7 @@ class KonstruksiController extends Controller
     public function generateKontrak($konstruksiOwnerId)
     {
         $konstruksi = KonstruksiOwner::where('id', $konstruksiOwnerId)->with('chooseKonstruksi', 'owner.user', 'konstruksi.kontraktor.user',)->first();
-        $title = $konstruksi->konstruksi->title;
+        $nama_tim = $konstruksi->konstruksi->nama_tim;
         $hari = Carbon::now()->isoFormat('dddd');
         $tgl = Carbon::now()->isoFormat('D');
         $bln = Carbon::now()->isoFormat('MMMM');
@@ -96,11 +116,11 @@ class KonstruksiController extends Controller
         $hargaDesain = $konstruksi->chooseKonstruksi->desain == "1" ? $konstruksi->konstruksi->harga_desain : 0;
         $hargaRAB = $konstruksi->chooseKonstruksi->RAB == "1" ? $konstruksi->konstruksi->harga_rab : 0;
         $harga = $this->penyebut(($hargaDesain + $hargaRAB)) . " rupiah.";
-        $path = public_path('pdf/kontrak/');
+        $path = public_path('pdf/kontraktor/');
         $kontraktorUname = $konstruksi->konstruksi->kontraktor->user->username;
         $ownuName = $konstruksi->owner->user->username;
         $filename = 'Kontrak Kerja ' . $kontraktorUname . ' - ' . $ownuName . ' ' . Carbon::now()->toDateString() . ".pdf";
-        $pdf = PDF::loadView('public.surat-konstruksi', compact('filename', 'title', 'date', 'kontraktorName', 'kontraktorTelp', 'kontraktorAlm', 'ownName', 'ownTelp', 'ownAlm', 'harga'));
+        $pdf = PDF::loadView('public.surat-konstruksi', compact('filename', 'nama_tim', 'date', 'kontraktorName', 'kontraktorTelp', 'kontraktorAlm', 'ownName', 'ownTelp', 'ownAlm', 'harga'));
         $createKontrak = $this->createKontrak($konstruksiOwnerId, $filename);
         $pdf->save($path . $filename);
     }

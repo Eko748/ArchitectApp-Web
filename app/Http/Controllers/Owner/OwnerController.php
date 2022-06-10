@@ -8,6 +8,7 @@ use App\Models\Konsultan;
 use App\Models\Kontraktor;
 use App\Models\KonstruksiOwner;
 use App\Models\KontrakKerjaKonsultan;
+use App\Models\KontrakKerjaKontraktor;
 use App\Models\KontraktorCabang;
 use App\Models\LelangOwner;
 use App\Models\Owner;
@@ -164,10 +165,9 @@ class OwnerController extends Controller
     public function myKonstruksi(Request $request)
     {
 
-        $data = KonstruksiOwner::with('owner.user', 'konstruksi.kontraktor.user', 'kontrak.proposal', 'kontrak.payment')->withCount('hasil')->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
-
+        $data = KonstruksiOwner::with('hasil', 'owner.user', 'konstruksi.kontraktor.user',)->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
         if ($request->ajax()) {
-            $view = view('konstruksi.data', compact('data'))->render();
+            $view = view('ajax.konstruksi', compact('data'))->render();
             return response()->json(['html' => $view]);
         }
         return view('public.mykonstruksi', compact('data'));
@@ -180,6 +180,15 @@ class OwnerController extends Controller
         $filename = $kontrak->kontrakKerja;
 
         return Storage::disk('files')->download("pdf/kontrak/" . $filename);
+    }
+
+    public function downloadKontrakKontraktor(KontrakKerjaKontraktor $kontrak)
+    {
+        // $kontrak = KontrakKerjaKonsultan::find($kontrak->id);
+
+        $filename = $kontrak->kontrakKerja;
+
+        return Storage::disk('files')->download("pdf/kontraktor/" . $filename);
     }
 
     public function updateBio(Request $request)
@@ -203,11 +212,26 @@ class OwnerController extends Controller
 
         return view('public.single-myproject', compact('data'));
     }
+    public function getDetilKonstruksi(KonstruksiOwner $konstruksi)
+    {
+        
+        $data = KonstruksiOwner::with('owner', 'konstruksi.konstraktor.user', 'kontrak.payment')->find($konstruksi->id);
+        // dd($data);
+        // $data = ProjectOwner::where("id", $project->id)->first();
+        
+        return view('public.single-mykonstruksi', compact('data'));
+    }
 
     public function getDetilKonsultan(ProjectOwner $konsultan)
     {
         $data = ProjectOwner::with('project.konsultan.user')->find($konsultan->id);
         return view('public.single-myproject', compact('data'));
+    }
+
+    public function getDetilKontraktor(KonstruksiOwner $kontraktor)
+    {
+        $data = KonstruksiOwner::with('konstruksi.kontraktor.user')->find($kontraktor->id);
+        return view('public.single-mykonstruksi', compact('data'));
     }
 
     public function konsDetil(Konsultan $kons)

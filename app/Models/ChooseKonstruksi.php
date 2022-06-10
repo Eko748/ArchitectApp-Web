@@ -13,9 +13,9 @@ class ChooseKonstruksi extends Model
     ];
 
 
-    public function imageOwner()
+    public function fileOwner()
     { 
-        return $this->hasMany("App\Models\ImageOwner", "id", "chooseProjectId");
+        return $this->hasMany(FileOwner::class, "id", "chooseKonstruksiId");
     }
     public function konstruksiOwner()
     {
