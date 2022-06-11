@@ -127,7 +127,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Baca <a href="">Persyaratan dan Ketentuan </a></td>
+                                        <td class="fw-bold">Baca <a href="{{ route('public.tahapan-konstruksi') }}">Tahapan Konstruksi Project</a></td>
                                     </tr>
                                 </table>
                             </div>

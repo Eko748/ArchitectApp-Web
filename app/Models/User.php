@@ -26,7 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_login',
         'avatar',
         'is_active',
-        'fireBaseToken'
+        'fireBaseToken',
+        'last_seen'
     ];
 
     /**

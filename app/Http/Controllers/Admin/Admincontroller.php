@@ -16,14 +16,14 @@ class Admincontroller extends Controller
 {
     public function index()
     {
-        $data = [
-            "jumlah_data_admin" => Admin::count(),
-            "jumlah_data_konsultan" => Konsultan::count(),
-            "jumlah_data_owner" => Owner::count(),
-            "jumlah_data_kontraktor" => Kontraktor::count(),
+        // $data = [
+        //     "jumlah_data_admin" => Admin::count(),
+        //     "jumlah_data_konsultan" => Konsultan::count(),
+        //     "jumlah_data_owner" => Owner::count(),
+        //     "jumlah_data_kontraktor" => Kontraktor::count(),
 
-        ];
-        return view('admin.dashboard', $data);
+        // ];
+        // return view('admin.dashboard', $data);
     }
     public function userPage()
     {

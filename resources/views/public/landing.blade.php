@@ -15,6 +15,7 @@ Arsitek.co
             renovasi sebuah rumah.
             Keahlian mereka dalam menentukan warna, bahan, dan furnitur yang sesuai, akan memperindah suasana rumah.
         </p>
+        <a href="{{ route('public.tahapan-konstruksi') }}" class="text-decoration-none text-muted fw-bold fa fa-info-circle" style="font-size: 40px"></a>
     </div>
     <div class="container-fluid ">
         <div class="title text-center my-5">

@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Route;
 
 //public
 
-Route::post("/cobaya", [KonstruksiController::class, "chooseKonstruksi"]);
+Route::get("/tahapan-konstruksi", [KonstruksiController::class, "tahapanKonstruksi"])->name('public.tahapan-konstruksi');
 
 Route::get('kirim-email', 'App\Http\Controllers\MailController@index');
 
@@ -63,7 +63,12 @@ Route::get('/detil/cabang-kontraktor/{cabang:slug}', [OwnerController::class, 'c
 Route::middleware('auth')->group(function () {
     Route::post('/gettimelogin', [Admincontroller::class, 'getTimeLogging']);
     Route::middleware(['admin'])->group(function () {
-        Route::get('/dashboard', [Admincontroller::class, 'index'])->name('dashboard');
+        // Route::get('/dashboard', [Admincontroller::class, 'index'])->name('index');
+        Route::get('/dashboard', [UserController::class, 'lastLogin'])->name('dashboard');
+        Route::get('online-user', [UserController::class, 'lastLogin']);
+
+
+
         Route::delete('/konsultan/{id}', [AdminController::class, 'deletekonsul'])->name('user.konsultan.delete');
         Route::delete('/owner/{id}', [AdminController::class, 'deleteowner'])->name('user.owner.delete');
         Route::delete('/kontraktor/{id}', [AdminController::class, 'deletekontraktor'])->name('user.kontraktor.delete');
@@ -277,3 +282,7 @@ Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

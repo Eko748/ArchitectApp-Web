@@ -6,8 +6,8 @@ $img[] = $key->softfile;
 @endforeach --}}
 <div class="col-lg-3 col-md-6 col-sm mb-3">
     <div class="card border-0 konstruksiCard">
-        {{-- @if ($item->hasil_count == 0)
-        <img src="{{ asset('img/progress.gif') }}" class="card-img-top" alt="..." style="max-height: 150"> --}}
+        {{-- @if ($item->hasil_count == 0)--}}
+        <img src="{{ asset('img/progress.gif') }}" class="card-img-top" alt="..." style="max-height: 150"> 
         
         {{-- @else
         <img src="{{ asset('img/file hasil/image/' . $img[0]) }}" class="card-img-top" alt="..."

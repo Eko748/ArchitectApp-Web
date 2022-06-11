@@ -16,7 +16,7 @@
           <p class="px-3 pt-3">
             Semua jenis transaksi diawasi oleh pihak ketiga
           </p>
-
+          <br>
           </div>
               
             <html>

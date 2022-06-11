@@ -15,6 +15,10 @@ use PDF;
 
 class KonstruksiController extends Controller
 {
+    public function tahapanKonstruksi()
+    {
+        return view('public.tahapan-konstruksi');
+    }
     // public function payProject(Request $request)
     // {
 

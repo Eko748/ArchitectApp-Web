@@ -22,7 +22,7 @@
                                 <h4>Konsultan</h4>
                             </div>
                             <div class="card-body">
-                                {{$jumlah_data_konsultan}}
+                                {{ $jumlah_data_konsultan }}
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                                 <h4>Owner</h4>
                             </div>
                             <div class="card-body">
-                                {{$jumlah_data_owner}}
+                                {{ $jumlah_data_owner }}
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                 <h4>Kontraktor</h4>
                             </div>
                             <div class="card-body">
-                                {{$jumlah_data_kontraktor}}
+                                {{ $jumlah_data_kontraktor }}
                             </div>
                         </div>
                     </div>
@@ -64,59 +64,57 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Admin</h4>
+                                <h4>Transaksi</h4>
                             </div>
                             <div class="card-body">
-                                {{$jumlah_data_admin}}
+                                {{ $jumlah_data_order }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Statistics</h4>
-                            <div class="card-header-action">
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-primary">Week</a>
-                                    <a href="#" class="btn">Month</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="myChart" height="182"></canvas>
-                            <div class="statistic-details mt-sm-4">
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span> 7%</span>
-                                    <div class="detail-value">$243</div>
-                                    <div class="detail-name">Today's Sales</div>
-                                </div>
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-danger"><i
-                                                class="fas fa-caret-down"></i></span> 23%</span>
-                                    <div class="detail-value">$2,902</div>
-                                    <div class="detail-name">This Week's Sales</div>
-                                </div>
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span>9%</span>
-                                    <div class="detail-value">$12,821</div>
-                                    <div class="detail-name">This Month's Sales</div>
-                                </div>
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span> 19%</span>
-                                    <div class="detail-value">$92,142</div>
-                                    <div class="detail-name">This Year's Sales</div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="section-body">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Data Owner</h4>
                     </div>
+            <div class="card-body">
+                <div class="table-responsive-sm">
+            <table class="table-hover table table-bordered data-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Last Seen</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                {{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}
+                            </td>
+                            <td>
+                                @if(Cache::has('user-is-online-' . $user->id))
+                                    <span class="text-success">Online</span>
+                                @else
+                                    <span class="text-secondary">Offline</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
                 </div>
             </div>
+                </div>
+            </div>
+            
         </section>
     </div>
 @endsection
