@@ -44,7 +44,7 @@ class ProjectController extends Controller
 
         $projectOwn =  ProjectOwner::create([
             'projectId' => $request->projectId,
-            'ownerId' => Auth::user()->id,
+            'ownerId' => $this->getOwnerId()->owner->id,
             'status' => "0",
         ]);
         $input = [
@@ -128,7 +128,7 @@ class ProjectController extends Controller
 
         $nama = $data->projectOwner->user->name;
         $email = $data->projectOwner->user->email;
-        $telepon = $data->projectOwner->user->owner->telepon;
+        $telepon = Auth::user()->owner->telepon;
         // dd($nama);
         $hargaRab = $data->project->harga_rab;
         $hargaDesain = $data->project->harga_desain;
@@ -180,7 +180,7 @@ class ProjectController extends Controller
         $order->kontrakKonsultanId = $request->kontrakKonsultanId;
         $order->ownerId = Auth::user()->id;
         $order->projectId = $request->projectId;
-        $order->status = 0;
+        $order->status = "Belum Bayar";
         $order->status_order = $json->transaction_status;
         $order->transaction_id = $json->transaction_id;
         $order->order_id = $json->order_id;

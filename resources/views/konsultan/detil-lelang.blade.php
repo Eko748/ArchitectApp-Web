@@ -173,7 +173,7 @@
                             if (response.desain == 1) {
                             $('.badge-jasa').append(`<span class="badge badge-warning badge-pill text-dark">Desain 2D dan 3D</span>`)
                             $('#desain').prop('checked', true);
-                                 $('.modal-body').prepend(`<div class="form-group"> <label for="tawaran">Tawaran Harga Desain</label>
+                                $('.modal-body').prepend(`<div class="form-group"> <label for="tawaran">Tawaran Harga Desain</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp</span>
@@ -183,14 +183,14 @@
                                 <div class="invalid-feedback"></div>
                                 <small id="tawarHelp" class="form-text text-muted">Berapa tawaran anda untuk desain yang akan anda buat.</small></div>`)
                         } 
-                          maskingInput('#hargaDesain')
-                         maskingInput('#hargaRab')
-                       
+                        maskingInput('#hargaDesain')
+                        maskingInput('#hargaRab')
+                    
                     },
                 });
             }
         </script>
-         @include('konsultan.js.profileJs')
+        @include('konsultan.js.profileJs')
 
     @endpush
 @endsection

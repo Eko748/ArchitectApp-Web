@@ -22,6 +22,7 @@ class LelangController extends Controller
     {
         $owner = Owner::where('userId', Auth::user()->id)->first();
         $data = LelangOwner::with('owner', 'image')->withCount('proposal')->where('status',0)->get();
+        // dd($data);
         return $data;
     }
     public function getAllLelangOwner(Request $request)
@@ -29,7 +30,7 @@ class LelangController extends Controller
         if ($request->has('filter')) {
             # code...
         }
-
+ 
         $lelang = LelangOwner::with('owner')->withCount('proposal')->where('status',0)->get();
         return $lelang;
     }

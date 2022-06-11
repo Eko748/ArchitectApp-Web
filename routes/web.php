@@ -173,6 +173,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/konsultan/confirmpass/{user}', [KonsultanProfile::class, 'confirmPass'])->name('konsultan.profile.confirm');
         Route::put('/konsultan/confirmpass/{user}', [KonsultanProfile::class, 'updatePass'])->name('konsultan.profile.pass');
         Route::delete('/konsultan/delete/{user}', [KonsultanProfile::class, 'destroy'])->name('konsultan.profile.del');
+
+        // Download Kontrak
+        Route::get('/konsultan/download/kontrak/{kontrak}', [JobController::class, 'downloadKontrak'])->name('konsultan.download');
     });
 
     Route::middleware(['kontraktor'])->group(function () {
@@ -242,7 +245,7 @@ Route::middleware('auth')->group(function () {
 
         // Choose Kontraktor
         Route::post('/owner/konstruksi/choose', [KonstruksiController::class, 'chooseKonstruksi'])->name('owner.choose.konstruksi');
-        Route::get('/owner/download/kontrakKontraktor/{kontrak}', [OwnerController::class, 'downloadKontrakKontraktor'])->name('owner.download');
+        // Route::get('/owner/download/kontrakKontraktor/{kontrak}', [OwnerController::class, 'downloadKontrakKontraktor'])->name('owner.download');
 
         // My Konstruksi
         Route::get('/owner/mykonstruksi', [OwnerController::class, 'myKonstruksi'])->name('owner.my.konstruksi');

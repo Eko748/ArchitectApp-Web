@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->integer('projectId');
             // $table->text('buktiBayar');
             // $table->integer('status');
-            $table->integer('status');
+            $table->enum('status',['Belum Bayar','Sudah Bayar']);
             $table->string('status_order');
             $table->string('transaction_id');
             $table->string('order_id');

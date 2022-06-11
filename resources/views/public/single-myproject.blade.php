@@ -27,10 +27,10 @@
                                     <i class="fas fa-user-tie me-1"></i>{{ $data->project->konsultan->user->name }}</span>
                                 <small class="text-muted ms-3 disp">Architect / Designer</small>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <span class="d-block me-2"><i class="fas fa-map-marker-alt me-1"></i>{{ $data->project->konsultan->user->alamat }}</span>
                                 <small class="text-muted ms-3 disp">Alamat</small>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="divider"></div>
                         <div class="text-capitalized p-3">

@@ -87,7 +87,7 @@ class PaymentController extends Controller
     
     public function verifyOrder(Request $request)
     {
-        return Order::find($request->id)->update(['status' => 1]);
+        return Order::find($request->id)->update(['status' => "Sudah Bayar"]);
     }
 
     public function verifyTransaksi(Request $request)

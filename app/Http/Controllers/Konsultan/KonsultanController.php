@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Konsultan;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChooseProject;
 use App\Models\LelangOwner;
+use App\Models\ProjectOwner;
 use App\Models\Project;
 use App\Models\LelangKonsultan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class KonsultanController extends Controller
 {
@@ -72,6 +76,23 @@ class KonsultanController extends Controller
     }
     public function activeJob()
     {
+        // if ($request->ajax()) {
+            // $data = ChooseProject::with('projectOwner.user.owner', 'projectOwner.kontrak.proposal', 'project.konsultan.user', 'imageOwner')->get();
+            // dd($data);
+            // $data = ProjectOwner::with('project.images', 'project.konsultan', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'chooseProject.imageOwner', 'hasil')->where('status', "0")->get();
+            // // dd($data);
+            // return DataTables::of($data)
+            //     ->addIndexColumn()->addColumn('tanggal', function ($data) {
+            //     $createdAt = Carbon::parse($data->updated_at);
+            //     return $createdAt->format('d M Y');
+            //     })->addColumn('Aksi', function ($data) {
+            //         $btn = '<a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewUser"
+            //         data-id="' . $data->id . '" id="viewUser">View</a>';
+            //         return $btn;
+            //     })->rawColumns(['Aksi'])->make(true);
+        // }
+        // dd($request);
+
         return view('konsultan.active-job');
     }
     public function activeProposal()

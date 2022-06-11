@@ -56,8 +56,6 @@
                 window.location.href = baseUrl + 'konsultan/lelang/' + id
                 });
             
-            
-            
                 SetupAjax();
                 $.ajax({
                 url: "{{ route('konsultan.lelang.all') }}",
@@ -75,15 +73,11 @@
                 let badge = "";
                 let image ="";
                 let path = "{{ asset('img/lelang/ruangan/') }}"
-
                 
                 $.each(response.image, function(key, value) {
             
                 image += `<img src="${path}/${value.image}" height="150" loading="lazy" class="d-inline m-1 rounded" >`
                 })
-
-            
-            
             
                 $('.list-group').prepend(`<li class="list-group-item list-group-item-action mylelang" data-id="${value.id}">
                     <div class="d-flex w-100 justify-content-between">

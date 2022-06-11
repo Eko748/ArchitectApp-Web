@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title')
-    Project
+    Archived Project
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} ">

@@ -159,7 +159,7 @@ class OwnerController extends Controller
     public function myProject(Request $request)
     {
 
-        $data = ProjectOwner::with('hasil', 'owner.user', 'project.konsultan.user', 'kontrak.proposal', 'kontrak.payment')->withCount('hasil')->where('ownerId', Auth::user()->id)->paginate(8);
+        $data = ProjectOwner::with('hasil', 'owner.user', 'project.konsultan.user', 'kontrak.proposal', 'kontrak.payment')->withCount('hasil')->where('ownerId', $this->getOwnerId()->owner->id)->paginate(8);
 
         if ($request->ajax()) {
             $view = view('ajax.data', compact('data'))->render();

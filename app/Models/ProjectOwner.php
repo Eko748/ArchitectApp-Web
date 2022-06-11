@@ -15,7 +15,7 @@ class ProjectOwner extends Model
 
     public function user()
     {
-        return $this->belongsTo(Owner::class, 'ownerId', 'id');
+        return $this->belongsTo(User::class, 'ownerId', 'id');
     }
 
     public function owner()

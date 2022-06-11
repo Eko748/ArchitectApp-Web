@@ -16,9 +16,13 @@ class ChooseProject extends Model
         'RAB' => "0", 'desain' => "0"
     ];
 
+    public function owner()
+    {
+        return $this->belongsTo(Owner::class, 'ownerId', 'id');
+    }
     public function imageOwner()
     { 
-        return $this->hasMany("App\Models\ImageOwner", "id", "chooseProjectId");
+        return $this->hasMany(ImageOwner::class, 'chooseProjectId', 'id');
     }
     public function projectOwner()
     {

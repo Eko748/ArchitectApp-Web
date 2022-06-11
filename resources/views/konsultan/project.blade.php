@@ -32,7 +32,7 @@ Project
                 </div>
             </div>
             <div class="card-body">
-                
+                <div class="table-responsive-sm">
                 <table class="table table-hover" id="table-project">
                     <thead>
                         <tr>
@@ -48,6 +48,7 @@ Project
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
         

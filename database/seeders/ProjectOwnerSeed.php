@@ -15,7 +15,7 @@ class ProjectOwnerSeed extends Seeder
     public function run()
     {
         ProjectOwner::create([
-            "ownerId" => 4,
+            "ownerId" => 1,
             "projectId" => 1,
             "status" => "0"
         ]);
