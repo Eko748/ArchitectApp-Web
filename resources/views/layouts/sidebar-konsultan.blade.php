@@ -12,7 +12,7 @@
                     href="{{ route('konsultan.dashboard') }}"><i class="fas fa-fire"></i><span>Home</span></a></li>
             <li class="menu-header">Product</li>
             <li class=" {{ Request::segment(2) == 'project' ? 'active' : '' }}"><a class="nav-link"  href="{{ route('konsultan.project') }}"><i class="far fa-images"></i><span>Desain Saya</span></a></li>
-            <li class=" {{ Request::segment(2) == 'lelang-konsultan' ? 'active' : '' }}"><a class="nav-link"  href="{{ route('konsultan.lelang-konsultan') }}"><i class="far fa-images"></i><span>Lelang Saya</span></a></li>
+            {{-- <li class=" {{ Request::segment(2) == 'lelang-konsultan' ? 'active' : '' }}"><a class="nav-link"  href="{{ route('konsultan.lelang-konsultan') }}"><i class="far fa-images"></i><span>Lelang Saya</span></a></li> --}}
             <li class="menu-header">Management</li>
             <li class=" {{ Request::segment(2) == 'lelang' ? 'active' : '' }}"><a class="nav-link"  href="{{ route('konsultan.find') }}"><i class="far fa-images"></i><span>Lelang Owner</span></a></li>
             <li class="nav-item dropdown  {{ in_array(Request::segment(3),['active-job','archived-job']) ? 'active' : '' }}">

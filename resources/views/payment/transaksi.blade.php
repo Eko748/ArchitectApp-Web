@@ -35,7 +35,10 @@
                   @csrf
                   <input type="hidden" name="json" id="json_callback">
               </form>
-              <button style="display: inline;" class="btn btn-warning btn-sm center px-3" id="pay-button"><i class="fa fa-shopping-cart"></i> Checkout!</button>
+              <button style="display: inline; border-radius: 5px;" class="btn btn-warning btn-sm center px-3" id="pay-button"><i class="fa fa-shopping-cart"></i> Checkout!</button>
+              <br>
+              <br>
+              <br>
               <script type="text/javascript">
                 // For example trigger on button clicked, or any time you need
                 var payButton = document.getElementById('pay-button');
