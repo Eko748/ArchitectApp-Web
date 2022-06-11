@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title')
-Verifikasi Pembayaran Project
+Verifikasi Pembayaran Konstruksi
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} ">
@@ -14,7 +14,7 @@ Verifikasi Pembayaran Project
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Verifikasi Jasa project Desain Konsultan</h1>
+            <h1>Verifikasi Transaksi Jasa Project Konstruksi</h1>
         </div>
 
         <div class="section-body">
@@ -29,7 +29,7 @@ Verifikasi Pembayaran Project
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Owner</th>
-                                    <th scope="col">Konsultan</th>
+                                    <th scope="col">Kontraktor</th>
                                     <th scope="col">Jumlah</th>
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Id Order</th>
@@ -93,8 +93,8 @@ Verifikasi Pembayaran Project
                             name: 'ownerId'
                         },
                         {
-                            data: 'kontrak.project_owner.project.konsultan.user.name',
-                            name: 'kontrak.project_owner.project.konsultan.user.email'
+                            data: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email',
+                            name: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email'
                         },
                         {
                             data: 'jumlah',
@@ -127,7 +127,7 @@ Verifikasi Pembayaran Project
 
                 $('body').on('click','#imgBukti',function () {
                     let img = $(this).data('img');
-                    $('.modal-body').append(`<img src="{{asset('img/payment/konsultan/${img}')}}" alt="" width="100%">`)
+                    $('.modal-body').append(`<img src="{{asset('img/payment/kontraktor/${img}')}}" alt="" width="100%">`)
                 })
                 $('body').on('click','#verify',function () {
                     let id = $(this).data('id');
@@ -149,7 +149,7 @@ Verifikasi Pembayaran Project
                             },
                         });
                         $.ajax({
-                            url: "{{route('order.verify')}}",
+                            url: "{{route('transaksi.verify')}}",
                             method: "POST",
                             data: { id: id },
                             dataType: "JSON",

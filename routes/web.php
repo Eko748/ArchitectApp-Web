@@ -106,9 +106,13 @@ Route::middleware('auth')->group(function () {
 
         // payment
         // Route::get('/payment/verify', [Admincontroller::class, 'verifyPayment'])->name('admin.verify');
-        Route::get('/payment/verify', [Admincontroller::class, 'verifyOrder'])->name('admin.verify');
-        Route::get('/payment', [PaymentController::class, 'getAllOrder'])->name('order.all');
-        Route::post('/payment', [PaymentController::class, 'verifyOrder'])->name('order.verify');
+        Route::get('/payment-konsultan/verify', [Admincontroller::class, 'verifyOrder'])->name('admin.verify');
+        Route::get('/payment-konsultan', [PaymentController::class, 'getAllOrder'])->name('order.all');
+        Route::post('/payment-konsultan', [PaymentController::class, 'verifyOrder'])->name('order.verify');
+
+        Route::get('/payment-kontraktor/verify', [Admincontroller::class, 'getVerifyTransaksi'])->name('admin.transaksi');
+        Route::get('/payment-kontraktor', [PaymentController::class, 'getAllTransaksi'])->name('transaksi.all');
+        Route::post('/payment-kontraktor', [PaymentController::class, 'verifyTransaksi'])->name('transaksi.verify');
         // Route::get('/payment', [PaymentController::class, 'getAllPayment'])->name('payment.all');
         // Route::post('/payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
     });

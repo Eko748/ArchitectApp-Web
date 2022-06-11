@@ -105,4 +105,9 @@ class Admincontroller extends Controller
     {
         return view('admin.verify-order');
     }
+
+    public function getVerifyTransaksi()
+    {
+        return view('admin.verify-transaksi');
+    }
 }

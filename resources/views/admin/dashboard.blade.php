@@ -15,7 +15,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-2">
                         <div class="card-icon bg-primary">
-                            <i class="fas fa-file"></i>
+                            <a href="{{ route('konsultan.page') }}" class="fas fa-user-tie"></a>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
@@ -30,7 +30,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-2">
                         <div class="card-icon bg-primary">
-                            <i class="fas fa-file"></i>
+                            <a href="{{ route('owner.page') }}" class="fas fa-users"></a>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
@@ -45,7 +45,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-2">
                         <div class="card-icon bg-primary">
-                            <i class="fas fa-file"></i>
+                            <a href="{{ route('kontraktor.page') }}" class="fas fa-user-cog"></a>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
@@ -60,7 +60,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-2">
                         <div class="card-icon bg-primary">
-                            <i class="fas fa-file"></i>
+                            <a href="{{ route('admin.verify') }}" class="fas fa-file"></a>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
