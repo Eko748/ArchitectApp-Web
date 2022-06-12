@@ -6,26 +6,39 @@
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('dashboard') }}">ADM</a>
         </div>
+        
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('dashboard') }}"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
+            <li class="{{ Request::segment(3) == 'dashboard' ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('dashboard') }}"><i class="fas fa-fire"></i><span>Home</span></a></li>
+
             <li class="menu-header">Management</li>
-            <li class="{{ Request::segment(2) == 'tender' ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin.tender') }}"><i class="fas fa-clipboard-list"></i><span>Data Tender
-                        Win</span></a></li>
-            <li class="nav-item dropdown  {{ in_array(Request::segment(2), ['verify', 'transaksi']) ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-clipboard"></i><span>Transaksi</span></a>
+            <li class="{{ Request::segment(3) == 'tender' ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin.tender') }}"><i class="fas fa-clipboard-list"></i><span>Data Tender Win</span></a>
+            </li>
+                        
+            <li class="nav-item dropdown  {{ in_array(Request::segment(2), ['verify', 'archieved']) ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user-tie"></i><span>Transaksi Konsultan</span></a> </a>
                 <ul class="dropdown-menu">
-                <li class="{{ Request::segment(2) == 'verify' ? 'active' : '' }}"><a class="nav-link"
-                        href="{{ route('admin.verify') }}"><i class="fas fa-handshake"></i><span>
-                            Project Konsultan</span></a></li>
-                <li class="{{ Request::segment(2) == 'transaksi' ? 'active' : '' }}"><a class="nav-link"
-                        href="{{ route('admin.transaksi') }}"><i class="fas fa-users-cog"></i><span>Project Kontraktor</span></a></li>
+                <li class="{{ Request::segment(3) == 'verify' ? 'active' : '' }}"><a class="nav-link"
+                        href="{{ route('admin.verify') }}"><i class="fas fa-handshake"></i><span>Project Active</span></a>
+                </li>
+                <li class="{{ Request::segment(3) == 'archieved' ? 'active' : '' }}"><a class="nav-link"
+                        href="{{ route('admin.archieved-order') }}"><i class="fas fa-save"></i><span>Project Archived</span></a>
+                </li>
                 </ul>
             </li>
-            <li
-                class="nav-item dropdown  {{ in_array(Request::segment(2), ['konsultan', 'owner', 'kontraktor']) ? 'active' : '' }}">
+
+            <li class="nav-item dropdown  {{ in_array(Request::segment(3), ['Kontraktor', 'archivedTrans']) ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user-cog"></i><span>Transaksi Kontraktor</span></a> </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::segment(3) == 'transaksi' ? 'active' : '' }}"><a class="nav-link"
+                        href="{{ route('admin.transaksi') }}"><i class="fas fa-handshake"></i><span>Konstruksi Active</span></a></li>
+                    <li class="{{ Request::segment(3) == 'archivedTrans' ? 'active' : '' }}"><a class="nav-link"
+                        href="{{ route('admin.archieved-transaksi') }}"><i class="fas fa-save"></i>Konstruksi Archived</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown  {{ in_array(Request::segment(2), ['konsultan', 'owner', 'kontraktor']) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-users"></i><span>User</span></a>
                 <ul class="dropdown-menu">

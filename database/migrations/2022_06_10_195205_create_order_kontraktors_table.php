@@ -19,7 +19,8 @@ class CreateOrderKontraktorsTable extends Migration
             $table->integer('ownerId');
             $table->integer('kontraktorId');
             $table->integer('konstruksiId');
-            $table->integer('status');
+            // $table->integer('status');
+            $table->enum('status',['Belum Bayar','Sudah Bayar']);
             $table->string('status_order');
             $table->string('transaction_id');
             $table->string('order_id');

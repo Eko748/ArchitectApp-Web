@@ -9,7 +9,7 @@ class KontrakKerjaKonsultan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tenderKonsultanId', 'projectOwnerId','kontrakKerja'
+        'tenderKonsultanId', 'projectOwnerId', 'kontrakKerja'
     ];
 
     public function projectOwner()

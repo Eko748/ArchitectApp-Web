@@ -18,7 +18,7 @@ class KonstruksiOwnerSeed extends Seeder
             "ownerId" => 4,
             "konstruksiId" => 1,
             "konfirmasi" => "0",
-            "status" => "0"
+            "status" => "Belum Bayar"
         ]);
     }
 }

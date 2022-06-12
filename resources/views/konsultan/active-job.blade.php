@@ -59,6 +59,7 @@ Project Owner
                                     <th scope="col">Luas Ruangan</th>
                                     <th scope="col">Kontrak</th>
                                     <th scope="col">Tanggal</th>
+                                    <th scope="col">Gambar</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -267,6 +268,10 @@ Project Owner
                             data: 'tanggal',
                             name: 'tanggal'
                         },
+                        // {
+                        //     data: 'gambar',
+                        //     name: 'gambar'
+                        // },
                         {
                             data: 'Aksi',
                             name: 'Aksi',

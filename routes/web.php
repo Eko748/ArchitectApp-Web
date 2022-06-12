@@ -107,12 +107,18 @@ Route::middleware('auth')->group(function () {
         // payment
         // Route::get('/payment/verify', [Admincontroller::class, 'verifyPayment'])->name('admin.verify');
         Route::get('/payment-konsultan/verify', [Admincontroller::class, 'verifyOrder'])->name('admin.verify');
+        Route::get('/payment-konsultan/archieved', [Admincontroller::class, 'getArchievedOrder'])->name('admin.archieved-order');
         Route::get('/payment-konsultan', [PaymentController::class, 'getAllOrder'])->name('order.all');
+        Route::get('/payment-konsultan-archieved', [PaymentController::class, 'getAllArchievedOrder'])->name('archieved-order.all');
         Route::post('/payment-konsultan', [PaymentController::class, 'verifyOrder'])->name('order.verify');
+        Route::post('/payment-konsultan-unverify', [PaymentController::class, 'unverifyOrder'])->name('order.unverify');
 
         Route::get('/payment-kontraktor/verify', [Admincontroller::class, 'getVerifyTransaksi'])->name('admin.transaksi');
+        Route::get('/payment-kontraktor/archieved', [Admincontroller::class, 'getArchievedTransaksi'])->name('admin.archieved-transaksi');
         Route::get('/payment-kontraktor', [PaymentController::class, 'getAllTransaksi'])->name('transaksi.all');
+        Route::get('/payment-kontraktor-archieved', [PaymentController::class, 'getAllArchievedTransaksi'])->name('archieved-transaksi.all');
         Route::post('/payment-kontraktor', [PaymentController::class, 'verifyTransaksi'])->name('transaksi.verify');
+        Route::post('/payment-kontraktor-unverify', [PaymentController::class, 'unverifyTransaksi'])->name('transaksi.unverify');
         // Route::get('/payment', [PaymentController::class, 'getAllPayment'])->name('payment.all');
         // Route::post('/payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
     });

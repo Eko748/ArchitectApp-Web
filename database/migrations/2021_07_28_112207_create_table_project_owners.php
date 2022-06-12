@@ -18,7 +18,7 @@ class CreateTableProjectOwners extends Migration
             $table->integer('ownerId');
             $table->integer('projectId');
             $table->text('hasil_rab')->nullable();
-            $table->enum('status',[0,1]);
+            $table->enum('status',['Belum Bayar','Sudah Bayar']);
             $table->timestamps();
         });
     }

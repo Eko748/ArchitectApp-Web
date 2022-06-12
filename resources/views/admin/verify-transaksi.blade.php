@@ -24,13 +24,14 @@ Verifikasi Pembayaran Konstruksi
                 </div>
                 <div class="card-body">
                     <div class="table-responsive-sm">
-                        <table class="table table-hover" id="table-payment">
+                        <table class="table table-hover" id="table-transaksi">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Owner</th>
                                     <th scope="col">Kontraktor</th>
                                     <th scope="col">Jumlah</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Id Order</th>
                                     <th scope="col">Status Order</th>
@@ -77,11 +78,11 @@ Verifikasi Pembayaran Konstruksi
 <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 <script>
     $(function() {
-                let table = $('#table-payment').DataTable({
+                let table = $('#table-transaksi').DataTable({
                     processing: true,
                     serverSide: true,
                     autoWidth: false,
-                    ajax: "{{ route('order.all') }}",
+                    ajax: "{{ route('transaksi.all') }}",
                     columns: [
 
                         {
@@ -96,9 +97,13 @@ Verifikasi Pembayaran Konstruksi
                             data: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email',
                             name: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email'
                         },
+                        // {
+                        //     data: 'jumlah',
+                        //     name: 'jumlah'
+                        // },
                         {
-                            data: 'jumlah',
-                            name: 'jumlah'
+                            data: 'kontrak.konstruksi_owner.status',
+                            name: 'status'
                         },
                         {
                             data: "tanggal",
@@ -155,7 +160,7 @@ Verifikasi Pembayaran Konstruksi
                             dataType: "JSON",
                             success: function () {
                                 alertSuccess("Berhasil memverifikasi");
-                                $('#table-payment').DataTable().ajax().reload()
+                                $('#table-transaksi').DataTable().ajax().reload()
                             },
                         });
                     }

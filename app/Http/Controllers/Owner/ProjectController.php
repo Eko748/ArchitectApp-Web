@@ -45,7 +45,7 @@ class ProjectController extends Controller
         $projectOwn =  ProjectOwner::create([
             'projectId' => $request->projectId,
             'ownerId' => $this->getOwnerId()->owner->id,
-            'status' => "0",
+            'status' => "Belum Bayar",
         ]);
         $input = [
             'panjang' => $request->panjang,
@@ -123,11 +123,11 @@ class ProjectController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
         
-        $data = ChooseProject::with('projectOwner.user', 'projectOwner.owner', 'project')->first();
+        $data = ChooseProject::with('projectOwner.user', 'projectOwner.owner.user', 'project')->first();
         // dd($data);
 
-        $nama = $data->projectOwner->user->name;
-        $email = $data->projectOwner->user->email;
+        $nama = $data->projectOwner->owner->user->name;
+        $email = $data->projectOwner->owner->user->email;
         $telepon = Auth::user()->owner->telepon;
         // dd($nama);
         $hargaRab = $data->project->harga_rab;
@@ -172,15 +172,16 @@ class ProjectController extends Controller
         
     }
 
-    public function paymentPost(Request $request, ProjectOwner $project)
+    public function paymentPost(Request $request)
     {
-        
+        // $data = ProjectOwner::with('project.konsultan', 'kontrak')->get();
+        $data = ChooseProject::with('project.konsultan', 'projectOwner.user.owner')->first();
         $json = json_decode($request->get('json'));
         $order = new Order();
-        $order->kontrakKonsultanId = $request->kontrakKonsultanId;
-        $order->ownerId = Auth::user()->id;
-        $order->projectId = $request->projectId;
-        $order->status = "Belum Bayar";
+        $order->kontrakKonsultanId = $data->id;
+        $order->ownerId = $data->project->konsultan->id;
+        $order->projectId =  $data->project->id;
+        // $order->status = "Belum Bayar";
         $order->status_order = $json->transaction_status;
         $order->transaction_id = $json->transaction_id;
         $order->order_id = $json->order_id;

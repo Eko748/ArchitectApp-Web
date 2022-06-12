@@ -18,7 +18,7 @@ class CreateKonstruksiOwnersTable extends Migration
             $table->integer('ownerId');
             $table->integer('konstruksiId');
             $table->enum('konfirmasi',[0,1,2]);
-            $table->enum('status',[0,1]);
+            $table->enum('status',["Belum Bayar","Sudah Bayar"]);
             $table->timestamps();
         });
     }

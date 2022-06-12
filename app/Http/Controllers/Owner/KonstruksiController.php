@@ -69,7 +69,7 @@ class KonstruksiController extends Controller
             "ownerId" => Auth::user()->id,
             "konstruksiId" => $request->konstruksiId,
             "konfirmasi" => "0",
-            "status" => "0"
+            "status" => "Belum Bayar"
         ]);
 
         $konstruksi_owner->save();
@@ -203,7 +203,7 @@ class KonstruksiController extends Controller
         $data = ChooseKonstruksi::with('cabang.kontraktor', 'konstruksiOwner.user.owner')->first();
         $json = json_decode($request->get('json'));
         $order = new OrderKontraktor();
-        $order->konstruksiOwnerId = $data->konstruksiOwner->id;
+        $order->konstruksiOwnerId = $request->id;
         $order->ownerId = $data->konstruksiOwner->user->owner->id;
         $order->kontraktorId = $data->cabang->kontraktor->id;
         $order->konstruksiId = $data->cabang->id;

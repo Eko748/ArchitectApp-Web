@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\KontrakKerjaKonsultan;
 use App\Models\Project;
 use App\Models\ProjectOwner;
+use App\Models\ChooseProject;
 use App\Models\Rating;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -44,9 +45,10 @@ class JobController extends Controller
         //             data-id="' . $data->id . '" id="viewUser">View</a>';
         //             return $btn;
         //         })->rawColumns(['Aksi'])->make(true);
-        $data = ProjectOwner::with('project.images', 'project.konsultan', 'owner.user.order', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'kontrak.order', 'chooseProject.imageOwner', 'hasil')->where('status', "0")->get();
+        $data = ProjectOwner::with('project.images', 'project.konsultan', 'chooseProject.owner.user.order', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'kontrak.order', 'chooseProject.ambil', 'chooseProject.imageOwner', 'hasil')->where('status', "0")->get();
+        $order = ChooseProject::with('owner.user.order')->where('id')->first();
             // dd($data);
-            return DataTables::of($data)
+            return DataTables::of($data, $order)
                 ->addIndexColumn()->addColumn('tanggal', function ($data) {
                 $createdAt = Carbon::parse($data->updated_at);
                 return $createdAt->format('d M Y');
@@ -57,8 +59,17 @@ class JobController extends Controller
                     // $project = $desain && $rab;
                     return $desain.$rab;
                     })
-                ->addIndexColumn()->addColumn('order', function ($data) {
-                    $status = $data->owner->user->order->status;
+                // ->addIndexColumn()->addColumn('gambar', function ($img, $index = 0, $index2 = 1, $index3 = 2, $index4 = 3) {
+                //         if ($img->ambil->images->count() == 0) {
+                //             return $gambar = "Gambar belum di upload";
+                //         }
+    
+                //         $gambar = "<img src='" . asset('img/owner/' . $img->ambil->images[$index]->image) . "' height='100' width='100'>";
+    
+                //     return $gambar;
+                // })
+                ->addIndexColumn()->addColumn('order', function ($order) {
+                    $status = $order->owner->user->order->status;
                     return $status;
                     })
                 ->addIndexColumn()->addColumn('luas', function ($data) {

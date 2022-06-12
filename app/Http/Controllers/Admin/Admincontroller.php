@@ -105,9 +105,17 @@ class Admincontroller extends Controller
     {
         return view('admin.verify-order');
     }
+    public function getArchievedOrder()
+    {
+        return view('admin.archieved-order');
+    }
 
     public function getVerifyTransaksi()
     {
         return view('admin.verify-transaksi');
+    }
+    public function getArchievedTransaksi()
+    {
+        return view('admin.archieved-transaksi');
     }
 }

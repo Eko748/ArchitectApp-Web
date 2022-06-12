@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title')
-Verifikasi Pembayaran Project
+Verifikasi Pembayaran Konstruksi
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} ">
@@ -14,13 +14,13 @@ Verifikasi Pembayaran Project
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Verifikasi Jasa project Desain Konsultan</h1>
+            <h1>Riwayat Transaksi Jasa Project Konstruksi</h1>
         </div>
 
         <div class="section-body">
             <div class="card">
                 <div class="card-header">
-                    <h4>Data Pembayaran</h4>
+                    <h4>Riwayat Pembayaran</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive-sm">
@@ -29,7 +29,7 @@ Verifikasi Pembayaran Project
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Owner</th>
-                                    <th scope="col">Konsultan</th>
+                                    <th scope="col">Kontraktor</th>
                                     <th scope="col">Jumlah</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Tanggal</th>
@@ -82,7 +82,7 @@ Verifikasi Pembayaran Project
                     processing: true,
                     serverSide: true,
                     autoWidth: false,
-                    ajax: "{{ route('order.all') }}",
+                    ajax: "{{ route('archieved-transaksi.all') }}",
                     columns: [
 
                         {
@@ -90,19 +90,19 @@ Verifikasi Pembayaran Project
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'owner.user.email',
+                            data: 'ownerId',
                             name: 'ownerId'
                         },
                         {
-                            data: 'kontrak.project_owner.project.konsultan.user.email',
-                            name: 'kontrak.project_owner.project.konsultan.user.email'
+                            data: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email',
+                            name: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email'
                         },
                         {
                             data: 'jumlah',
                             name: 'jumlah'
                         },
                         {
-                            data: 'status',
+                            data: 'kontrak.konstruksi_owner.status',
                             name: 'status'
                         },
                         {
@@ -132,7 +132,7 @@ Verifikasi Pembayaran Project
 
                 $('body').on('click','#imgBukti',function () {
                     let img = $(this).data('img');
-                    $('.modal-body').append(`<img src="{{asset('img/payment/konsultan/${img}')}}" alt="" width="100%">`)
+                    $('.modal-body').append(`<img src="{{asset('img/payment/kontraktor/${img}')}}" alt="" width="100%">`)
                 })
                 $('body').on('click','#verify',function () {
                     let id = $(this).data('id');
@@ -154,7 +154,7 @@ Verifikasi Pembayaran Project
                             },
                         });
                         $.ajax({
-                            url: "{{route('order.verify')}}",
+                            url: "{{route('transaksi.unverify')}}",
                             method: "POST",
                             data: { id: id },
                             dataType: "JSON",

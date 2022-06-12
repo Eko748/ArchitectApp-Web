@@ -17,7 +17,7 @@ class ProjectOwnerSeed extends Seeder
         ProjectOwner::create([
             "ownerId" => 1,
             "projectId" => 1,
-            "status" => "0"
+            "status" => "Belum Bayar"
         ]);
     }
 }

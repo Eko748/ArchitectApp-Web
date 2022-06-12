@@ -14,13 +14,13 @@ Verifikasi Pembayaran Project
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Verifikasi Jasa project Desain Konsultan</h1>
+            <h1>Riwayat Transaksi Desain Konsultan</h1>
         </div>
 
         <div class="section-body">
             <div class="card">
                 <div class="card-header">
-                    <h4>Data Pembayaran</h4>
+                    <h4>Riwayat Pembayaran</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive-sm">
@@ -82,7 +82,7 @@ Verifikasi Pembayaran Project
                     processing: true,
                     serverSide: true,
                     autoWidth: false,
-                    ajax: "{{ route('order.all') }}",
+                    ajax: "{{ route('archieved-order.all') }}",
                     columns: [
 
                         {
@@ -154,7 +154,7 @@ Verifikasi Pembayaran Project
                             },
                         });
                         $.ajax({
-                            url: "{{route('order.verify')}}",
+                            url: "{{route('order.unverify')}}",
                             method: "POST",
                             data: { id: id },
                             dataType: "JSON",
