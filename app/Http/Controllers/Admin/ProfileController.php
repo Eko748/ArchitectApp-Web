@@ -15,7 +15,7 @@ class ProfileController extends Controller
 
     public function show(User $user)
     {
-        return $user;
+        return User::with('admin')->where('id', $user->id)->first();
     }
 
     /**

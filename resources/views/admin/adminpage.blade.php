@@ -168,6 +168,6 @@
 
             });
         </script>
-        @include('admin.js.profileJs')
+        @include('admin.js.profileJS')
     @endpush
 @endsection

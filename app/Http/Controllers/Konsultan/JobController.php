@@ -9,7 +9,9 @@ use App\Models\KontrakKerjaKonsultan;
 use App\Models\Project;
 use App\Models\ProjectOwner;
 use App\Models\ChooseProject;
+use App\Models\Order;
 use App\Models\Rating;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +24,7 @@ use PDF;
 
 class JobController extends Controller
 {
-    public function getAllJob(Request $request)
+    public function getAllJob(Request $request, ProjectOwner $project)
     {
         // $owner = Owner::where('userId', Auth::user()->id)->first();
         // $data = ProjectOwner::with('owner.user', 'project.konsultan', 'chooseProject.ambil', 'kontrak.proposal')->where('status',0)->get();
@@ -45,19 +47,22 @@ class JobController extends Controller
         //             data-id="' . $data->id . '" id="viewUser">View</a>';
         //             return $btn;
         //         })->rawColumns(['Aksi'])->make(true);
-        $data = ProjectOwner::with('project.images', 'project.konsultan', 'chooseProject.owner.user.order', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'kontrak.order', 'chooseProject.ambil', 'chooseProject.imageOwner', 'hasil')->where('status', "0")->get();
-        $order = ChooseProject::with('owner.user.order')->where('id')->first();
+        $data = ProjectOwner::where('status', "Belum Bayar")->with('project.images', 'project.konsultan', 'chooseProject.owner.user.order', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'kontrak.order', 'chooseProject.ambil', 'chooseProject.imageOwner', 'hasil')->whereHas('project', function ($q) {
+            $q->where('id', $this->getKonsultanId()->konsultan->id);
+        })->where('status', "Belum Bayar")->orderBy('id', 'DESC')->get();
+        // $order = ChooseProject::with('owner.user.order')->where('id', "Belum Bayar")->first();
             // dd($data);
-            return DataTables::of($data, $order)
+            return DataTables::of($data)
                 ->addIndexColumn()->addColumn('tanggal', function ($data) {
                 $createdAt = Carbon::parse($data->updated_at);
                 return $createdAt->format('d M Y');
                 })
                 ->addIndexColumn()->addColumn('project', function ($data) {
+                    
                     $desain = $data->chooseProject->desain = "Desain";
                     $rab = $data->chooseProject->rab = "RAB";
                     // $project = $desain && $rab;
-                    return $desain.$rab;
+                    return $desain." & ".$rab;
                     })
                 // ->addIndexColumn()->addColumn('gambar', function ($img, $index = 0, $index2 = 1, $index3 = 2, $index4 = 3) {
                 //         if ($img->ambil->images->count() == 0) {
@@ -68,10 +73,11 @@ class JobController extends Controller
     
                 //     return $gambar;
                 // })
-                ->addIndexColumn()->addColumn('order', function ($order) {
-                    $status = $order->owner->user->order->status;
-                    return $status;
-                    })
+                // ->addIndexColumn()->addColumn('order', function ($order) {
+                //     $order = Order::where('status', "Belum Bayar")->first();
+                //     $status = $order->status;
+                //     return $status;
+                //     })
                 ->addIndexColumn()->addColumn('luas', function ($data) {
                     $panjang = $data->chooseProject->panjang;
                     $lebar = $data->chooseProject->lebar;
@@ -82,11 +88,90 @@ class JobController extends Controller
                     // $download = KontrakKerjaKonsultan::where('kontrakKerja', )
                     $download = $data->kontrak->kontrakKerja;
                     
-                    $btn = '<a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewUser"
-                    data-id="' . $data->id . '" id="viewUser">View</a>';
-                    $kontrak = '<a href="'.$download.'" class="btn btn-primary btn-sm" data-id="#">Lihat Kontrak</a>';
+                    $btn = '<button type="button" class="btn btn-primary" id="tambahHasil" data-target="#modalHasil"
+                    data-toggle="modal" >Kirim
+                    File</button> | ';
+                    $kontrak = '<button type="button" class="btn btn-warning" id="i" data-target="#a"
+                    data-toggle="modal" >Lihat
+                    Kontrak</button>';
                     
-                    return $btn. $kontrak;
+                    return $btn.$kontrak;
+                })->rawColumns(['Aksi'])->make(true);
+        
+    }
+
+    public function getAllJobVerify(Request $request, ProjectOwner $project)
+    {
+        // $owner = Owner::where('userId', Auth::user()->id)->first();
+        // $data = ProjectOwner::with('owner.user', 'project.konsultan', 'chooseProject.ambil', 'kontrak.proposal')->where('status',0)->get();
+        // // dd($data);
+        // return $data;
+        // return ProjectOwner::with('project','kontrak.proposal.lelang')->whereHas('project',function (Builder $query)
+        // {
+        //    $query->where('isLelang','1')->where('konsultanId',$this->getKonsultanId()->konsultan->id);
+        // // })->get();
+        // if ($request->ajax()) {
+        //     $data = ProjectOwner::where('status', 0)->with('owner.user', 'project.konsultan', 'chooseProject.ambil', 'kontrak.proposal')->get();
+        //     // dd($data);
+
+        //     return DataTables::of($data)
+        //         ->addIndexColumn()->addColumn('tanggal', function ($data) {
+        //         $createdAt = Carbon::parse($data->updated_at);
+        //         return $createdAt->format('d M Y');
+        //         })->addColumn('Aksi', function ($data) {
+        //             $btn = '<a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewUser"
+        //             data-id="' . $data->id . '" id="viewUser">View</a>';
+        //             return $btn;
+        //         })->rawColumns(['Aksi'])->make(true);
+        $data = ProjectOwner::where('status', "Sudah Bayar")->with('project.images', 'project.konsultan', 'chooseProject.owner.user.order', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'kontrak.order', 'chooseProject.ambil', 'chooseProject.imageOwner', 'hasil')->whereHas('project', function ($q) {
+            $q->where('id', $this->getKonsultanId()->konsultan->id);
+        })->where('status', "Sudah Bayar")->orderBy('id', 'DESC')->get();
+        // $order = ChooseProject::with('owner.user.order')->where('id', "Belum Bayar")->first();
+            // dd($data);
+            return DataTables::of($data)
+                ->addIndexColumn()->addColumn('tanggal', function ($data) {
+                $createdAt = Carbon::parse($data->updated_at);
+                return $createdAt->format('d M Y');
+                })
+                ->addIndexColumn()->addColumn('project', function ($data) {
+                    
+                    $desain = $data->chooseProject->desain = "Desain";
+                    $rab = $data->chooseProject->rab = "RAB";
+                    // $project = $desain && $rab;
+                    return $desain." & ".$rab;
+                    })
+                // ->addIndexColumn()->addColumn('gambar', function ($img, $index = 0, $index2 = 1, $index3 = 2, $index4 = 3) {
+                //         if ($img->ambil->images->count() == 0) {
+                //             return $gambar = "Gambar belum di upload";
+                //         }
+    
+                //         $gambar = "<img src='" . asset('img/owner/' . $img->ambil->images[$index]->image) . "' height='100' width='100'>";
+    
+                //     return $gambar;
+                // })
+                // ->addIndexColumn()->addColumn('order', function ($order) {
+                //     $order = Order::where('status', "Belum Bayar")->first();
+                //     $status = $order->status;
+                //     return $status;
+                //     })
+                ->addIndexColumn()->addColumn('luas', function ($data) {
+                    $panjang = $data->chooseProject->panjang;
+                    $lebar = $data->chooseProject->lebar;
+                    // $luas = $panjang * $lebar;
+                    return $panjang." x ".$lebar." M";
+                })
+                ->addColumn('Aksi', function ($data) {
+                    // $download = KontrakKerjaKonsultan::where('kontrakKerja', )
+                    $download = $data->kontrak->kontrakKerja;
+                    
+                    $btn = '<button type="button" class="btn btn-primary" id="tambahHasil" data-target="#modalHasil"
+                    data-toggle="modal" >Kirim
+                    File</button> | ';
+                    $kontrak = '<button type="button" class="btn btn-warning" id="i" data-target="#a"
+                    data-toggle="modal" >Lihat
+                    Kontrak</button>';
+                    
+                    return $btn.$kontrak;
                 })->rawColumns(['Aksi'])->make(true);
         
     }
@@ -102,10 +187,64 @@ class JobController extends Controller
 
     public function getArchivedJob()
     {
-        return Project::with('projectOwner.hasil', 'projectOwner.kontrak.proposal', 'projectOwner.kontrak.payment')->where('isLelang', "1")->where('konsultanId', $this->getKonsultanId()->konsultan->id)->whereHas('projectOwner',function (Builder $query)
-        {
-            $query->where('status','1');
-        })->get();
+        $data = ProjectOwner::where('status', "Sudah Bayar")->with('project.images', 'project.konsultan', 'chooseProject.owner.user.order', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'kontrak.order', 'chooseProject.ambil', 'chooseProject.imageOwner', 'hasil')
+        // ->whereHas('project', function (Builder $query, $q) {
+        //     $query->where('isLelang', "1");
+        // })
+        ->whereHas('project', function ($q) {
+            $q->where('id', $this->getKonsultanId()->konsultan->id);
+        })->where('status', "Sudah Bayar")->orderBy('id', 'DESC')->get();
+        
+        // $data = Project::with('projectOwner.hasil', 'projectOwner.kontrak.proposal', 'projectOwner.kontrak.payment')->where('isLelang', "1")->where('konsultanId', $this->getKonsultanId()->konsultan->id)->whereHas('projectOwner',function (Builder $query)
+        // {
+        //     $query->where('status','Sudah Bayar');
+        // })->get();
+        return DataTables::of($data)
+                ->addIndexColumn()->addColumn('tanggal', function ($data) {
+                $createdAt = Carbon::parse($data->updated_at);
+                return $createdAt->format('d M Y');
+                })
+                ->addIndexColumn()->addColumn('project', function ($data) {
+                    
+                    $desain = $data->chooseProject->desain = "Desain";
+                    $rab = $data->chooseProject->rab = "RAB";
+                    // $project = $desain && $rab;
+                    return $desain." & ".$rab;
+                    })
+                // ->addIndexColumn()->addColumn('gambar', function ($img, $index = 0, $index2 = 1, $index3 = 2, $index4 = 3) {
+                //         if ($img->ambil->images->count() == 0) {
+                //             return $gambar = "Gambar belum di upload";
+                //         }
+    
+                //         $gambar = "<img src='" . asset('img/owner/' . $img->ambil->images[$index]->image) . "' height='100' width='100'>";
+    
+                //     return $gambar;
+                // })
+                // ->addIndexColumn()->addColumn('order', function ($order) {
+                //     $order = Order::where('status', "Belum Bayar")->first();
+                //     $status = $order->status;
+                //     return $status;
+                //     })
+                ->addIndexColumn()->addColumn('luas', function ($data) {
+                    $panjang = $data->chooseProject->panjang;
+                    $lebar = $data->chooseProject->lebar;
+                    // $luas = $panjang * $lebar;
+                    return $panjang." x ".$lebar." M";
+                })
+                // ->addColumn('Aksi', function ($data) {
+                //     // $download = KontrakKerjaKonsultan::where('kontrakKerja', )
+                //     $download = $data->kontrak->kontrakKerja;
+                    
+                //     $btn = '<button type="button" class="btn btn-primary" id="tambahHasil" data-target="#modalHasil"
+                //     data-toggle="modal" >Kirim
+                //     File</button> | ';
+                //     $kontrak = '<button type="button" class="btn btn-warning" id="i" data-target="#a"
+                //     data-toggle="modal" >Lihat
+                //     Kontrak</button>';
+                    
+                //     return $btn.$kontrak;
+                // })->rawColumns(['Aksi'])
+                ->make(true);
     }
 
     public function getDetilJob(Request $request)
@@ -113,19 +252,53 @@ class JobController extends Controller
         return Project::with('projectOwner.hasil', 'projectOwner.kontrak.proposal.lelang.image', 'projectOwner.kontrak.payment','projectOwner.owner.user')->where('id',$request->id)->first();
     }
 
+    // public function uploadHasil(Request $request)
+    // {
+    //     $projectOwner = ProjectOwner::find($request->projectOwnerId);
+    //     if ($request->hasFile('rab')) {
+    //         $path = 'img/file hasil/rab/';
+    //         $rab = $request->file('rab');
+    //         $filename = $rab->hashName();
+    //         $rab->storeAs($path, $filename, 'files');
+    //         ProjectOwner::find($request->projectOwnerId)->update(['hasil_rab' => $filename]);
+    //     }
+    //     if ($request->hasFile('softfile')) {
+    //         $file = $request->file('softfile');
+    //         foreach ($file as $key) {
+    //             $path = 'img/file hasil/image/';
+    //             $fileName = $key->hashName();
+    //             $key->storeAs($path, $fileName, 'files');
+    //             HasilDesain::create([
+    //                 'projectOwnerId' => $request->projectOwnerId,
+    //                 'softfile' => $fileName
+    //             ]);
+    //         }
+    //         // Project::find($projectOwner->projectId)->update(['status'=>"1"]);
+    //     }
+    //     return  $this->sendResponse('', 'berhasil di upload');
+    // }
+
     public function uploadHasil(Request $request)
     {
-        $projectOwner = ProjectOwner::find($request->projectOwnerId);
+        $projectOwner = ProjectOwner::where('id', $this->getOwnerId()->id)->with('hasil')->get();
+        
         $request->validate([
-            'rab'=>'required',
+            'hasil_rab'=>'required',
             'softfile'=>'required'
-    ]);
-        if ($request->hasFile('rab')) {
+        ]);
+
+        // $input = [
+        //     'hasil_rab' => $request->hasil_rab,
+        //     'softfile' => $request->softfile,
+        // ];
+        // $hasil = HasilDesain::create($input);
+
+        if ($request->hasFile('hasil_rab')) {
             $path = 'img/file hasil/rab/';
-            $rab = $request->file('rab');
+            $rab = $request->file('hasil_rab');
             $filename = $rab->hashName();
             $rab->storeAs($path, $filename, 'files');
-            ProjectOwner::find($request->projectOwnerId)->update(['hasil_rab' => $filename]);
+            ProjectOwner::where('ownerId', $this->getOwnerId()->id)->update(['hasil_rab' => $filename]);
         }
         if ($request->hasFile('softfile')) {
             $file = $request->file('softfile');
@@ -134,7 +307,7 @@ class JobController extends Controller
                 $fileName = $key->hashName();
                 $key->storeAs($path, $fileName, 'files');
                 HasilDesain::create([
-                    'projectOwnerId' => $request->projectOwnerId,
+                    'projectOwnerId' => $projectOwner->id,
                     'softfile' => $fileName
                 ]);
             }
@@ -211,6 +384,6 @@ class JobController extends Controller
                 Storage::disk('files')->copy($oldpath . $key->softfile, $newrabpath . $key->softfile);
             }
         }
-        return $this->sendResponse(compact('project', 'ownProject', 'rates', 'image'), 'Hasil sudah menjadi project');
+        return compact('project', 'ownProject', 'rates', 'image');
     }
 }

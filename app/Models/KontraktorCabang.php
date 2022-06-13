@@ -29,4 +29,8 @@ class KontraktorCabang extends Model
     {
         return $this->hasMany(KonstruksiOwner::class,'konstruksiId','id');
     }
+    public function chooseOwn()
+    {
+        return $this->hasMany(ChooseKonstruksi::class,'konstruksiOwnerId','id');
+    }
 }

@@ -87,7 +87,7 @@
             $("#oldpass").on("focusout", function() {
                 SetupAjax();
                 $.ajax({
-                    url: "{{ route('konsultan.profile.confirm', Auth::user()->id) }}",
+                    url: "{{ route('admin.profile.confirm', Auth::user()->id) }}",
                     dataType: "JSON",
                     type: "POST",
                     data: $("#oldpass").serialize(),
@@ -109,7 +109,7 @@
             $("#formPass").submit(function(e) {
                 e.preventDefault();
                 ajaxValidate(
-                    "{{ route('konsultan.profile.pass', Auth::user()->id) }}",
+                    "{{ route('admin.profile.pass', Auth::user()->id) }}",
                     "PUT",
                     "modalPass",
                     "Password anda berhasil diubah"
@@ -125,8 +125,9 @@
     })
 
     function loadUser() {
-        let url = 'http://127.0.0.1:8000/my/' + {{ Auth::user()->id }} + '/profile'
-            let path = "http://127.0.0.1:8000/img/avatar/";
+        // let baseUrl = 'http://192.168.42.231:8000/';
+        let url = "{{ route('admin.profile.show', Auth::user()->id) }}"
+            let path = "{{ asset('img/logo_proyek.png/') }}"
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),

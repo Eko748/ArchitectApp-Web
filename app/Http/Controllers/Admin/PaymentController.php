@@ -44,8 +44,8 @@ class PaymentController extends Controller
     {
         if ($req->ajax()) {
             $data = Order::with('owner.user','kontrak.projectOwner.project.konsultan.user')->where('status', "Belum Bayar")->get();
-            // $order = ProjectOwner::where('status', "Sudah Bayar")->first();
-            return DataTables::of($data)
+            $o = ProjectOwner::where('id',$this->getOwnerId()->id)->where('status', "Belum Bayar")->get();
+            return DataTables::of($data, $o)
                 ->addIndexColumn()->addColumn('Aksi', function ($data) {
                 $btn = '<a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewUser"
                     data-id="' . $data->id . '" id="viewUser">View</a>';
@@ -54,11 +54,10 @@ class PaymentController extends Controller
                     }
                     $btn .= '<a href="#" class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Verifikasi</a>';
                     return $btn;
-                // })->addColumn('status', function ($projectOwner) {
-                //     // $status = $order->status
-                //     // $order = ProjectOwner::where('id',$projectOwner->id)->where('status', "Sudah Bayar")->first();
-                //     // $status = $order->status;
-                //     return $order;
+                // })->addColumn('status', function ($o) {
+                //     $order = ProjectOwner::where('id',$this->getOwnerId()->id)->where('status', "Belum Bayar")->get();
+                //     $status = $o->status;
+                //     return $o;
                 })->addColumn('tanggal', function ($data) {
                     return Carbon::parse($data->created_at)->isoFormat('dddd, D MMMM YYYY');
                 })->addColumn('jumlah', function ($data) {
@@ -79,7 +78,7 @@ class PaymentController extends Controller
                     if ($data->is_active != 0) {
                         return $btn .= '<button href="#" class="btn btn-primary mr-1 btn-sm" disabled>Terverifikasi</button>';
                     }
-                    $btn .= '<a href="#" class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Verifikasi</a>';
+                    $btn .= '<a href="#" class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Batalkan</a>';
                     return $btn;
                 // })->addColumn('status', function ($projectOwner) {
                 //     // $status = $order->status
@@ -97,8 +96,9 @@ class PaymentController extends Controller
     public function getAllTransaksi(Request $req)
     {
         if ($req->ajax()) {
-            $data = OrderKontraktor::with('owner.user','kontrak.konstruksiOwner.cabang.kontraktor.user')->where('status', "Belum Bayar")->get();
+            $data = OrderKontraktor::with('owner.user','kontrak.konstruksiOwner.konstruksi.kontraktor.user', 'kontraktor')->where('status', "Belum Bayar")->get();
 
+            // $o = KonstruksiOwner::where('id',$this->getOwnerId()->id)->where('status', "Belum Bayar")->get();
             return DataTables::of($data)
                 ->addIndexColumn()->addColumn('Aksi', function ($data) {
                 $btn = '<a href="#" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#modalViewUser"
@@ -108,6 +108,9 @@ class PaymentController extends Controller
                     }
                     $btn .= '<a href="#" class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Verifikasi</a>';
                     return $btn;
+                // })->addColumn('transaksi', function ($data) {
+                //     $order = KonstruksiOwner::where('status', "Belum Bayar")->first();
+                //     return $order;
                 })->addColumn('tanggal', function ($data) {
                     return Carbon::parse($data->created_at)->isoFormat('dddd, D MMMM YYYY');
                 })->addColumn('jumlah', function ($data) {
@@ -119,7 +122,8 @@ class PaymentController extends Controller
     public function getAllArchievedTransaksi(Request $req)
     {
         if ($req->ajax()) {
-            $data = OrderKontraktor::with('owner.user','kontrak.konstruksiOwner.cabang.kontraktor.user')->where('status', "Sudah Bayar")->get();
+            $data = OrderKontraktor::with('owner.user','kontrak.konstruksiOwner.konstruksi.kontraktor.user', 'kontraktor')->where('status', "Sudah Bayar")->get();
+
 
             return DataTables::of($data)
                 ->addIndexColumn()->addColumn('Aksi', function ($data) {
@@ -128,7 +132,7 @@ class PaymentController extends Controller
                     if ($data->is_active != 0) {
                         return $btn .= '<button href="#" class="btn btn-primary mr-1 btn-sm" disabled>Terverifikasi</button>';
                     }
-                    $btn .= '<a href="#" class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Verifikasi</a>';
+                    $btn .= '<a href="#" class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Batalkan</a>';
                     return $btn;
                 })->addColumn('tanggal', function ($data) {
                     return Carbon::parse($data->created_at)->isoFormat('dddd, D MMMM YYYY');
@@ -145,21 +149,31 @@ class PaymentController extends Controller
     
     public function verifyOrder(Request $request)
     {
-        return Order::find($request->id)->update(['status' => "Sudah Bayar"]);
+        $project = ProjectOwner::find($request->id)->update(['status' => "Sudah Bayar"]);
+        $order = Order::find($request->id)->update(['status' => "Sudah Bayar"]);
+        return $project. $order;
     }
 
     public function unverifyOrder(Request $request)
     {
-        return Order::find($request->id)->update(['status' => "Belum Bayar"]);
+        $project = ProjectOwner::find($request->id)->update(['status' => "Belum Bayar"]);
+        $order = Order::find($request->id)->update(['status' => "Belum Bayar"]);
+        return $project. $order;
     }
 
     public function verifyTransaksi(Request $request)
     {
-        return OrderKontraktor::find($request->id)->update(['status' => "Sudah Bayar"]);
+        $kontrak = KonstruksiOwner::find($request->id)->update(['status' => "Sudah Bayar"]);
+        $transaksi = OrderKontraktor::find($request->id)->update(['status' => "Sudah Bayar"]);
+    
+        return $kontrak. $transaksi;
     }
 
     public function unverifyTransaksi(Request $request)
     {
-        return OrderKontraktor::find($request->id)->update(['status' => "Belum Bayar"]);
+        $kontrak = KonstruksiOwner::find($request->id)->update(['status' => "Belum Bayar"]);
+        $transaksi = OrderKontraktor::find($request->id)->update(['status' => "Belum Bayar"]);
+    
+        return $kontrak. $transaksi;
     }
 }

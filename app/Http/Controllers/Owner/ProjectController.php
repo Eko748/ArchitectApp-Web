@@ -181,7 +181,7 @@ class ProjectController extends Controller
         $order->kontrakKonsultanId = $data->id;
         $order->ownerId = $data->project->konsultan->id;
         $order->projectId =  $data->project->id;
-        // $order->status = "Belum Bayar";
+        $order->status = "Belum Bayar";
         $order->status_order = $json->transaction_status;
         $order->transaction_id = $json->transaction_id;
         $order->order_id = $json->order_id;

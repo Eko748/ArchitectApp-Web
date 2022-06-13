@@ -71,7 +71,7 @@
                     <div class="dropdown-content">
                         <a class="nav-link text-dark dropdown-item" href="{{ route('owner.my.project') }}">Desain</a>
                         <a class="nav-link text-dark dropdown-item"
-                            href="{{ route('owner.my.konstruksi') }}">Kontruksi</a>
+                            href="{{ route('owner.my.konstruksi') }}">Konstruksi</a>
                     </div>
                 </div>
                 {{-- <div class="dropdown tema">

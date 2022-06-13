@@ -198,16 +198,16 @@ class KonstruksiController extends Controller
         
     }
 
-    public function transaksiPost(Request $request, ChooseKonstruksi $choose)
+    public function transaksiPost(Request $request)
     {
         $data = ChooseKonstruksi::with('cabang.kontraktor', 'konstruksiOwner.user.owner')->first();
         $json = json_decode($request->get('json'));
         $order = new OrderKontraktor();
-        $order->konstruksiOwnerId = $request->id;
+        $order->konstruksiOwnerId = $data->id;
         $order->ownerId = $data->konstruksiOwner->user->owner->id;
         $order->kontraktorId = $data->cabang->kontraktor->id;
         $order->konstruksiId = $data->cabang->id;
-        $order->status = 0;
+        $order->status = "Belum Bayar";
         $order->status_order = $json->transaction_status;
         $order->transaction_id = $json->transaction_id;
         $order->order_id = $json->order_id;

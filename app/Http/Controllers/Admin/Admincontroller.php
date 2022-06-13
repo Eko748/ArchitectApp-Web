@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Konsultan;
+use App\Models\OrderKontraktor;
 
 class Admincontroller extends Controller
 {
@@ -112,6 +113,8 @@ class Admincontroller extends Controller
 
     public function getVerifyTransaksi()
     {
+        // $data = OrderKontraktor::with('owner.user','kontrak.konstruksiOwner', 'kontraktor')->where('status', "Belum Bayar")->get();
+        // dd($data);
         return view('admin.verify-transaksi');
     }
     public function getArchievedTransaksi()

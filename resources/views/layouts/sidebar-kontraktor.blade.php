@@ -21,10 +21,10 @@
                     <li class="{{ Request::segment(3) == 'active-job' ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('kontraktor.job.active') }}">Active Jobs</a></li>
                     <li class="{{ Request::segment(3) == 'archived-job' ? 'active' : '' }}"><a class="nav-link"
-                            href="{{ route('kontraktor.job.archived') }}">Archived Jobs</a></li>
+                            href="{{ route('kontraktor.job.archived') }}">Submitted Jobs</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown  {{ in_array(Request::segment(3),['active','submit','archived']) ? 'active' : '' }}">
+            {{-- <li class="nav-item dropdown  {{ in_array(Request::segment(3),['active','submit','archived']) ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="fas fa-users"></i><span>My Proposal</span></a> </a>
                 <ul class="dropdown-menu">
@@ -35,8 +35,8 @@
                     <li class="{{ Request::segment(3) == 'archived' ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('kontraktor.proposal.archived') }}">Archived Proposal</a></li>
                 </ul>
-            </li>
-            <li class=" {{ Request::segment(2) == 'inbox' ? 'active' : '' }}"><a class="nav-link"  href=""><i class="far fa-images"></i><span>Message</span></a></li>
+            </li> --}}
+            {{-- <li class=" {{ Request::segment(2) == 'inbox' ? 'active' : '' }}"><a class="nav-link"  href=""><i class="far fa-images"></i><span>Message</span></a></li> --}}
             <li class="menu-header">Setting</li>
             <li class="{{ Request::segment(2) == 'profile' ? 'active' : '' }} "><a class="nav-link"
                     href="{{ route('kontraktor.profile', Auth::user()->id) }}"> <i

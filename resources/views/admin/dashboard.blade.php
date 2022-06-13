@@ -165,5 +165,5 @@ $.plot('#bar-chart', [bar_data], {
 @push('js')
     <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
-    @include('admin.js.profileJs')
+    @include('admin.js.profileJS')
 @endpush

@@ -102,7 +102,7 @@ Verifikasi Pembayaran Project
                             name: 'jumlah'
                         },
                         {
-                            data: 'status',
+                            data: 'kontrak.project_owner.status',
                             name: 'status'
                         },
                         {
@@ -138,7 +138,7 @@ Verifikasi Pembayaran Project
                     let id = $(this).data('id');
                    Swal.fire({
                     title: "Yakin?",
-                    text: "Anda akan memverifikasi data ini ",
+                    text: "Anda akan membatalkan data ini ",
                     icon: "question",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -172,6 +172,6 @@ Verifikasi Pembayaran Project
 
             });
 </script>
-@include('admin.js.profileJs')
+@include('admin.js.profileJS')
 @endpush
 @endsection

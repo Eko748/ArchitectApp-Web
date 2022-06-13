@@ -52,7 +52,7 @@
                 <form action="" id="addProp">
                     <div class="modal-body">
                         <input type="hidden" name="lelangId">
-                       
+                    
                         <div class="form-group">
                             <label for="coverletter">Cover letter</label>
                             <textarea class="form-control h-100" id="coverletter" aria-describedby="clhelp"
@@ -60,7 +60,7 @@
                                 <div class="invalid-feedback"></div>
                                 <small id="clhelp" class="form-text text-muted">Cover letter minimal 50 karakter.</small>
                         </div>
-                       
+                    
                         <div class="form-group mb-3">
                             <label class="" for="cv">CV</label>
                             <div class="custom-file">

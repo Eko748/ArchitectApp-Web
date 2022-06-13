@@ -90,19 +90,19 @@ Verifikasi Pembayaran Konstruksi
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'ownerId',
+                            data: 'owner.user.email',
                             name: 'ownerId'
                         },
                         {
-                            data: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email',
-                            name: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email'
+                            data: 'kontrak.konstruksi_owner.konstruksi.kontraktor.user.email',
+                            name: 'email'
                         },
-                        // {
-                        //     data: 'jumlah',
-                        //     name: 'jumlah'
-                        // },
                         {
-                            data: 'kontrak.konstruksi_owner.status',
+                            data: 'jumlah',
+                            name: 'jumlah'
+                        },
+                        {
+                            data: 'status',
                             name: 'status'
                         },
                         {
@@ -172,6 +172,6 @@ Verifikasi Pembayaran Konstruksi
 
             });
 </script>
-@include('admin.js.profileJs')
+@include('admin.js.profileJS')
 @endpush
 @endsection

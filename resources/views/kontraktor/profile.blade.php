@@ -201,7 +201,7 @@
         </div>
     </div>
     @push('js')
-         @include('konsultan.js.profileJs')
+    @include('kontraktor.js.profileJs')
     @endpush
 @endsection
 

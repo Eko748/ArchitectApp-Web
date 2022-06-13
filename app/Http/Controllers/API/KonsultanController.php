@@ -35,8 +35,8 @@ class KonsultanController extends BaseController
     {
         // $data = Project::with('projectOwn.owner.user', 'projectOwn.kontrak.payment', 'konsultan', 'images')->where([['konsultanId', $this->getKonsultanId()->konsultan->id], ['isLelang', "1"]])->get();
         $data = ProjectOwner::with('project.images', 'project.konsultan', 'owner.user', 'owner.lelang.image', 'kontrak.payment', 'chooseProject.imageOwner', 'hasil')->whereHas('project', function ($q) {
-            $q->where('konsultanId', $this->getKonsultanId()->konsultan->id);
-        })->where('status', "0")->orderBy('id', 'DESC')->get();
+            $q->where('id', $this->getKonsultanId()->konsultan->id);
+        })->where('status', "Belum Bayar")->orderBy('id', 'DESC')->get();
         return $this->sendResponse($data, 'data loaded successfully');
     }
     public function getAllProjectByKons(Request $request)

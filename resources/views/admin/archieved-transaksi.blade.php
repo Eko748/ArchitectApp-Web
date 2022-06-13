@@ -90,19 +90,19 @@ Verifikasi Pembayaran Konstruksi
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'ownerId',
+                            data: 'owner.user.email',
                             name: 'ownerId'
                         },
                         {
-                            data: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email',
-                            name: 'kontrak.konstruksi_owner.cabang.kontraktor.user.email'
+                            data: 'kontrak.konstruksiOwner.konstruksi.kontraktor.user.email',
+                            name: 'email'
                         },
                         {
                             data: 'jumlah',
                             name: 'jumlah'
                         },
                         {
-                            data: 'kontrak.konstruksi_owner.status',
+                            data: 'status',
                             name: 'status'
                         },
                         {
@@ -138,7 +138,7 @@ Verifikasi Pembayaran Konstruksi
                     let id = $(this).data('id');
                    Swal.fire({
                     title: "Yakin?",
-                    text: "Anda akan memverifikasi data ini ",
+                    text: "Anda akan membatalkan data ini ",
                     icon: "question",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -172,6 +172,6 @@ Verifikasi Pembayaran Konstruksi
 
             });
 </script>
-@include('admin.js.profileJs')
+@include('admin.js.profileJS')
 @endpush
 @endsection

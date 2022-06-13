@@ -3,40 +3,13 @@
 Project Owner
 @endsection
 @section('css')
-
+<link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} ">
+<link rel="stylesheet" href="{{ asset('node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}">
 @endsection
 @section('content')
 @include('layouts.topbar')
 @include('layouts.sidebar-konsultan')
 
-
-{{-- <div class="main-content">
-    <section class="section">
-        <div class="section-header">
-            <h1>My Active Project</h1>
-        </div>
-        
-        <div class="section-body">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Data Project Active</h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-hover" id="table-project">
-                        <ul class="list-group">
-                            
-                        </ul>
-                    </table>
-                    <div class="row justify-content-center none-lelang" style="display: none">
-                        <div class="col-lg-6 col-md col-sm text-center" style="height: 100px">
-                            <p class="">Owner belum ada yang membuat lelang</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div> --}}
 <div class="main-content">
     <section class="section">
         <div class="section-header">
@@ -59,7 +32,7 @@ Project Owner
                                     <th scope="col">Luas Ruangan</th>
                                     <th scope="col">Kontrak</th>
                                     <th scope="col">Tanggal</th>
-                                    <th scope="col">Gambar</th>
+                                    {{-- <th scope="col">Gambar</th> --}}
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -77,20 +50,102 @@ Project Owner
     </section>
 </div>
 
+
+<div class="modal fade" id="modalHasil" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kirim File</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="formTambahHasil">
+                    @csrf
+                    <div class="form-group">
+                        <label for="softfile">File Desain</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" multiple name="softfile[]">
+                            <label class="custom-file-label" for="softfile">Choose file</label>
+                        </div>
+                        <small>Desain Terbaik 2D / 3D Anda</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hasil_rab">File RAB</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="hasil_rab">
+                            <label class="custom-file-label" for="hasil_rab">Choose file</label>
+                        </div>
+                        <small>RAB Terbaik Anda</small>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- <div class="modal fade" id="modalAddProp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload File Hasil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="addProp">
+                <div class="modal-body">
+                    <input type="hidden" name="projectOwnerId">
+                
+                    <div class="form-group mb-3">
+                        <label class="" for="softfile">File Desain</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="softfile" name="softfile">
+                            <label class="custom-file-label" for="softfile">Choose file</label>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                
+                    <div class="form-group mb-3">
+                        <label class="" for="rab">File RAB</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="rab" name="rab">
+                            <label class="custom-file-label" for="rab">Choose file</label>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div> --}}
+{{-- 
 <div class="modal fade" id="modalViewUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Detail Tender</h5>
+                <h5 class="modal-title">Detail Project</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                  <div class="form-group">
-                        <label for="ownerName">Nama Owner</label>
-                        <input type="text" name="ownerName" id="ownerName" class="form-control" disabled>
+                        <label for="name">Nama Owner</label>
+                        <input type="text" name="name" id="name" class="form-control" disabled>
                         
                     </div>
                     <div class="form-group">
@@ -120,114 +175,63 @@ Project Owner
 
         </div>
     </div>
-</div>
+</div> --}}
 
 @push('js')
 
-{{-- <script>
-    $(document).ajaxStart(function() {
-        $('.preloader').show()
-    })
-    
-    @auth
-    $(function() {
-        $('.list-group').on('click', '.mylelang', function() {
-            let id = $(this).data('id');
-            window.location.href = baseUrl + 'konsultan/myjob/active-job' + id
-        });
-        
-        
-        
-        SetupAjax();
-        $.ajax({
-            url: "{{ route('konsultan.job') }}",
-            dataType: "JSON",
-            type: "GET",
-            success: function(response) {
-                console.log(response);
-                if (response.length == 0) {
-                    $('.none-lelang').show()
-                }
-                console.log(response)
-                $.each(response, function(key, value) {
-                    
-                    
-                    $('.list-group').prepend(`<li class="list-group-item list-group-item-action mylelang" data-id="${value.id}">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h3 class="mb-1 title">${value.title}</h3>
-                            <small class="date">${selisih}</small>
-                        </div>
-                    </li>`)
-                });
-            },
-        });
-    });
-    @endauth
-</script> --}}
-{{-- <script>
-    $(document).ajaxStart(function() {
-        $('.preloader').show()
-    })
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
+<script>
+    // $(function() {
+    //     showLelang()
+      
 
-    @auth
-        $(function() {
-        $('.list-group').on('click', '.mylelang', function() {
-        let id = $(this).data('id');
-        window.location.href = baseUrl + 'konsultan/myjob/active-job' + id
-        });
-    
-        SetupAjax();
-        $.ajax({
-        url: "{{ route('konsultan.job') }}",
-        dataType: "JSON",
-        type: "GET",
-        success: function(response) {
-        if (response.length == 0) {
-        $('.none-lelang').show()
-        }
-        console.log(response)
-        $.each(response, function(key, value) {
-    
-    
-        let selisih = selisihWaktu(value.created_at);
-        let badge = "";
-        let image ="";
-        let path = "{{ asset('img/owner/') }}"
-        
-        $.each(response.image, function(key, value) {
-    
-        image += `<img src="${path}/${value.image}" height="150" loading="lazy" class="d-inline m-1 rounded" >`
-        })
-    
-        $('.list-group').prepend(`<li class="list-group-item list-group-item-action mylelang" data-id="${value.id}">
-            <div class="d-flex w-100 justify-content-between">
-                <h3 class="mb-1 title">${value.desain}</h3>
-                <small class="date">${selisih}</small>
-            </div>
-            // <small><span class="me-2">Est. Biaya: ${rupiahFormat(value.budgetFrom)} - ${rupiahFormat(value.budgetTo)}</span> <br>
-            //     <span class="me-2 text-capitalize "> Style Desain: ${value.panjang} </span><span><i
-            //             class="fas fa-map-marker-alt"></i> ${value.owner.alamat}</span></small>
-                        <hr>
-            <h6><b>Deskripsi</b></h6>
-            <p class="mb-1 my-2 desc d-inline ">${value.description}</p>
-            <div class="images p-3">
+    //     $('#submit-prop').on('click', function() {
+    //         formfile("upload CV anda")
+    //         blankInput();
 
-            ${image}
-            </div>
-            <div class="text-decoration-none my-3">
-                ${badge}
-            </div>
-            
-            <small><span>Proposal: ${value.proposal_count}</span> <span class="ms-2 ">Status: `+ (value.status == 0 ?
-                    '<span class="text-success fw-bolder">aktif</span>' : '<span class="text-danger fw-bolder">tutup</span>')
-                    +`</span></small>
-        </li><br>`)
-        });
-        },
-        });
-        });
-    @endauth
-</script> --}}
+    //         removeInvalid();
+    //         $('input[name=projectOwnerId]').empty();
+    //     })
+        
+        
+    //     $('body').on('submit','#addProp', function(e) {
+    //             $('input[name=projectOwnerId]').val({{ Request::segment(3) }})
+    //             e.preventDefault();
+    //             SetupAjax();
+    //             $.ajax({
+    //                 url: "{{ route('konsultan.upload.job') }}",
+    //                 dataType: "JSON",
+    //                 type: "POST",
+    //                 data: new FormData(this),
+    //                 cache: false,
+    //                 processData: false,
+    //                 contentType: false,
+    //                 success: function(response) {
+    //                     $(this).trigger("reset");
+    //                     $("#modalAddProp").modal("hide");
+    //                     alertSuccess("File Project anda berhasil diupload");
+    //                     $('.badge-jasa').empty()
+    //                     showLelang()
+    //                 },
+    //                 error: function(xhr) {
+    //                     var res = xhr.responseJSON;
+    //                     if ($.isEmptyObject(res) == false) {
+    //                         $.each(res.errors, function(key, value) {
+    //                             $("textarea[name=" + key + "]").addClass(
+    //                                 "is-invalid");
+    //                             $("textarea[name=" + key + "]")
+    //                                 .next()
+    //                                 .html(value);
+    //                         });
+    //                     }
+    //                 },
+    //             });
+    //         })
+    // })
+
+    
+</script>
+
 <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
@@ -237,7 +241,7 @@ Project Owner
                     processing: true,
                     serverSide: true,
                     autoWidth: false,
-                    ajax: "{{ route('konsultan.job') }}",
+                    ajax: "{{ route('konsultan.job-verify') }}",
                     columns: [
 
                         {
@@ -249,8 +253,8 @@ Project Owner
                             name: 'name'
                         },
                         {
-                            data: 'order',
-                            name: 'order'
+                            data: 'status',
+                            name: 'status'
                         },
                         {
                             data: 'project',
@@ -283,14 +287,14 @@ Project Owner
 
                 $('body').on('click','#viewUser',function () {
                     let id = $(this).data('id');
-                    let url = baseUrl + "tender/" +id
+                    let url = baseUrl + "project/" +id
                      $.ajax({
                 url: url,
                 dataType: "JSON",
                 type: "GET",
                 success: function(response) {
                     console.log(response)
-                    $("#konsName").val(response.konsultan.user.name);
+                    $("#name").val(response.owner.user.name);
                     $("#ownerName").val(response.lelang.owner.user.name);
                     $("#date").val(moment(response.created_at).format('d MMMM Y'));
                     $("#desain").val(rupiahFormat(response.tawaranDesain));
@@ -306,6 +310,7 @@ Project Owner
 
             });
         </script>
+@include('konsultan.js.hasil-js')
 @endpush
 @endsection
 

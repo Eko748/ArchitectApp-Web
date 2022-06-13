@@ -37,7 +37,7 @@
                             href="{{ route('konsultan.proposal.archived') }}">Archived Proposal</a></li>
                 </ul>
             </li>
-            <li class=" {{ Request::segment(2) == 'inbox' ? 'active' : '' }}"><a class="nav-link"  href=""><i class="far fa-images"></i><span>Message</span></a></li>
+            {{-- <li class=" {{ Request::segment(2) == 'inbox' ? 'active' : '' }}"><a class="nav-link"  href=""><i class="far fa-images"></i><span>Message</span></a></li> --}}
             <li class="menu-header">Setting</li>
             <li class="{{ Request::segment(2) == 'profile' ? 'active' : '' }} "><a class="nav-link"
                     href="{{ route('konsultan.profile', Auth::user()->id) }}"> <i

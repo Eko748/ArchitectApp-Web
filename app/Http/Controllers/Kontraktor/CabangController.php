@@ -3,16 +3,173 @@
 namespace App\Http\Controllers\Kontraktor;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChooseKonstruksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\KontraktorCabang;
 use App\Models\ImageKontraktor;
+use App\Models\KonstruksiOwner;
+use Carbon\Carbon;
+
 ;
 
 
 class CabangController extends Controller
 {
+    public function getAllJob(Request $request, ChooseKonstruksi $project)
+    {
+        $data = ChooseKonstruksi::with('order.owner', 'konstruksiOwner.user.owner', 'cabang.kontraktor')->whereHas('konstruksiOwner', function ($q) {
+            $q->where('konfirmasi', "0");
+        })
+        ->where('status', "1")
+        // ->whereHas('cabang', function ($s) {
+        //     whereHas('kontraktor', function ($t) {
+        //         $t->where('id', $this->getKontraktorId()->kontraktor->id);
+        //     })->get();
+        // })
+
+        ->orderBy('id', 'DESC')->get();
+
+        // $order = ChooseProject::with('owner.user.order')->where('id', "Belum Bayar")->first();
+            // dd($data);
+            return DataTables::of($data)
+                ->addIndexColumn()->addColumn('tanggal', function ($data) {
+                $tanggal = $data->mulaiKonstruksi;
+                $tgl = Carbon::parse($tanggal);
+                return $tanggal;
+                })
+                ->addIndexColumn()->addColumn('siap', function ($data) {
+                    
+                    $status = $data->status = "Siap";
+                    // $rab = $data->chooseProject->rab = "RAB";
+                    // $project = $status && $rab;
+                    return $status;
+                    })
+                // ->addIndexColumn()->addColumn('tim', function ($data) {
+                    
+                //     $kons = KonstruksiOwner::with('chooseKonstruksi.cabang')->where('id', $this->getKontraktorId()->kontraktor->id)->get();
+                //     $cabang = $kons->chooseKonstruksi->cabang->nama_tim;
+                //     // $rab = $data->chooseProject->rab = "RAB";
+                //     // $project = $status && $rab;                        
+                //     return $cabang;
+                //     })
+                
+                ->addIndexColumn()->addColumn('alamat', function ($data) {
+                    $kota = $data->kota;
+                    $kecamatan = $data->kecamatan;
+                    $desa = $data->desa;
+                    $jalan = $data->jalan;
+                    $alamat = $kota." Kec. ".$kecamatan." Desa. ". $desa." Jalan. ". $jalan;
+                    return $alamat;
+                })
+                ->addColumn('Aksi', function ($data) {
+                    // $download = KontrakKerjaKonsultan::where('kontrakKerja', )
+                    // $download = $data->kontrak->kontrakKerja;
+                    
+                    $btn = '<button class="btn btn-success mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Accept</button> | ';
+                    $kontrak = '<button class="btn btn-danger mr-1 btn-sm" id="unverify" data-id="' . $data->id . '">Reject</button>';
+                    
+                    return $btn.$kontrak;
+                })->rawColumns(['Aksi'])->make(true);
+        
+    }
+
+    public function getAllJobVerify(Request $request, ChooseKonstruksi $project)
+    {
+        $data = ChooseKonstruksi::where('status', "1")->with('order.owner', 'konstruksiOwner.user.owner', 'cabang.kontraktor')->whereHas('konstruksiOwner', function ($q) {
+            $q->where('status', "Belum Bayar");
+        })->whereHas('konstruksiOwner', function ($q) {
+            $q->where('konfirmasi', "1");
+        })
+        ->whereHas('cabang.kontraktor', function ($s) {
+            $s->where('id', $this->getKontraktorId()->kontraktor->id);
+        })->where('status', "1")->orderBy('id', 'DESC')->get();
+
+        // $order = ChooseProject::with('owner.user.order')->where('id', "Belum Bayar")->first();
+            // dd($data);
+            return DataTables::of($data)
+                ->addIndexColumn()->addColumn('tanggal', function ($data) {
+                $tanggal = $data->mulaiKonstruksi;
+                $tgl = Carbon::parse($tanggal);
+                return $tanggal;
+                })
+                ->addIndexColumn()->addColumn('siap', function ($data) {
+                    
+                    $status = $data->status = "Siap";
+                    // $rab = $data->chooseProject->rab = "RAB";
+                    // $project = $status && $rab;
+                    return $status;
+                    })
+                
+                ->addIndexColumn()->addColumn('alamat', function ($data) {
+                    $kota = $data->kota;
+                    $kecamatan = $data->kecamatan;
+                    $desa = $data->desa;
+                    $jalan = $data->jalan;
+                    $alamat = $kota." Kec. ".$kecamatan." Desa. ". $desa." Jalan. ". $jalan;
+                    return $alamat;
+                })
+                ->addColumn('Aksi', function ($data) {
+                    // $download = KontrakKerjaKonsultan::where('kontrakKerja', )
+                    // $download = $data->kontrak->kontrakKerja;
+                    
+                    $btn = '<button class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Buat Kontrak</button>';
+                    // $kontrak = '<button class="btn btn-danger mr-1 btn-sm" id="unverify" data-id="' . $data->id . '">Reject</button>';
+                    
+                    return $btn;
+                })->rawColumns(['Aksi'])->make(true);
+        
+    }
+
+    public function getAllJobArchived(Request $request, ChooseKonstruksi $project)
+    {
+        $data = ChooseKonstruksi::where('status', "2")->with('order.owner', 'konstruksiOwner.user.owner', 'cabang.kontraktor')->whereHas('konstruksiOwner', function ($q) {
+            $q->where('status', "Sudah Bayar");
+        })->whereHas('konstruksiOwner', function ($q) {
+            $q->where('konfirmasi', "1");
+        })
+        ->whereHas('cabang.kontraktor', function ($s) {
+            $s->where('id', $this->getKontraktorId()->kontraktor->id);
+        })->where('status', "2")->orderBy('id', 'DESC')->get();
+
+        // $order = ChooseProject::with('owner.user.order')->where('id', "Belum Bayar")->first();
+            // dd($data);
+            return DataTables::of($data)
+                ->addIndexColumn()->addColumn('tanggal', function ($data) {
+                $tanggal = $data->mulaiKonstruksi;
+                $tgl = Carbon::parse($tanggal);
+                return $tanggal;
+                })
+                ->addIndexColumn()->addColumn('siap', function ($data) {
+                    
+                    $status = $data->status = "Siap";
+                    // $rab = $data->chooseProject->rab = "RAB";
+                    // $project = $status && $rab;
+                    return $status;
+                    })
+                
+                ->addIndexColumn()->addColumn('alamat', function ($data) {
+                    $kota = $data->kota;
+                    $kecamatan = $data->kecamatan;
+                    $desa = $data->desa;
+                    $jalan = $data->jalan;
+                    $alamat = $kota." Kec. ".$kecamatan." Desa. ". $desa." Jalan. ". $jalan;
+                    return $alamat;
+                })
+                // ->addColumn('Aksi', function ($data) {
+                //     // $download = KontrakKerjaKonsultan::where('kontrakKerja', )
+                //     // $download = $data->kontrak->kontrakKerja;
+                    
+                //     $btn = '<button class="btn btn-primary mr-1 btn-sm" id="verify" data-id="' . $data->id . '">Buat Kontrak</button>';
+                //     // $kontrak = '<button class="btn btn-danger mr-1 btn-sm" id="unverify" data-id="' . $data->id . '">Reject</button>';
+                    
+                //     return $btn;
+                // })->rawColumns(['Aksi'])
+                ->make(true);
+        
+    }
+
     public function rules()
     {
         return [
@@ -101,6 +258,22 @@ class CabangController extends Controller
             }
             return redirect()->back();
         }
+    }
+
+    public function verifyProject(Request $request)
+    {
+        $project = KonstruksiOwner::find($request->id)->update(['konfirmasi' => "1"]);
+        return $project;
+    }
+    public function unVerifyProject(Request $request)
+    {
+        $project = KonstruksiOwner::find($request->id)->update(['konfirmasi' => "2"]);
+        return $project;
+    }
+    public function verifyProjectActive(Request $request)
+    {
+        $project = ChooseKonstruksi::find($request->id)->update(['status' => "2"]);
+        return $project;
     }
 
 }

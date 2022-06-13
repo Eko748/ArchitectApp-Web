@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [UserController::class, 'lastLogin'])->name('dashboard');
         Route::get('online-user', [UserController::class, 'lastLogin']);
 
+        // Route::post('/admin/profile/{user}', [ProfileController::class, 'show'])->name('admin.profile.show');
+        // Route::post('/admin/confirmpass/{user}', [ProfileController::class, 'confirmPass'])->name('admin.profile.confirm');
 
 
         Route::delete('/konsultan/{id}', [AdminController::class, 'deletekonsul'])->name('user.konsultan.delete');
@@ -97,11 +99,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/tender/{proposal}', [AdminProposalController::class, 'showTenderWin'])->name('tender.win');
         // profile routes
         Route::get('/my/{user}/profile', [ProfileController::class, 'edit'])->name('profile');
-        Route::post('/my/{user}/profile', [ProfileController::class, 'show']);
+        Route::post('/my/{user}/profile', [ProfileController::class, 'show'])->name('admin.profile.show');
         Route::put('/my/{user}/profile', [ProfileController::class, 'update']);
         Route::put('/gantiava/{user}', [ProfileController::class, 'gantiAva'])->name('gantiava');
-        Route::post('/confirmpass/{user}', [ProfileController::class, 'confirmPass']);
-        Route::put('/confirmpass/{user}', [ProfileController::class, 'updatePass']);
+        Route::post('/confirmpass/{user}', [ProfileController::class, 'confirmPass'])->name('admin.profile.confirm');
+        Route::put('/confirmpass/{user}', [ProfileController::class, 'updatePass'])->name('admin.profile.pass');
         Route::delete('/delete/{user}', [ProfileController::class, 'destroy']);
 
         // payment
@@ -159,8 +161,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/konsultan/myjob/detil/{project}', [KonsultanController::class, 'detilJob'])->name('konsultan.job.detil');
         Route::get('/konsultan/myjob/active-job', [KonsultanController::class, 'activeJob'])->name('konsultan.job.active');
         Route::get('/konsultan/myjob/active', [JobController::class, 'getAllJob'])->name('konsultan.job');
+        Route::get('/konsultan/myjob/active-verify', [JobController::class, 'getAllJobVerify'])->name('konsultan.job-verify');
         Route::get('/konsultan/archived-job', [JobController::class, 'getArchivedJob'])->name('konsultan.archived.job');
         Route::post('/konsultan/upload/job', [JobController::class, 'uploadHasil'])->name('konsultan.upload.job');
+        Route::post('/konsultan/upload/hasil-project', [JobController::class, 'createProject'])->name('konsultan.upload.hasil');
 
         // proposal
         Route::get('/konsultan/myproposal/active', [KonsultanController::class, 'activeProposal'])->name('konsultan.proposal.active');
@@ -202,8 +206,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/kontraktor/getlelang/{lelang}', [LelangController::class, 'showLelang'])->name('kontraktor.lelang.show');
 
         // job
+        // Route::get('/kontraktor/myjob/active', [JobController::class, 'getAllJob'])->name('konsultan.job');
+        Route::get('/kontraktor/myjob/active', [CabangController::class, 'getAllJob'])->name('kontraktor.job.verify');
         Route::get('/kontraktor/myjob/active-job', [KontraktorController::class, 'activeJob'])->name('kontraktor.job.active');
+        Route::get('/kontraktor/myjob/active-verify', [CabangController::class, 'getAllJobVerify'])->name('kontraktor.job.verify.active');
+        Route::get('/kontraktor/myjob/active-archived', [CabangController::class, 'getAllJobArchived'])->name('kontraktor.job.verify.archived');
         Route::get('/kontraktor/myjob/archived-job', [KontraktorController::class, 'archivedJob'])->name('kontraktor.job.archived');
+
+        // ACC Job
+        Route::post('/kontraktor/myjob/active-verify', [CabangController::class, 'verifyProject'])->name('project.verify');
+        Route::post('/kontraktor/myjob/active-unverify', [CabangController::class, 'unVerifyProject'])->name('project.un-verify');
+        Route::post('/kontraktor/myjob/active-verify-acc', [CabangController::class, 'verifyProjectActive'])->name('project.verify.active');
 
         // proposal
         Route::get('/kontraktor/myproposal/active', [KontraktorController::class, 'activeProposal'])->name('kontraktor.proposal.active');

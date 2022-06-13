@@ -33,9 +33,9 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user-cog"></i><span>Transaksi Kontraktor</span></a> </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::segment(3) == 'transaksi' ? 'active' : '' }}"><a class="nav-link"
-                        href="{{ route('admin.transaksi') }}"><i class="fas fa-handshake"></i><span>Konstruksi Active</span></a></li>
+                        href="{{ route('admin.transaksi') }}"><i class="fas fa-handshake"></i><span>Project Active</span></a></li>
                     <li class="{{ Request::segment(3) == 'archivedTrans' ? 'active' : '' }}"><a class="nav-link"
-                        href="{{ route('admin.archieved-transaksi') }}"><i class="fas fa-save"></i>Konstruksi Archived</a></li>
+                        href="{{ route('admin.archieved-transaksi') }}"><i class="fas fa-save"></i><span>Project Archived</span></a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown  {{ in_array(Request::segment(2), ['konsultan', 'owner', 'kontraktor']) ? 'active' : '' }}">

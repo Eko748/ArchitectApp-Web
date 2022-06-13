@@ -80,5 +80,5 @@
 @push('js')
     <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
-     @include('konsultan.js.profileJs')
+    @include('kontraktor.js.profileJs')
 @endpush
