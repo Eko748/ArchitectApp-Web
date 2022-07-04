@@ -30,6 +30,23 @@ use Illuminate\Validation\Rule;
 
 class  OwnerController extends BaseController
 {
+    public function project()
+    {
+        $project = Project::with('konsultan.user', 'images')->where('isLelang', "0")->get();
+        return $this->sendResponse($project, 'Data loaded successfully');
+    }
+
+    public function professional()
+    {
+        $project = User::with('konsultan')->where(['is_active' => 1, 'level' => 'konsultan'])->get();
+        return $this->sendResponse($project, 'Data loaded successfully');
+    }
+
+    public function kontraktor()
+    {
+        $project = User::with('kontraktor')->where(['is_active' => 1, 'level' => 'kontraktor'])->get();
+        return $this->sendResponse($project, 'Data loaded successfully');
+    }
 
     public function getAllProjectKons()
     {
@@ -189,7 +206,7 @@ class  OwnerController extends BaseController
         $lelang = LelangOwner::create($input);
         if ($request->hasFile('image')) {
             $img = $request->file('image');
-            $path = 'img/lelang/tkp/';
+            $path = 'img/lelang/ruangan/';
             $no = 1;
             foreach ($img as $key) {
                 $filename = $key->hashName();
@@ -200,7 +217,7 @@ class  OwnerController extends BaseController
         }
         if ($request->hasFile('inspirasi')) {
             $ins = $request->file('inspirasi');
-            $path = 'img/lelang/tkp/';
+            $path = 'img/lelang/ruangan/';
             $no = 1;
             foreach ($ins as $key) {
                 $filename = $key->hashName();
@@ -280,7 +297,8 @@ class  OwnerController extends BaseController
 
     public function getLelangByOwn()
     {
-        $data = LelangOwner::with('image')->get();
+        // $data = LelangOwner::with('image')->get();
+        $data = LelangOwner::with('owner.user', 'image', 'inspirasi')->withCount('proposal')->where('ownerId', Auth::user()->owner->id)->where('status', 0)->get();
         // return view('public.project', compact('data'));
         // return view('public.mylelang', compact('data'));
         return $this->sendResponse($data, 'Data loaded successfully');

@@ -175,7 +175,7 @@ class ProjectController extends Controller
     public function paymentPost(Request $request)
     {
         // $data = ProjectOwner::with('project.konsultan', 'kontrak')->get();
-        $data = ChooseProject::with('project.konsultan', 'projectOwner.user.owner')->first();
+        $data = ChooseProject::with('project.konsultan', 'projectOwner.user.owner')->get();
         $json = json_decode($request->get('json'));
         $order = new Order();
         $order->kontrakKonsultanId = $data->id;

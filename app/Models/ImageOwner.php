@@ -14,7 +14,7 @@ class ImageOwner extends Model
 
     public function lelang()
     {
-        return $this->belongsTo(LelangOwner::class, 'lelangOwnerId');
+        return $this->belongsTo(LelangOwner::class, 'lelangOwnerId', 'id');
     }
     public function choose()
     {

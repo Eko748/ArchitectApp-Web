@@ -25,6 +25,11 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'daftar']);
 Route::post('/regiskonsultan', [AuthController::class, 'daftarKonsultan']);
 Route::post('/regiskontraktor', [AuthController::class, 'daftarKontraktor']);
+
+Route::get('/project', [OwnerController::class, 'project']);
+Route::get('/all-konsultan', [OwnerController::class, 'professional']);
+Route::get('/all-kontraktor', [OwnerController::class, 'kontraktor']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('ownerapi')->group(function () {
 

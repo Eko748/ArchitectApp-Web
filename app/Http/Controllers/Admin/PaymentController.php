@@ -43,7 +43,7 @@ class PaymentController extends Controller
     public function getAllOrder(Request $req, Order $order)
     {
         if ($req->ajax()) {
-            $data = Order::with('owner.user','kontrak.projectOwner.project.konsultan.user')->where('status', "Belum Bayar")->get();
+            $data = Order::with('owner.user','kontrak.projectOwner.project.konsultan.user', 'project.projectOwn.owner.user')->where('status', "Belum Bayar")->get();
             $o = ProjectOwner::where('id',$this->getOwnerId()->id)->where('status', "Belum Bayar")->get();
             return DataTables::of($data, $o)
                 ->addIndexColumn()->addColumn('Aksi', function ($data) {
